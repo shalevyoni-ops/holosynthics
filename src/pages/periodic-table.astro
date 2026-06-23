@@ -7,7 +7,7 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
 
 <BaseLayout
   title="Periodic Table of AI"
-  description="56 universal neuron elements organized into 8 fundamental atom types. Every language model contains all of them. Explore the complete table with real data from 11 models."
+  description="56 universal neuron elements organized into 8 fundamental atom types. Every language model contains all of them. Explore the complete table."
 >
   <script type="application/ld+json" slot="head">
     {JSON.stringify({
@@ -50,24 +50,13 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
             {type.elements.map(el => (
               <div class="el-cell" id={`element-${el.id}`} style={`--ec: ${el.color};`}
                 data-type={type.symbol}
+                data-desc={el.description}
                 tabindex="0"
                 role="button"
-                aria-label={`${el.name} element — ${el.description}`}
+                aria-label={`${el.name} — ${el.description}`}
               >
-                <div class="el-top">
-                  <span class="en">{el.id}</span>
-                  <span class="emag">{el.meanMag.toFixed(2)}</span>
-                </div>
+                <span class="en">{el.id}</span>
                 <div class="ename">{el.name}</div>
-                <div class="ecount">{el.count.toLocaleString()} neurons</div>
-                <div class="elayers">
-                  <div class="layer-bar" title={`Early: ${el.early}%`} style={`width: ${el.early}%; background: ${el.color}80;`}></div>
-                  <div class="layer-bar" title={`Mid: ${el.mid}%`} style={`width: ${el.mid}%; background: ${el.color};`}></div>
-                  <div class="layer-bar" title={`Late: ${el.late}%`} style={`width: ${el.late}%; background: ${el.color}60;`}></div>
-                </div>
-                <div class="layer-labels">
-                  <span>E{el.early}%</span><span>M{el.mid}%</span><span>L{el.late}%</span>
-                </div>
               </div>
             ))}
           </div>
@@ -81,42 +70,22 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
       <div id="detail-content"></div>
     </div>
 
-    <!-- Data section -->
-    <section class="data-section">
-      <div class="data-container">
-        <h2>Layer Distribution Across Elements</h2>
-        <p>Early = layers 1–4 | Mid = layers 5–8 | Late = layers 9–12 (or equivalent depth thirds)</p>
-
-        <div class="data-table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Element</th>
-                <th>Neurons</th>
-                <th>Mean Mag.</th>
-                <th>Early %</th>
-                <th>Mid %</th>
-                <th>Late %</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ALL_ELEMENTS.map(el => (
-                <tr data-type={el.typeSymbol}>
-                  <td style={`color: ${el.color};`}>{el.id}</td>
-                  <td>
-                    <span class="el-type-badge" style={`color: ${el.color}; border-color: ${el.color}40; background: ${el.color}10;`}>{el.typeSymbol}</span>
-                    {el.name}
-                  </td>
-                  <td>{el.count.toLocaleString()}</td>
-                  <td>{el.meanMag.toFixed(2)}</td>
-                  <td>{el.early}%</td>
-                  <td>{el.mid}%</td>
-                  <td>{el.late}%</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <!-- Element index — names and descriptions only -->
+    <section class="index-section">
+      <div class="index-container">
+        <h2>All 56 Elements</h2>
+        <p class="index-sub">Each element represents a distinct category of neuron function found universally across AI language models. Full quantitative data is available through GI X-Ray analysis.</p>
+        <div class="index-grid">
+          {ALL_ELEMENTS.map(el => (
+            <div class="index-row" data-type={el.typeSymbol}>
+              <span class="idx-num" style={`color: ${el.color};`}>{el.id}</span>
+              <span class="idx-badge" style={`color: ${el.color}; border-color: ${el.color}40; background: ${el.color}10;`}>{el.typeSymbol}</span>
+              <div class="idx-text">
+                <span class="idx-name">{el.name}</span>
+                <span class="idx-desc">{el.description}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -162,9 +131,7 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
     display: flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(255,255,255,0.03);
-    border-color: var(--tc, #fff);
+    border: 1px solid var(--tc, #fff);
     background: color-mix(in srgb, var(--tc, #fff) 10%, transparent);
     padding: 6px 14px;
     border-radius: 8px;
@@ -190,9 +157,9 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
 
   .table-grid {
     display: grid;
-    grid-template-columns: repeat(8, minmax(130px, 1fr));
+    grid-template-columns: repeat(8, minmax(120px, 1fr));
     gap: 10px;
-    min-width: 900px;
+    min-width: 840px;
     max-width: 1400px;
     margin: 0 auto;
   }
@@ -221,6 +188,9 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
     position: relative;
     overflow: hidden;
     outline: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .el-cell::after {
@@ -241,45 +211,18 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
 
   .el-cell:hover::after, .el-cell:focus::after { opacity: 1; }
 
-  .el-top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-  }
-
-  .en { font-size: 9px; color: var(--muted); }
-  .emag { font-size: 9px; color: var(--ec); }
-  .ename { font-size: 12px; font-weight: 700; color: #E2E8F0; margin-bottom: 4px; }
-  .ecount { font-size: 9px; color: var(--muted); margin-bottom: 8px; }
-
-  .elayers {
-    display: flex;
-    gap: 1px;
-    height: 4px;
-    border-radius: 2px;
-    overflow: hidden;
-    background: rgba(255,255,255,0.05);
-    margin-bottom: 3px;
-  }
-
-  .layer-bar { height: 100%; min-width: 0; }
-
-  .layer-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 7px;
-    color: var(--muted);
-  }
+  .en { font-size: 9px; color: var(--muted); line-height: 1; }
+  .ename { font-size: 12px; font-weight: 700; color: #E2E8F0; line-height: 1.3; }
 
   /* Detail panel */
   .detail-panel {
     position: fixed;
     right: 0; top: 0; bottom: 0;
-    width: min(400px, 90vw);
+    width: min(420px, 92vw);
     background: #0F1225;
     border-left: 1px solid rgba(0,217,255,0.2);
     z-index: 200;
-    padding: 32px;
+    padding: 36px 32px;
     overflow-y: auto;
     animation: slideIn 0.25s ease;
   }
@@ -302,59 +245,82 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
 
   .close-detail:hover { color: #fff; }
 
-  /* Data section */
-  .data-section { padding: 80px 24px; }
-  .data-container { max-width: 1100px; margin: 0 auto; }
+  /* Element index */
+  .index-section { padding: 80px 24px; }
+  .index-container { max-width: 960px; margin: 0 auto; }
 
-  .data-section h2 {
+  .index-section h2 {
     font-size: 28px;
     font-weight: 700;
     color: #fff;
     margin-bottom: 8px;
   }
 
-  .data-section p {
+  .index-sub {
     font-size: 14px;
     color: var(--muted);
-    margin-bottom: 32px;
+    margin-bottom: 36px;
+    line-height: 1.7;
+    max-width: 640px;
   }
 
-  .data-table-wrap { overflow-x: auto; }
-
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    min-width: 600px;
+  .index-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .data-table th {
-    padding: 10px 12px;
-    text-align: left;
-    border-bottom: 1px solid rgba(0,217,255,0.3);
-    color: var(--cyan);
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-  }
-
-  .data-table td {
-    padding: 10px 12px;
+  .index-row {
+    display: grid;
+    grid-template-columns: 28px 36px 1fr;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 0;
     border-bottom: 1px solid var(--border);
-    color: #CBD5E1;
   }
 
-  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .index-row:last-child { border-bottom: none; }
 
-  .el-type-badge {
+  .idx-num {
+    font-size: 11px;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .idx-badge {
     font-size: 10px;
     font-weight: 700;
     border: 1px solid;
-    padding: 2px 6px;
+    padding: 2px 5px;
     border-radius: 4px;
-    margin-right: 8px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .idx-text {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+
+  .idx-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #E2E8F0;
+    white-space: nowrap;
+  }
+
+  .idx-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .index-row { grid-template-columns: 24px 32px 1fr; gap: 8px; }
+    .idx-desc { display: block; width: 100%; }
+    .idx-text { flex-direction: column; gap: 2px; }
   }
 </style>
 
@@ -371,44 +337,42 @@ import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
         document.querySelectorAll('.el-cell').forEach(cell => {
           cell.style.opacity = cell.dataset.type === type ? '1' : '0.15';
         });
-        document.querySelectorAll('.data-table tbody tr').forEach(row => {
+        document.querySelectorAll('.index-row').forEach(row => {
           row.style.opacity = row.dataset.type === type ? '1' : '0.15';
         });
       } else {
-        document.querySelectorAll('.el-cell, .data-table tbody tr').forEach(el => {
+        document.querySelectorAll('.el-cell, .index-row').forEach(el => {
           el.style.opacity = '';
         });
       }
     });
   });
 
-  // Element click detail
+  // Element click detail panel
   const panel = document.getElementById('detail-panel');
   const content = document.getElementById('detail-content');
   const closeBtn = document.getElementById('close-detail');
 
-  const elementData = {
-    id: 'placeholder'
-  };
-
   document.querySelectorAll('.el-cell').forEach(cell => {
     cell.addEventListener('click', () => {
-      const id = cell.id.replace('element-', '');
       const name = cell.querySelector('.ename').textContent;
-      const count = cell.querySelector('.ecount').textContent;
       const type = cell.dataset.type;
+      const desc = cell.dataset.desc;
       const color = getComputedStyle(cell).getPropertyValue('--ec').trim();
 
       content.innerHTML = `
-        <div style="color:${color};font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">${type}</div>
-        <h2 style="font-size:28px;font-weight:800;color:#fff;margin-bottom:16px">${name}</h2>
-        <div style="font-size:14px;color:#94A3B8;margin-bottom:24px">${count}</div>
-        <div style="font-size:13px;color:#94A3B8;line-height:1.7;">
-          This element is part of the ${type} atom type. Click any element in the table to view its layer distribution
-          and neuron count. Full details available in our published research papers.
+        <div style="color:${color};font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px">${type}</div>
+        <h2 style="font-size:30px;font-weight:800;color:#fff;margin-bottom:20px;line-height:1.15">${name}</h2>
+        <p style="font-size:15px;color:#94A3B8;line-height:1.8;margin-bottom:28px">${desc}</p>
+        <div style="border:1px solid rgba(0,217,255,0.15);border-radius:12px;padding:20px;background:rgba(0,217,255,0.04);margin-bottom:24px;">
+          <div style="font-size:12px;color:#8892A4;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;">Quantitative Data</div>
+          <div style="font-size:13px;color:#94A3B8;line-height:1.7">
+            Neuron counts, layer distributions, and mean magnitude scores for each element
+            are available through GI X-Ray analysis. <a href="/darkfield" style="color:var(--cyan)">Request a scan &rarr;</a>
+          </div>
         </div>
-        <a href="/research" style="display:inline-block;margin-top:24px;color:var(--cyan);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,217,255,0.4);padding-bottom:2px;">
-          Read the Paper &rarr;
+        <a href="/research" style="display:inline-block;color:var(--cyan);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,217,255,0.4);padding-bottom:2px;">
+          Read the Research Papers &rarr;
         </a>
       `;
       panel.hidden = false;

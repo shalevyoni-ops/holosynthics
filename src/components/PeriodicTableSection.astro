@@ -35,7 +35,6 @@ import { ATOM_TYPES } from '../data/elements';
             >
               <span class="el-num">{el.id}</span>
               <span class="el-name">{el.name}</span>
-              <span class="el-count">{el.count.toLocaleString()}</span>
             </a>
           ))}
         </div>
@@ -198,12 +197,6 @@ import { ATOM_TYPES } from '../data/elements';
     color: #E2E8F0;
     margin: 3px 0 2px;
     line-height: 1.2;
-  }
-
-  .el-count {
-    font-size: 9px;
-    color: var(--el-color);
-    opacity: 0.8;
   }
 
   .table-footer {
