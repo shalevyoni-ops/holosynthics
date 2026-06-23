@@ -1,0 +1,307 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Holosynthics was founded by Yonathan Shalev at Growing Intelligence. We discovered 56 universal neuron types inside AI language models."
+>
+  <Nav />
+
+  <main class="about-page">
+    <section class="about-hero">
+      <h1>About <span class="accent">Holosynthics</span></h1>
+      <p>Neuron-level AI interpretability. Built by Growing Intelligence.</p>
+    </section>
+
+    <div class="about-content">
+      <section class="founder-section">
+        <div class="founder-card">
+          <div class="founder-avatar">YS</div>
+          <div class="founder-bio">
+            <h2>Yonathan Shalev</h2>
+            <div class="founder-title">Founder, Growing Intelligence</div>
+            <p>
+              Holosynthics is the research arm of Growing Intelligence — the company building
+              OMEGA, a sovereign AI infrastructure that runs on signed entities called GIs.
+            </p>
+            <p>
+              The periodic table of AI was discovered through a two-year systematic program of
+              transformer weight decomposition, sparse autoencoder analysis, and cross-model
+              validation. No prior work hypothesized that all language models share a universal
+              set of 56 neuron sub-types. We found it empirically.
+            </p>
+            <p>
+              Two papers are published on Zenodo. Patent applications are pending covering the
+              decomposition method, the neuron editing protocol (GI Surgeon), and the monitoring
+              framework (GI Monitor).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="patents-section">
+        <h2>Patents &amp; IP</h2>
+        <div class="patents-grid">
+          <div class="patent-card">
+            <div class="patent-label">Provisional Patent Application</div>
+            <h3>Holosynthics Decomposition Method</h3>
+            <p>Neuron-level decomposition of transformer language models into universal semantic atom types using weight-space projection and SAE cross-validation.</p>
+            <span class="patent-status">Filed · 2026</span>
+          </div>
+          <div class="patent-card">
+            <div class="patent-label">Provisional Patent Application</div>
+            <h3>GI Surgeon — Targeted Neuron Editing</h3>
+            <p>Method for applying targeted weight-space edits to suppress noise neurons and amplify signal neurons in transformer models without retraining.</p>
+            <span class="patent-status">Filed · 2026</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="papers-quick">
+        <h2>Published Research</h2>
+        <div class="papers-list">
+          <a href="https://doi.org/10.5281/zenodo.15623044" target="_blank" rel="noopener" class="paper-link">
+            <span class="paper-li-num">Paper I</span>
+            <div>
+              <div class="paper-li-title">Holosynthics: Neuron-Level Decomposition of Language Models into 8 Universal Atom Types</div>
+              <div class="paper-li-doi">doi:10.5281/zenodo.15623044</div>
+            </div>
+          </a>
+          <a href="https://doi.org/10.5281/zenodo.15640300" target="_blank" rel="noopener" class="paper-link">
+            <span class="paper-li-num">Paper II</span>
+            <div>
+              <div class="paper-li-title">The Periodic Table of AI: 56 Universal Neuron Elements Across 11 Language Models</div>
+              <div class="paper-li-doi">doi:10.5281/zenodo.15640300</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="mission-section">
+        <h2>Mission</h2>
+        <p>
+          We believe AI interpretability should be as rigorous as chemistry. The periodic table
+          of elements didn't just organize knowledge — it made predictions, enabled synthesis,
+          and revealed deep structure. The Holosynthics periodic table does the same for AI neurons.
+        </p>
+        <p>
+          Every AI model should be scannable. Every hallucination should be traceable. Every
+          problematic neuron should be editable. That's what we're building.
+        </p>
+        <div class="contact-box">
+          <h3>Contact</h3>
+          <a href="mailto:contact@growing-intelligence.com">contact@growing-intelligence.com</a>
+          <a href="https://growing-intelligence.com" target="_blank" rel="noopener">growing-intelligence.com</a>
+          <a href="https://github.com/growing-intelligence" target="_blank" rel="noopener">github.com/growing-intelligence</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .about-page { padding-top: 64px; }
+
+  .about-hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    background: radial-gradient(ellipse 50% 40% at 50% 0%, rgba(76,201,240,0.1) 0%, transparent 60%);
+  }
+
+  h1 {
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .accent { color: var(--cyan); }
+  .about-hero p { font-size: 18px; color: var(--muted); }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  section { margin-bottom: 72px; }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+  }
+
+  /* Founder */
+  .founder-card {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .founder-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .founder-bio h2 { margin-bottom: 4px; font-size: 24px; }
+
+  .founder-title {
+    font-size: 14px;
+    color: var(--cyan);
+    margin-bottom: 20px;
+  }
+
+  .founder-bio p {
+    font-size: 16px;
+    color: #94A3B8;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  /* Patents */
+  .patents-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .patent-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .patent-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 10px;
+  }
+
+  .patent-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .patent-card p {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .patent-status {
+    font-size: 11px;
+    color: var(--green);
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.25);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* Papers quick */
+  .papers-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .paper-link {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    background: var(--bg2);
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .paper-link:hover { border-color: rgba(0,217,255,0.3); }
+
+  .paper-li-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--pink);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .paper-li-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .paper-li-doi {
+    font-size: 12px;
+    font-family: monospace;
+    color: var(--cyan);
+  }
+
+  /* Mission */
+  .mission-section p {
+    font-size: 16px;
+    color: #94A3B8;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .contact-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-box h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .contact-box a {
+    font-size: 15px;
+    color: var(--cyan);
+    text-decoration: none;
+  }
+
+  .contact-box a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .founder-card { flex-direction: column; }
+    .patents-grid { grid-template-columns: 1fr; }
+  }
+</style>

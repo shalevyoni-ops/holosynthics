@@ -1,0 +1,542 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import DarkFieldCTA from '../components/DarkFieldCTA.astro';
+import Footer from '../components/Footer.astro';
+
+const tiers = [
+  { name: 'Open Source', price: 'Free', per: '', highlight: false, features: ['DarkField Python client', 'Activation extraction', 'DKFD bundle format', 'MIT license', 'Any HuggingFace model'] },
+  { name: 'GI X-Ray', price: '$299', per: '/scan', highlight: true, features: ['Full 56-element scan', 'Layer-by-layer breakdown', 'Anomaly heatmap', 'PDF report', 'Hallucination risk score', 'Email delivery in 24h'] },
+  { name: 'GI Monitor', price: '$499', per: '/month', highlight: false, features: ['Real-time monitoring', 'Drift detection alerts', 'Slack/PagerDuty integration', 'Dashboard access', 'Monthly summary report', 'Up to 3 models'] },
+  { name: 'GI Surgeon', price: 'Custom', per: '', highlight: false, features: ['Targeted neuron editing', 'Hallucination fix guarantee', 'Regression suite included', 'Air-gap deployment', 'Custom SLA', 'Enterprise contract'] },
+];
+---
+
+<BaseLayout
+  title="DarkField — AI Model Scanning"
+  description="Scan your AI model with the Holosynthics periodic table. Open-source Python client, managed X-Ray analysis, real-time monitoring, and surgical editing."
+>
+  <Nav />
+
+  <main class="df-page">
+    <!-- Hero -->
+    <section class="df-hero">
+      <div class="hero-glow"></div>
+      <div class="df-hero-inner">
+        <div class="badge">Developer Tools</div>
+        <h1>Scan Any AI Model.<br /><span class="accent">Understand Every Neuron.</span></h1>
+        <p>DarkField extracts activations. GI X-Ray maps them to the 56-element periodic table. GI Surgeon fixes what's broken — without retraining.</p>
+
+        <div class="quickstart">
+          <code>pip install darkfield && darkfield scan --model gpt2 --output my_model.bin</code>
+        </div>
+
+        <div class="df-actions">
+          <a href="https://github.com/growing-intelligence/darkfield" target="_blank" rel="noopener" class="btn-github">GitHub &rarr;</a>
+          <a href="#pricing" class="btn-primary">Get X-Ray Analysis</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how-section" id="how">
+      <div class="container">
+        <h2>How It Works</h2>
+        <div class="steps-grid">
+          <div class="hw-step">
+            <div class="hw-num">01</div>
+            <h3>Extract</h3>
+            <p>DarkField (open-source Python) registers forward hooks on your model's transformer layers and captures activation vectors during inference on your dataset.</p>
+            <code>darkfield scan --model your/model --dataset truthfulqa</code>
+          </div>
+          <div class="hw-step">
+            <div class="hw-num">02</div>
+            <h3>Bundle</h3>
+            <p>Activations are compressed into a DKFD bundle — a signed, deterministic binary format with cryptographic hash of the model weights. Portable, verifiable.</p>
+            <code>→ scan_bundle.bin (SHA-256 verified)</code>
+          </div>
+          <div class="hw-step">
+            <div class="hw-num">03</div>
+            <h3>Analyze</h3>
+            <p>GI X-Ray maps your bundle against the Holosynthics 56-element periodic table. Produces a heatmap of which elements dominate which layers, and flags anomalies.</p>
+            <code>→ 56-element report + anomaly score</code>
+          </div>
+          <div class="hw-step">
+            <div class="hw-num">04</div>
+            <h3>Repair (optional)</h3>
+            <p>GI Surgeon applies targeted weight edits to suppress noise neurons and amplify signal neurons. No retraining. Fully reversible. Validated against regression suite.</p>
+            <code>→ patched model weights</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GI X-Ray section -->
+    <section class="tool-detail" id="xray">
+      <div class="container">
+        <div class="tool-detail-inner">
+          <div class="tool-text">
+            <span class="tool-label">GI X-Ray</span>
+            <h2>See Your Model's Neuron DNA</h2>
+            <p>Send us your DarkField bundle. We run the full 56-element analysis and return a comprehensive report showing exactly which neuron types dominate each layer, where anomalies concentrate, and what your hallucination risk score is.</p>
+            <ul class="feature-list">
+              <li>Full periodic table heatmap per layer</li>
+              <li>Anomaly cluster identification</li>
+              <li>Entropy.Confidence trace (hallucination predictor)</li>
+              <li>Cross-model comparison (how does your model compare?)</li>
+              <li>PDF report + raw JSON data</li>
+            </ul>
+            <a href="mailto:contact@growing-intelligence.com?subject=GI X-Ray Request" class="btn-request">Request X-Ray &rarr;</a>
+          </div>
+          <div class="tool-visual xray-visual">
+            <!-- SVG heatmap representation -->
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="X-Ray heatmap diagram">
+              <rect width="300" height="200" fill="#0D0F23" rx="12"/>
+              <text x="150" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Layer Distribution Heatmap</text>
+              {Array.from({length: 8}, (_, col) =>
+                Array.from({length: 7}, (_, row) => {
+                  const colors = ['#F72585','#00D9FF','#7209B7','#4CC9F0','#22C55E','#FFD60A','#F59E0B','#EF4444'];
+                  const opacity = 0.2 + Math.random() * 0.7;
+                  return `<rect x="${30 + col*32}" y="${36 + row*22}" width="28" height="18" rx="3" fill="${colors[col]}" opacity="${opacity.toFixed(2)}"/>`;
+                }).join('')
+              ).join('')}
+              <text x="150" y="195" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">Bo · Nu · Sy · Id · Sp · Ti · Re · En</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GI Surgeon section -->
+    <section class="tool-detail alt" id="surgeon">
+      <div class="container">
+        <div class="tool-detail-inner reverse">
+          <div class="tool-text">
+            <span class="tool-label">GI Surgeon</span>
+            <h2>Fix Hallucinations Without Retraining</h2>
+            <p>Targeted neuron-level edits in weight space. GI Surgeon identifies the specific neuron clusters responsible for a hallucination pattern and applies precision edits — amplification, suppression, or rerouting.</p>
+            <ul class="feature-list">
+              <li>Weight-space edits (permanent, reversible)</li>
+              <li>Amplification · Suppression · Rerouting</li>
+              <li>50-prompt regression suite before every commit</li>
+              <li>Perplexity delta &lt; 0.5% guarantee</li>
+              <li>Air-gap deployment available</li>
+            </ul>
+            <a href="mailto:contact@growing-intelligence.com?subject=GI Surgeon Inquiry" class="btn-request">Contact for Enterprise &rarr;</a>
+          </div>
+          <div class="tool-visual surgeon-visual">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="Neuron edit diagram">
+              <rect width="300" height="200" fill="#0D0F23" rx="12"/>
+              <!-- Before/after bars -->
+              <text x="60" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">BEFORE</text>
+              <text x="210" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">AFTER</text>
+              <!-- Noise bar (before) -->
+              <rect x="20" y="36" width="80" height="12" rx="2" fill="#7209B7" opacity="0.9"/>
+              <text x="24" y="46" fill="#fff" font-size="7" font-family="Inter,sans-serif">Symbol (noise) 180%</text>
+              <!-- Signal bar (before) - small -->
+              <rect x="20" y="56" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.6"/>
+              <text x="24" y="66" fill="#fff" font-size="7" font-family="Inter,sans-serif">Time.Era 40%</text>
+              <!-- Arrow -->
+              <text x="150" y="80" fill="#00D9FF" font-size="24" text-anchor="middle" font-family="Inter,sans-serif">&#8594;</text>
+              <text x="150" y="100" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">GI Surgeon</text>
+              <!-- Noise bar (after) - suppressed -->
+              <rect x="170" y="36" width="25" height="12" rx="2" fill="#7209B7" opacity="0.35"/>
+              <text x="174" y="46" fill="#fff" font-size="7" font-family="Inter,sans-serif">Symbol 60%</text>
+              <!-- Signal bar (after) - amplified -->
+              <rect x="170" y="56" width="95" height="12" rx="2" fill="#FFD60A" opacity="0.9"/>
+              <text x="174" y="66" fill="#fff" font-size="7" font-family="Inter,sans-serif">Time.Era 95%</text>
+              <!-- Result -->
+              <rect x="20" y="120" width="260" height="20" rx="4" fill="#22C55E" opacity="0.15"/>
+              <rect x="20" y="120" width="260" height="20" rx="4" fill="none" stroke="#22C55E" stroke-width="1" opacity="0.4"/>
+              <text x="150" y="134" fill="#22C55E" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Output: "1989" (correct)</text>
+              <text x="150" y="165" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">No retraining. Regression passed. Permanent.</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        <h2>Pricing</h2>
+        <div class="pricing-grid">
+          {tiers.map(tier => (
+            <div class={`pricing-card ${tier.highlight ? 'highlight' : ''}`}>
+              {tier.highlight && <div class="popular">Most Popular</div>}
+              <div class="tier-name">{tier.name}</div>
+              <div class="tier-price">
+                <span class="price-val">{tier.price}</span>
+                {tier.per && <span class="price-per">{tier.per}</span>}
+              </div>
+              <ul class="tier-features">
+                {tier.features.map(f => <li>{f}</li>)}
+              </ul>
+              <a
+                href={tier.price === 'Free' ? 'https://github.com/growing-intelligence/darkfield' : 'mailto:contact@growing-intelligence.com'}
+                class={`tier-cta ${tier.highlight ? 'primary' : 'secondary'}`}
+                target={tier.price === 'Free' ? '_blank' : undefined}
+                rel={tier.price === 'Free' ? 'noopener' : undefined}
+              >
+                {tier.price === 'Free' ? 'Get Started Free' : tier.price === 'Custom' ? 'Contact Us' : 'Get Started'}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <DarkFieldCTA />
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .df-page { padding-top: 64px; }
+
+  .df-hero {
+    position: relative;
+    text-align: center;
+    padding: 80px 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(0,217,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .df-hero-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+
+  .badge {
+    display: inline-block;
+    border: 1px solid rgba(0,217,255,0.3);
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    background: rgba(0,217,255,0.06);
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 60px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .accent { color: var(--cyan); }
+
+  .df-hero p {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .quickstart {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,217,255,0.2);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 32px;
+    display: inline-block;
+  }
+
+  .quickstart code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+    background: none;
+    padding: 0;
+    word-break: break-all;
+  }
+
+  .df-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-github {
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: rgba(255,255,255,0.05);
+    transition: 0.2s;
+  }
+
+  .btn-github:hover { border-color: rgba(255,255,255,0.2); text-decoration: none; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; text-decoration: none; }
+
+  /* How section */
+  .how-section { padding: 80px 24px; background: var(--bg2); }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  h2 {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 48px;
+    letter-spacing: -0.03em;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .hw-step {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .hw-num {
+    font-size: 40px;
+    font-weight: 900;
+    color: rgba(0,217,255,0.15);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .hw-step h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .hw-step p {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .hw-step code {
+    font-size: 11px;
+    font-family: monospace;
+    color: var(--cyan);
+    background: rgba(0,217,255,0.07);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: block;
+    word-break: break-all;
+  }
+
+  /* Tool detail */
+  .tool-detail { padding: 80px 24px; }
+  .tool-detail.alt { background: var(--bg2); }
+
+  .tool-detail-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .tool-detail-inner.reverse { direction: rtl; }
+  .tool-detail-inner.reverse .tool-text { direction: ltr; }
+  .tool-detail-inner.reverse .tool-visual { direction: ltr; }
+
+  .tool-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .tool-text h2 { margin-bottom: 20px; font-size: 28px; }
+
+  .tool-text p {
+    font-size: 16px;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .feature-list li {
+    font-size: 14px;
+    color: #CBD5E1;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .feature-list li::before {
+    content: '✓';
+    color: var(--cyan);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  .btn-request {
+    color: var(--cyan);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,217,255,0.4);
+    padding-bottom: 2px;
+  }
+
+  .btn-request:hover { border-color: var(--cyan); }
+
+  .tool-visual { border-radius: 14px; overflow: hidden; }
+  .tool-visual svg { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); }
+
+  /* Pricing */
+  .pricing-section { padding: 80px 24px; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .pricing-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .pricing-card.highlight {
+    border-color: rgba(0,217,255,0.4);
+    background: rgba(0,217,255,0.03);
+  }
+
+  .popular {
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--cyan);
+    color: #080A18;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 0 0 8px 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tier-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+  }
+
+  .tier-price { display: flex; align-items: baseline; gap: 4px; }
+
+  .price-val {
+    font-size: 36px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .price-per { font-size: 14px; color: var(--muted); }
+
+  .tier-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .tier-features li {
+    font-size: 13px;
+    color: #94A3B8;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .tier-features li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--muted);
+  }
+
+  .tier-cta {
+    display: block;
+    text-align: center;
+    padding: 11px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: auto;
+    transition: 0.2s;
+  }
+
+  .tier-cta.primary {
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+  }
+
+  .tier-cta.secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .tier-cta:hover { opacity: 0.85; text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr 1fr; }
+    .tool-detail-inner { grid-template-columns: 1fr; }
+    .tool-detail-inner.reverse { direction: ltr; }
+  }
+
+  @media (max-width: 600px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+</style>

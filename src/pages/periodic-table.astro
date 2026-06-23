@@ -1,0 +1,420 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { ATOM_TYPES, ALL_ELEMENTS } from '../data/elements';
+---
+
+<BaseLayout
+  title="Periodic Table of AI"
+  description="56 universal neuron elements organized into 8 fundamental atom types. Every language model contains all of them. Explore the complete table with real data from 11 models."
+>
+  <script type="application/ld+json" slot="head">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "Holosynthics Periodic Table of AI — 56 Elements",
+      "description": "56 universal neuron types across 11 language models",
+      "creator": { "@type": "Organization", "name": "Holosynthics" },
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "url": "https://holosynthics.com/periodic-table"
+    })}
+  </script>
+
+  <Nav />
+
+  <main class="pt-page">
+    <div class="pt-hero">
+      <h1>The Periodic Table of <span class="accent">AI</span></h1>
+      <p>56 universal neuron elements. 8 fundamental types. Every language model we tested contains all of them.</p>
+      <div class="pt-legend">
+        {ATOM_TYPES.map(t => (
+          <button class="legend-item" data-type={t.symbol} style={`--tc: ${t.color};`}>
+            <span class="ls" style={`color: ${t.color};`}>{t.symbol}</span>
+            <span class="ln">{t.name}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Full interactive table -->
+    <div class="full-table">
+      <div class="table-grid" id="table-grid">
+        {ATOM_TYPES.map((type) => (
+          <div class="type-col" data-type={type.symbol}>
+            <div class="col-header" style={`border-color: ${type.color}40; background: ${type.color}15;`}>
+              <span class="cs" style={`color: ${type.color};`}>{type.symbol}</span>
+              <span class="cn">{type.name}</span>
+              <span class="cd">{type.description}</span>
+            </div>
+            {type.elements.map(el => (
+              <div class="el-cell" id={`element-${el.id}`} style={`--ec: ${el.color};`}
+                data-type={type.symbol}
+                tabindex="0"
+                role="button"
+                aria-label={`${el.name} element — ${el.description}`}
+              >
+                <div class="el-top">
+                  <span class="en">{el.id}</span>
+                  <span class="emag">{el.meanMag.toFixed(2)}</span>
+                </div>
+                <div class="ename">{el.name}</div>
+                <div class="ecount">{el.count.toLocaleString()} neurons</div>
+                <div class="elayers">
+                  <div class="layer-bar" title={`Early: ${el.early}%`} style={`width: ${el.early}%; background: ${el.color}80;`}></div>
+                  <div class="layer-bar" title={`Mid: ${el.mid}%`} style={`width: ${el.mid}%; background: ${el.color};`}></div>
+                  <div class="layer-bar" title={`Late: ${el.late}%`} style={`width: ${el.late}%; background: ${el.color}60;`}></div>
+                </div>
+                <div class="layer-labels">
+                  <span>E{el.early}%</span><span>M{el.mid}%</span><span>L{el.late}%</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Element detail panel (shown on click) -->
+    <div class="detail-panel" id="detail-panel" hidden>
+      <button class="close-detail" id="close-detail" aria-label="Close">&times;</button>
+      <div id="detail-content"></div>
+    </div>
+
+    <!-- Data section -->
+    <section class="data-section">
+      <div class="data-container">
+        <h2>Layer Distribution Across Elements</h2>
+        <p>Early = layers 1–4 | Mid = layers 5–8 | Late = layers 9–12 (or equivalent depth thirds)</p>
+
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Element</th>
+                <th>Neurons</th>
+                <th>Mean Mag.</th>
+                <th>Early %</th>
+                <th>Mid %</th>
+                <th>Late %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ALL_ELEMENTS.map(el => (
+                <tr data-type={el.typeSymbol}>
+                  <td style={`color: ${el.color};`}>{el.id}</td>
+                  <td>
+                    <span class="el-type-badge" style={`color: ${el.color}; border-color: ${el.color}40; background: ${el.color}10;`}>{el.typeSymbol}</span>
+                    {el.name}
+                  </td>
+                  <td>{el.count.toLocaleString()}</td>
+                  <td>{el.meanMag.toFixed(2)}</td>
+                  <td>{el.early}%</td>
+                  <td>{el.mid}%</td>
+                  <td>{el.late}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pt-page { padding-top: 64px; }
+
+  .pt-hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,217,255,0.1) 0%, transparent 60%);
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 60px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .accent { color: var(--cyan); }
+
+  .pt-hero p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto 40px;
+  }
+
+  .pt-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    border-color: var(--tc, #fff);
+    background: color-mix(in srgb, var(--tc, #fff) 10%, transparent);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    transition: background 0.2s;
+  }
+
+  .legend-item:hover, .legend-item.active {
+    background: color-mix(in srgb, var(--tc, #fff) 20%, transparent);
+  }
+
+  .ls { font-weight: 800; font-size: 15px; }
+  .ln { color: var(--muted); }
+
+  .full-table {
+    overflow-x: auto;
+    padding: 40px 24px;
+    background: var(--bg2);
+  }
+
+  .table-grid {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(130px, 1fr));
+    gap: 10px;
+    min-width: 900px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .type-col { display: flex; flex-direction: column; gap: 6px; }
+
+  .col-header {
+    border: 1px solid;
+    border-radius: 10px 10px 4px 4px;
+    padding: 14px 10px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .cs { display: block; font-size: 24px; font-weight: 800; line-height: 1; }
+  .cn { display: block; font-size: 11px; font-weight: 700; color: #E2E8F0; margin-top: 4px; }
+  .cd { display: block; font-size: 9px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+  .el-cell {
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 10px 8px;
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    transition: 0.2s;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+  }
+
+  .el-cell::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--ec);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .el-cell:hover, .el-cell:focus {
+    border-color: var(--ec);
+    background: rgba(255,255,255,0.05);
+    transform: translateY(-2px);
+  }
+
+  .el-cell:hover::after, .el-cell:focus::after { opacity: 1; }
+
+  .el-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .en { font-size: 9px; color: var(--muted); }
+  .emag { font-size: 9px; color: var(--ec); }
+  .ename { font-size: 12px; font-weight: 700; color: #E2E8F0; margin-bottom: 4px; }
+  .ecount { font-size: 9px; color: var(--muted); margin-bottom: 8px; }
+
+  .elayers {
+    display: flex;
+    gap: 1px;
+    height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 3px;
+  }
+
+  .layer-bar { height: 100%; min-width: 0; }
+
+  .layer-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 7px;
+    color: var(--muted);
+  }
+
+  /* Detail panel */
+  .detail-panel {
+    position: fixed;
+    right: 0; top: 0; bottom: 0;
+    width: min(400px, 90vw);
+    background: #0F1225;
+    border-left: 1px solid rgba(0,217,255,0.2);
+    z-index: 200;
+    padding: 32px;
+    overflow-y: auto;
+    animation: slideIn 0.25s ease;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  .close-detail {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .close-detail:hover { color: #fff; }
+
+  /* Data section */
+  .data-section { padding: 80px 24px; }
+  .data-container { max-width: 1100px; margin: 0 auto; }
+
+  .data-section h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .data-section p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  .data-table-wrap { overflow-x: auto; }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 600px;
+  }
+
+  .data-table th {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,217,255,0.3);
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: #CBD5E1;
+  }
+
+  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .el-type-badge {
+    font-size: 10px;
+    font-weight: 700;
+    border: 1px solid;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+</style>
+
+<script>
+  // Filter by type
+  document.querySelectorAll('.legend-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.type;
+      const isActive = btn.classList.contains('active');
+      document.querySelectorAll('.legend-item').forEach(b => b.classList.remove('active'));
+
+      if (!isActive) {
+        btn.classList.add('active');
+        document.querySelectorAll('.el-cell').forEach(cell => {
+          cell.style.opacity = cell.dataset.type === type ? '1' : '0.15';
+        });
+        document.querySelectorAll('.data-table tbody tr').forEach(row => {
+          row.style.opacity = row.dataset.type === type ? '1' : '0.15';
+        });
+      } else {
+        document.querySelectorAll('.el-cell, .data-table tbody tr').forEach(el => {
+          el.style.opacity = '';
+        });
+      }
+    });
+  });
+
+  // Element click detail
+  const panel = document.getElementById('detail-panel');
+  const content = document.getElementById('detail-content');
+  const closeBtn = document.getElementById('close-detail');
+
+  const elementData = {
+    id: 'placeholder'
+  };
+
+  document.querySelectorAll('.el-cell').forEach(cell => {
+    cell.addEventListener('click', () => {
+      const id = cell.id.replace('element-', '');
+      const name = cell.querySelector('.ename').textContent;
+      const count = cell.querySelector('.ecount').textContent;
+      const type = cell.dataset.type;
+      const color = getComputedStyle(cell).getPropertyValue('--ec').trim();
+
+      content.innerHTML = `
+        <div style="color:${color};font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">${type}</div>
+        <h2 style="font-size:28px;font-weight:800;color:#fff;margin-bottom:16px">${name}</h2>
+        <div style="font-size:14px;color:#94A3B8;margin-bottom:24px">${count}</div>
+        <div style="font-size:13px;color:#94A3B8;line-height:1.7;">
+          This element is part of the ${type} atom type. Click any element in the table to view its layer distribution
+          and neuron count. Full details available in our published research papers.
+        </div>
+        <a href="/research" style="display:inline-block;margin-top:24px;color:var(--cyan);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,217,255,0.4);padding-bottom:2px;">
+          Read the Paper &rarr;
+        </a>
+      `;
+      panel.hidden = false;
+    });
+  });
+
+  closeBtn?.addEventListener('click', () => { panel.hidden = true; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') panel.hidden = true; });
+</script>

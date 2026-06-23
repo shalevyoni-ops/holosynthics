@@ -1,0 +1,353 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const papers = [
+  {
+    num: 1,
+    title: 'Holosynthics: Neuron-Level Decomposition of Language Models into 8 Universal Atom Types',
+    abstract: 'We present Holosynthics, a framework for decomposing transformer language model neurons into 8 fundamental semantic atom types: Boolean, Number, Symbol, Identity, Space, Time, Relation, and Entropy. Using weight-space decomposition via MLP gate-projection key-vectors projected onto the vocabulary, combined with Sparse Autoencoder (SAE) cross-validation, we demonstrate that these 8 types appear universally across architecturally distinct models including Gemma 2B, GPT-2 Small, and Qwen3 1.7B.',
+    doi: '10.5281/zenodo.15623044',
+    doiUrl: 'https://doi.org/10.5281/zenodo.15623044',
+    models: ['Gemma 2B', 'GPT-2 Small', 'Gemma 9B', 'Llama 3.1 8B', 'Qwen3 1.7B', 'OLMo 3 7B'],
+    date: 'June 2026',
+    venue: 'Zenodo',
+    findings: [
+      '8 universal atom types confirmed across all tested architectures',
+      'Symbol neurons are the most numerous (25–55% of classified neurons)',
+      'Entropy neurons are the rarest (0.2–0.6%)',
+      '13,000 features analyzed across 26 Gemma 2B layers',
+    ],
+  },
+  {
+    num: 2,
+    title: 'The Periodic Table of AI: 56 Universal Neuron Elements Across 11 Language Models',
+    abstract: 'We extend the Holosynthics framework to 56 sub-type elements (8 types × 7 sub-types each) and validate universality across 11 language models including GPT-2 Small, Mistral 7B, OLMo 3 7B, Llama 3.1 8B, Phi-3 Mini, and 6 others. The same 56 elements appear in 10 of 11 models tested. We characterize layer distribution patterns for all 56 elements and introduce the Entropy.Confidence element — a late-layer neuron cluster correlated with output certainty.',
+    doi: '10.5281/zenodo.15640300',
+    doiUrl: 'https://doi.org/10.5281/zenodo.15640300',
+    models: ['GPT-2 Small', 'GPT-2 Medium', 'GPT-Neo 2.7B', 'Pythia 1.4B', 'Pythia 2.8B', 'DeepSeek 1.3B', 'Falcon 7B', 'Mistral 7B', 'OLMo 3 7B', 'Phi-3 Mini', 'Qwen3 1.7B'],
+    date: 'June 2026',
+    venue: 'Zenodo',
+    findings: [
+      '56 elements validated across 11 architectures',
+      '9,492 neurons sub-classified in Mistral 7B + OLMo 3 7B',
+      '10/11 models confirm all 8 types (GPT-2 Medium: 3 absent due to method)',
+      'Entropy.Confidence neuron cluster correlates with hallucination absence',
+    ],
+  },
+];
+
+const experiments = [
+  { name: 'Hallucination Trace Experiment', model: 'GPT-2 Small', date: 'June 2026', result: '10/10 factual prompts hallucinated; Symbol-dominant + Entropy.Confidence absent = hallucination signature' },
+  { name: 'Gemma 2B Full 26-Layer Decomposition', model: 'Gemma 2B', date: 'June 2026', result: '13,000 features across 26 layers; 65,589 atoms classified; ONE CONDUCTOR GI' },
+  { name: 'Qwen3 1.7B SAE Cross-Validation', model: 'Qwen3 1.7B', date: 'June 2026', result: '4,500 features across 9 sampled layers; all 8 types confirmed; 19.9% anomaly rate' },
+  { name: 'Six-Model Periodic Table Comparison', model: 'Gemma 2B/9B, GPT-2, Llama, Qwen3, OLMo', date: 'June 2026', result: 'Symbol % ranges 25–55%; Relation grows with model size (14% → 27%)' },
+  { name: 'Llama 3.1 8B Deep Classification', model: 'Llama 3.1 8B', date: 'June 2026', result: '32 layers, 962 atoms; Symbol 53.4%, Relation 19.9%, Entropy 17.2%' },
+];
+---
+
+<BaseLayout
+  title="Research"
+  description="Holosynthics research papers and experiments. Two published papers on AI neuron decomposition, 11 models analyzed, 56 universal elements discovered."
+>
+  <script type="application/ld+json" slot="head">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Holosynthics Research Papers",
+      "itemListElement": papers.map((p, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "item": {
+          "@type": "ScholarlyArticle",
+          "name": p.title,
+          "identifier": `doi:${p.doi}`,
+          "url": p.doiUrl,
+          "datePublished": "2026-06-01",
+          "author": { "@type": "Person", "name": "Yonathan Shalev" }
+        }
+      }))
+    })}
+  </script>
+
+  <Nav />
+
+  <main class="research-page">
+    <div class="page-hero">
+      <h1>Research</h1>
+      <p>Published, reproducible, verified. Every result in our papers is backed by real model experiments.</p>
+    </div>
+
+    <section class="papers-section">
+      <div class="container">
+        <h2>Published Papers</h2>
+        {papers.map(paper => (
+          <div class="paper-full">
+            <div class="paper-header">
+              <div class="paper-meta">
+                <span class="paper-num">Paper {paper.num}</span>
+                <span class="paper-venue">{paper.venue} · {paper.date}</span>
+              </div>
+              <a href={paper.doiUrl} target="_blank" rel="noopener" class="doi-badge">
+                DOI: {paper.doi}
+              </a>
+            </div>
+
+            <h3>{paper.title}</h3>
+            <p class="abstract">{paper.abstract}</p>
+
+            <div class="paper-findings">
+              <h4>Key Findings</h4>
+              <ul>
+                {paper.findings.map(f => <li>{f}</li>)}
+              </ul>
+            </div>
+
+            <div class="paper-models">
+              <h4>Models Tested</h4>
+              <div class="model-tags">
+                {paper.models.map(m => <span class="model-tag">{m}</span>)}
+              </div>
+            </div>
+
+            <a href={paper.doiUrl} target="_blank" rel="noopener" class="read-paper">
+              Read Paper &rarr;
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="experiments-section">
+      <div class="container">
+        <h2>Experiment Log</h2>
+        <p class="section-sub">Reproducible experiments. All code available on request.</p>
+        <div class="exp-table-wrap">
+          <table class="exp-table">
+            <thead>
+              <tr>
+                <th>Experiment</th>
+                <th>Model(s)</th>
+                <th>Date</th>
+                <th>Key Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              {experiments.map(e => (
+                <tr>
+                  <td>{e.name}</td>
+                  <td class="model-col">{e.model}</td>
+                  <td class="date-col">{e.date}</td>
+                  <td>{e.result}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .research-page { padding-top: 64px; }
+
+  .page-hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    background: radial-gradient(ellipse 50% 40% at 50% 0%, rgba(114,9,183,0.12) 0%, transparent 60%);
+  }
+
+  h1 {
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .page-hero p {
+    font-size: 18px;
+    color: var(--muted);
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .papers-section {
+    padding: 60px 0 80px;
+  }
+
+  .experiments-section {
+    padding: 60px 0 80px;
+    background: var(--bg2);
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 40px;
+  }
+
+  .section-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: -28px;
+    margin-bottom: 32px;
+  }
+
+  .paper-full {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 28px;
+    background: var(--bg2);
+    transition: border-color 0.3s;
+  }
+
+  .paper-full:hover { border-color: rgba(0,217,255,0.25); }
+
+  .paper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .paper-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .paper-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pink);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .paper-venue {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .doi-badge {
+    font-size: 11px;
+    font-family: monospace;
+    color: var(--cyan);
+    border: 1px solid rgba(0,217,255,0.25);
+    padding: 4px 12px;
+    border-radius: 6px;
+    background: rgba(0,217,255,0.05);
+    text-decoration: none;
+  }
+
+  .doi-badge:hover { background: rgba(0,217,255,0.1); }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  .abstract {
+    font-size: 14px;
+    color: #94A3B8;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .paper-findings, .paper-models { margin-bottom: 24px; }
+
+  h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+
+  .paper-findings ul {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .paper-findings li {
+    font-size: 14px;
+    color: #CBD5E1;
+    line-height: 1.6;
+  }
+
+  .model-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .model-tag {
+    font-size: 12px;
+    background: rgba(0,217,255,0.08);
+    color: var(--cyan);
+    border: 1px solid rgba(0,217,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .read-paper {
+    display: inline-block;
+    color: var(--cyan);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,217,255,0.4);
+    padding-bottom: 2px;
+  }
+
+  .read-paper:hover { border-color: var(--cyan); }
+
+  .exp-table-wrap { overflow-x: auto; }
+
+  .exp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 600px;
+  }
+
+  .exp-table th {
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,217,255,0.3);
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .exp-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #CBD5E1;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .model-col { white-space: nowrap; color: var(--muted); }
+  .date-col { white-space: nowrap; color: var(--muted); }
+
+  .exp-table tr:hover td { background: rgba(255,255,255,0.02); }
+</style>

@@ -1,0 +1,197 @@
+---
+import Particles from './Particles.astro';
+
+const papers = [
+  {
+    num: 1,
+    title: 'Holosynthics: Neuron-Level Decomposition of Language Models into 8 Universal Atom Types',
+    desc: 'We introduce the Holosynthics decomposition framework and demonstrate 8 fundamental neuron types across 6 transformer architectures.',
+    doi: '10.5281/zenodo.15623044',
+    doiUrl: 'https://doi.org/10.5281/zenodo.15623044',
+    models: ['Gemma 2B', 'GPT-2 Small', 'Qwen3 1.7B'],
+    tag: 'Paper I · June 2026',
+  },
+  {
+    num: 2,
+    title: 'The Periodic Table of AI: 56 Universal Neuron Elements Across 11 Language Models',
+    desc: 'We extend the 8-type framework to 56 sub-types and validate universality across 11 models including Mistral 7B, OLMo 3 7B, Llama 3.1 8B, and Phi-3 Mini.',
+    doi: '10.5281/zenodo.15640300',
+    doiUrl: 'https://doi.org/10.5281/zenodo.15640300',
+    models: ['Mistral 7B', 'OLMo 3 7B', 'Llama 3.1 8B', '+8 more'],
+    tag: 'Paper II · June 2026',
+  },
+];
+---
+
+<section class="papers-section">
+  <div class="papers-bg"></div>
+  <Particles id="papers-canvas" count={60} />
+
+  <div class="container">
+    <div class="section-header">
+      <h2>Peer-Reviewed <span class="accent">Research</span></h2>
+      <p>Published on Zenodo. Independently reproducible. Real neuron counts, real model weights, real experiments.</p>
+    </div>
+
+    <div class="papers-grid">
+      {papers.map(paper => (
+        <div class="paper-card">
+          <div class="paper-num">Paper {paper.num}</div>
+          <div class="paper-tag">{paper.tag}</div>
+          <h3>{paper.title}</h3>
+          <p>{paper.desc}</p>
+          <div class="paper-models">
+            {paper.models.map(m => <span class="model-tag">{m}</span>)}
+          </div>
+          <a href={paper.doiUrl} target="_blank" rel="noopener" class="doi-link">
+            DOI: {paper.doi} &rarr;
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <a href="/research" class="view-all">View all research &rarr;</a>
+  </div>
+</section>
+
+<style>
+  .papers-section {
+    position: relative;
+    padding: 100px 24px;
+    background: var(--bg2);
+    overflow: hidden;
+  }
+
+  .papers-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 30% 50%, rgba(114,9,183,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 70% 50%, rgba(247,37,133,0.08) 0%, transparent 60%);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .accent { color: var(--cyan); }
+
+  .section-header p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .papers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .paper-card {
+    background: rgba(8,10,24,0.8);
+    border: 1px solid rgba(0,217,255,0.15);
+    border-radius: 16px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.3s;
+  }
+
+  .paper-card:hover {
+    border-color: rgba(0,217,255,0.4);
+  }
+
+  .paper-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+  }
+
+  .paper-tag {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: 14px;
+    color: #94A3B8;
+    line-height: 1.7;
+  }
+
+  .paper-models {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .model-tag {
+    font-size: 11px;
+    background: rgba(0,217,255,0.08);
+    color: var(--cyan);
+    border: 1px solid rgba(0,217,255,0.2);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .doi-link {
+    font-size: 13px;
+    color: var(--cyan);
+    margin-top: auto;
+    font-family: monospace;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,217,255,0.3);
+    padding-bottom: 1px;
+    width: fit-content;
+  }
+
+  .doi-link:hover { border-color: var(--cyan); }
+
+  .view-all {
+    display: block;
+    text-align: center;
+    color: var(--cyan);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,217,255,0.4);
+    padding-bottom: 2px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .view-all:hover { border-color: var(--cyan); }
+
+  @media (max-width: 700px) {
+    .papers-grid { grid-template-columns: 1fr; }
+  }
+</style>

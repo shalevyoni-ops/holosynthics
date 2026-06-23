@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import PeriodicTableSection from '../components/PeriodicTableSection.astro';
+import ToolsGrid from '../components/ToolsGrid.astro';
+import PapersSection from '../components/PapersSection.astro';
+import DarkFieldCTA from '../components/DarkFieldCTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Holosynthics"
+  description="We discovered the Periodic Table of AI — 56 universal neuron types across all language models. Scan, analyze, and repair AI models at the neuron level."
+>
+  <Nav />
+  <main>
+    <Hero />
+    <PeriodicTableSection />
+    <ToolsGrid />
+    <PapersSection />
+    <DarkFieldCTA />
+  </main>
+  <Footer />
+</BaseLayout>

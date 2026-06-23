@@ -1,0 +1,184 @@
+---
+import Particles from './Particles.astro';
+---
+
+<section class="hero">
+  <div class="hero-bg">
+    <!-- Neuron network background pattern (CSS-based; swap with /img/hero-neuron.jpg when Midjourney assets arrive) -->
+  </div>
+  <Particles id="hero-canvas" count={100} />
+
+  <div class="hero-content">
+    <div class="badge">AI Interpretability Research</div>
+    <h1>
+      The Periodic Table<br />
+      <span class="gradient-text">of Artificial Intelligence</span>
+    </h1>
+    <p class="hero-desc">
+      We decomposed 11 AI language models and discovered 56 universal neuron types —
+      organized into 8 fundamental atom types that appear across every architecture we tested.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">56</span>
+        <span class="stat-label">Elements</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">11</span>
+        <span class="stat-label">Models Scanned</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">9,492</span>
+        <span class="stat-label">Neurons Classified</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="/periodic-table" class="btn-primary">Explore the Table</a>
+      <a href="/darkfield" class="btn-secondary">Free Model Scan</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 80px 24px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,217,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 60%, rgba(247,37,133,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 20% 80%, rgba(114,9,183,0.08) 0%, transparent 60%),
+      var(--bg);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .badge {
+    display: inline-block;
+    border: 1px solid rgba(0,217,255,0.4);
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    background: rgba(0,217,255,0.07);
+  }
+
+  h1 {
+    font-size: clamp(36px, 7vw, 76px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--pink) 50%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    font-size: clamp(16px, 2vw, 20px);
+    color: #94A3B8;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--cyan);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; text-decoration: none; }
+
+  .btn-secondary {
+    border: 1px solid rgba(0,217,255,0.4);
+    color: var(--cyan);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: rgba(0,217,255,0.06);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .btn-secondary:hover { background: rgba(0,217,255,0.12); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .stat-divider { display: none; }
+    .hero-stats { gap: 20px; }
+  }
+</style>

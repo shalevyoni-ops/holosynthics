@@ -1,0 +1,193 @@
+---
+import { ATOM_TYPES } from '../data/elements';
+---
+
+<section class="pt-section" id="periodic-table">
+  <div class="container">
+    <div class="section-header">
+      <h2>The Periodic Table of <span class="accent">AI</span></h2>
+      <p>8 fundamental atom types × 7 sub-types = 56 universal elements. Every language model contains all of them.</p>
+    </div>
+
+    <div class="table-grid">
+      {ATOM_TYPES.map((type) => (
+        <div class="type-column">
+          <div class="type-header" style={`border-color: ${type.color}; background: ${type.color}15;`}>
+            <span class="type-symbol" style={`color: ${type.color};`}>{type.symbol}</span>
+            <span class="type-name">{type.name}</span>
+          </div>
+          {type.elements.map((el) => (
+            <a
+              href={`/periodic-table#element-${el.id}`}
+              class="element-card"
+              style={`--el-color: ${el.color};`}
+              title={el.description}
+            >
+              <span class="el-num">{el.id}</span>
+              <span class="el-name">{el.name}</span>
+              <span class="el-count">{el.count.toLocaleString()}</span>
+            </a>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    <div class="table-footer">
+      <a href="/periodic-table" class="explore-link">
+        Explore all 56 elements in detail &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pt-section {
+    padding: 100px 24px;
+    background: var(--bg2);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .accent { color: var(--cyan); }
+
+  .section-header p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .table-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+    overflow-x: auto;
+    min-width: 600px;
+  }
+
+  .type-column {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .type-header {
+    border: 1px solid;
+    border-radius: 8px 8px 4px 4px;
+    padding: 10px 6px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .type-symbol {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .type-name {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .element-card {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 6px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .element-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--el-color);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .element-card:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: var(--el-color);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .element-card:hover::before { opacity: 1; }
+
+  .el-num {
+    font-size: 9px;
+    color: var(--muted);
+    line-height: 1;
+  }
+
+  .el-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #E2E8F0;
+    margin: 3px 0 2px;
+    line-height: 1.2;
+  }
+
+  .el-count {
+    font-size: 9px;
+    color: var(--el-color);
+    opacity: 0.8;
+  }
+
+  .table-footer {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .explore-link {
+    color: var(--cyan);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,217,255,0.4);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .explore-link:hover { border-color: var(--cyan); }
+
+  @media (max-width: 900px) {
+    .table-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (max-width: 500px) {
+    .table-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

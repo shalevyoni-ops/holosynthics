@@ -1,0 +1,191 @@
+---
+const tools = [
+  {
+    icon: '🔬',
+    name: 'GI X-Ray',
+    tag: 'Available Now',
+    tagColor: '#22C55E',
+    desc: 'Scan any AI model with the Holosynthics periodic table. Identifies which of the 56 neuron types are present, in what proportions, and where anomalies concentrate.',
+    features: ['Full 56-element scan', 'Layer-by-layer breakdown', 'Anomaly heatmap', 'PDF report'],
+    cta: 'Request Scan',
+    href: '/darkfield',
+  },
+  {
+    icon: '📊',
+    name: 'GI Monitor',
+    tag: 'Available Now',
+    tagColor: '#22C55E',
+    desc: 'Real-time neuron monitoring for production AI systems. Detects distribution shift, anomalous activation patterns, and hallucination precursors before they affect output.',
+    features: ['Real-time stream', 'Drift detection', 'Alert thresholds', 'Dashboard'],
+    cta: 'Learn More',
+    href: '/darkfield',
+  },
+  {
+    icon: '⚕️',
+    name: 'GI Surgeon',
+    tag: 'Enterprise',
+    tagColor: '#F59E0B',
+    desc: 'Targeted neuron-level editing. Fix specific hallucination patterns, suppress noise neuron clusters, and amplify signal neurons — without retraining.',
+    features: ['Weight-space editing', 'Regression suite', 'Reversible edits', 'Air-gap ready'],
+    cta: 'Contact Us',
+    href: '/about',
+  },
+  {
+    icon: '⚡',
+    name: 'DarkField',
+    tag: 'Open Source',
+    tagColor: '#00D9FF',
+    desc: 'Open-source Python client for activation extraction. Install with pip, run on any HuggingFace model, export the DKFD bundle for X-Ray analysis.',
+    features: ['pip install darkfield', 'Any HF model', 'MIT license', '28/28 tests'],
+    cta: 'pip install darkfield',
+    href: 'https://github.com/growing-intelligence/darkfield',
+  },
+];
+---
+
+<section class="tools-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>The <span class="accent">Tool Suite</span></h2>
+      <p>Four tools built on the Holosynthics periodic table. From open-source extraction to enterprise surgical editing.</p>
+    </div>
+
+    <div class="tools-grid">
+      {tools.map(tool => (
+        <div class="tool-card">
+          <div class="tool-head">
+            <div class="tool-icon">{tool.icon}</div>
+            <div>
+              <div class="tool-name">{tool.name}</div>
+              <span class="tool-tag" style={`color: ${tool.tagColor}; border-color: ${tool.tagColor}40; background: ${tool.tagColor}10;`}>
+                {tool.tag}
+              </span>
+            </div>
+          </div>
+          <p class="tool-desc">{tool.desc}</p>
+          <ul class="tool-features">
+            {tool.features.map(f => <li>{f}</li>)}
+          </ul>
+          <a href={tool.href} class="tool-cta">{tool.cta} &rarr;</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tools-section {
+    padding: 100px 24px;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .accent { color: var(--cyan); }
+
+  .section-header p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .tool-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+
+  .tool-card:hover {
+    border-color: rgba(0,217,255,0.3);
+    transform: translateY(-4px);
+  }
+
+  .tool-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .tool-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .tool-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .tool-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .tool-desc {
+    color: #94A3B8;
+    font-size: 14px;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .tool-features {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tool-features li {
+    font-size: 12px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.05);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .tool-cta {
+    color: var(--cyan);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: auto;
+  }
+
+  .tool-cta:hover { text-decoration: underline; }
+
+  @media (max-width: 700px) {
+    .tools-grid { grid-template-columns: 1fr; }
+  }
+</style>

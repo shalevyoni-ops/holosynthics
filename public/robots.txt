@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://holosynthics.com/sitemap-index.xml
