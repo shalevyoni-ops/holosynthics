@@ -8,7 +8,7 @@ const navLinks = [
 ];
 ---
 
-<nav>
+<nav dir="ltr">
   <div class="nav-inner">
     <a href="/" class="logo" aria-label="Holosynthics home">
       <div class="logo-dot"></div>
@@ -42,6 +42,8 @@ const navLinks = [
     background: rgba(8, 10, 24, 0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
+    direction: ltr;
+    unicode-bidi: embed;
   }
 
   .nav-inner {
@@ -51,7 +53,7 @@ const navLinks = [
     height: 64px;
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 8px;
   }
 
   .logo {
@@ -83,7 +85,6 @@ const navLinks = [
     display: flex;
     list-style: none;
     gap: 8px;
-    margin-left: auto;
   }
 
   .nav-links a {
@@ -102,7 +103,7 @@ const navLinks = [
   }
 
   .nav-cta {
-    margin-left: 8px;
+    margin-left: 16px;
     background: linear-gradient(135deg, var(--cyan), #0099BB);
     color: #080A18;
     font-weight: 700;

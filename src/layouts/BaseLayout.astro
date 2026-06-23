@@ -89,6 +89,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
         --border: rgba(255,255,255,0.08);
       }
 
+      html, body { direction: ltr !important; unicode-bidi: embed; text-align: left; }
       html { scroll-behavior: smooth; }
 
       body {
@@ -111,7 +112,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
       ::-webkit-scrollbar-thumb { background: rgba(0,217,255,0.3); border-radius: 3px; }
     </style>
   </head>
-  <body>
+  <body dir="ltr">
     <slot />
   </body>
 </html>
