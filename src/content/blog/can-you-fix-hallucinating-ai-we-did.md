@@ -19,7 +19,7 @@ GI Surgeon: edit the neurons directly.
 
 ## The Method
 
-Every hallucinated response traces back to a neuron activation pattern. The Holosynthics scan identifies which neurons fired, which were silent, and which were present in the wrong layer.
+Every hallucinated response traces back to a specific neuron configuration. The Holosynthics scan identifies which neurons fired, which were silent, and which were present in the wrong position.
 
 GI Surgeon performs three classes of edit:
 
@@ -27,7 +27,7 @@ GI Surgeon performs three classes of edit:
 
 **Suppression** — reduce the weight contribution of a noise neuron firing at the wrong time. Used for the Symbol-neuron pattern underlying fluency-over-accuracy hallucinations.
 
-**Rerouting** — redirect a mid-layer activation from one attention head path to another. Used for complex factual recall failures.
+**Rerouting** — redirect signal flow between network components. Used for complex factual recall failures.
 
 All edits are:
 - Applied in weight space, not activation space (permanent in the model weights)
@@ -45,7 +45,7 @@ Holosynthics scan of layer 6 at the "fell" token shows:
 
 The model knows Berlin, knows "wall," but Symbol neurons overwhelm the Time.Era signal when predicting the year.
 
-GI Surgeon applies: **Symbol.Lexical suppression** at layer 6, reducing the 3 highest-magnitude noise neurons by 60%.
+GI Surgeon applies: **Symbol.Lexical suppression** — targeting the 3 highest-magnitude noise neurons, reducing their influence by 60%.
 
 Result after edit: "The year the Berlin Wall fell was... 1989."
 
@@ -70,6 +70,6 @@ We disclose results, not implementation details. The specific neuron targeting a
 
 **GI Surgeon** — applies edits under Holosynthics protocol. Available as a managed service (we run it on your model) and an on-premises API (for air-gapped deployments).
 
-**DarkField** — the open-source Python client for activation extraction. Captures the raw data that X-Ray and Surgeon interpret.
+**DarkField** — the open-source Python client that captures the neuron data that X-Ray and Surgeon interpret.
 
 Pricing and free scan options at [holosynthics.com/darkfield](/darkfield).

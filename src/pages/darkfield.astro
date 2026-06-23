@@ -5,10 +5,42 @@ import DarkFieldCTA from '../components/DarkFieldCTA.astro';
 import Footer from '../components/Footer.astro';
 
 const tiers = [
-  { name: 'Open Source', price: 'Free', per: '', highlight: false, features: ['DarkField Python client', 'Activation extraction', 'DKFD bundle format', 'MIT license', 'Any HuggingFace model'] },
-  { name: 'GI X-Ray', price: '$299', per: '/scan', highlight: true, features: ['Full 56-element scan', 'Layer-by-layer breakdown', 'Anomaly heatmap', 'PDF report', 'Hallucination risk score', 'Email delivery in 24h'] },
-  { name: 'GI Monitor', price: '$499', per: '/month', highlight: false, features: ['Real-time monitoring', 'Drift detection alerts', 'Slack/PagerDuty integration', 'Dashboard access', 'Monthly summary report', 'Up to 3 models'] },
-  { name: 'GI Surgeon', price: 'Custom', per: '', highlight: false, features: ['Targeted neuron editing', 'Hallucination fix guarantee', 'Regression suite included', 'Air-gap deployment', 'Custom SLA', 'Enterprise contract'] },
+  {
+    name: 'DarkField Open Source',
+    label: 'Free',
+    cta: 'Get Started Free',
+    ctaHref: 'https://github.com/shalevyoni-ops/darkfield',
+    ctaExternal: true,
+    highlight: false,
+    features: ['DarkField Python client', 'Neuron data capture', 'DKFD bundle format', 'MIT license', 'Any HuggingFace model'],
+  },
+  {
+    name: 'GI X-Ray',
+    label: 'Contact Us',
+    cta: 'Contact Us',
+    ctaHref: 'mailto:shalev.yoni@gmail.com?subject=GI X-Ray Request',
+    ctaExternal: false,
+    highlight: true,
+    features: ['Full 56-element scan', 'Layer-by-layer analysis', 'Anomaly heatmap', 'Hallucination risk report', 'Signed PDF delivery', 'Email in 24h'],
+  },
+  {
+    name: 'GI Monitor',
+    label: 'Contact Us',
+    cta: 'Contact Us',
+    ctaHref: 'mailto:shalev.yoni@gmail.com?subject=GI Monitor Inquiry',
+    ctaExternal: false,
+    highlight: false,
+    features: ['Real-time drift detection', 'Neuron composition alerts', 'Dashboard access', 'Monthly summary report', 'Up to 3 models', 'Slack/PagerDuty integration'],
+  },
+  {
+    name: 'GI Surgeon',
+    label: 'Request a Quote',
+    cta: 'Request a Quote',
+    ctaHref: 'mailto:shalev.yoni@gmail.com?subject=GI Surgeon Inquiry',
+    ctaExternal: false,
+    highlight: false,
+    features: ['Targeted neuron editing', 'Hallucination fix guarantee', '50-prompt regression suite', 'Minimal perplexity impact', 'Air-gap deployment', 'Enterprise contract'],
+  },
 ];
 ---
 
@@ -25,15 +57,15 @@ const tiers = [
       <div class="df-hero-inner">
         <div class="badge">Developer Tools</div>
         <h1>Scan Any AI Model.<br /><span class="accent">Understand Every Neuron.</span></h1>
-        <p>DarkField extracts activations. GI X-Ray maps them to the 56-element periodic table. GI Surgeon fixes what's broken — without retraining.</p>
+        <p>DarkField captures neuron data. GI X-Ray maps it to the 56-element periodic table. GI Surgeon fixes what's broken — without retraining.</p>
 
         <div class="quickstart">
-          <code>pip install darkfield && darkfield scan --model gpt2 --output my_model.bin</code>
+          <code>pip install darkfield && darkfield scan --model gpt2 --output my_model.dkfd</code>
         </div>
 
         <div class="df-actions">
-          <a href="https://github.com/growing-intelligence/darkfield" target="_blank" rel="noopener" class="btn-github">GitHub &rarr;</a>
-          <a href="#pricing" class="btn-primary">Get X-Ray Analysis</a>
+          <a href="https://github.com/shalevyoni-ops/darkfield" target="_blank" rel="noopener" class="btn-github">GitHub &rarr;</a>
+          <a href="#tools" class="btn-primary">See All Tools</a>
         </div>
       </div>
     </section>
@@ -46,14 +78,14 @@ const tiers = [
           <div class="hw-step">
             <div class="hw-num">01</div>
             <h3>Extract</h3>
-            <p>DarkField (open-source Python) registers forward hooks on your model's transformer layers and captures activation vectors during inference on your dataset.</p>
+            <p>DarkField (open-source Python) scans your model during inference and captures neuron state data from your dataset.</p>
             <code>darkfield scan --model your/model --dataset truthfulqa</code>
           </div>
           <div class="hw-step">
             <div class="hw-num">02</div>
             <h3>Bundle</h3>
-            <p>Activations are compressed into a DKFD bundle — a signed, deterministic binary format with cryptographic hash of the model weights. Portable, verifiable.</p>
-            <code>→ scan_bundle.bin (SHA-256 verified)</code>
+            <p>Neuron data is compressed into a DKFD bundle — a signed, deterministic binary format with cryptographic hash of the model weights. Portable, verifiable.</p>
+            <code>→ scan_bundle.dkfd (SHA-256 verified)</code>
           </div>
           <div class="hw-step">
             <div class="hw-num">03</div>
@@ -72,31 +104,31 @@ const tiers = [
     </section>
 
     <!-- GI X-Ray section -->
-    <section class="tool-detail" id="xray">
+    <section class="tool-detail" id="tools">
       <div class="container">
         <div class="tool-detail-inner">
           <div class="tool-text">
             <span class="tool-label">GI X-Ray</span>
             <h2>See Your Model's Neuron DNA</h2>
-            <p>Send us your DarkField bundle. We run the full 56-element analysis and return a comprehensive report showing exactly which neuron types dominate each layer, where anomalies concentrate, and what your hallucination risk score is.</p>
+            <p>Send us your DarkField bundle. We run the full 56-element analysis and return a comprehensive report showing which neuron types dominate each layer, where anomalies concentrate, and what your hallucination risk profile looks like.</p>
             <ul class="feature-list">
               <li>Full periodic table heatmap per layer</li>
               <li>Anomaly cluster identification</li>
               <li>Entropy.Confidence trace (hallucination predictor)</li>
-              <li>Cross-model comparison (how does your model compare?)</li>
-              <li>PDF report + raw JSON data</li>
+              <li>Cross-model comparison</li>
+              <li>Signed PDF report + raw JSON data</li>
             </ul>
-            <a href="mailto:contact@growing-intelligence.com?subject=GI X-Ray Request" class="btn-request">Request X-Ray &rarr;</a>
+            <a href="mailto:shalev.yoni@gmail.com?subject=GI X-Ray Request" class="btn-request">Contact Us for a Scan &rarr;</a>
           </div>
           <div class="tool-visual xray-visual">
-            <!-- SVG heatmap representation -->
             <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="X-Ray heatmap diagram">
               <rect width="300" height="200" fill="#0D0F23" rx="12"/>
               <text x="150" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Layer Distribution Heatmap</text>
               {Array.from({length: 8}, (_, col) =>
                 Array.from({length: 7}, (_, row) => {
                   const colors = ['#F72585','#00D9FF','#7209B7','#4CC9F0','#22C55E','#FFD60A','#F59E0B','#EF4444'];
-                  const opacity = 0.2 + Math.random() * 0.7;
+                  const vals = [0.5, 0.8, 0.3, 0.6, 0.4, 0.7, 0.9, 0.2];
+                  const opacity = Math.max(0.1, Math.min(0.95, vals[(col + row) % 8]));
                   return `<rect x="${30 + col*32}" y="${36 + row*22}" width="28" height="18" rx="3" fill="${colors[col]}" opacity="${opacity.toFixed(2)}"/>`;
                 }).join('')
               ).join('')}
@@ -107,10 +139,49 @@ const tiers = [
       </div>
     </section>
 
-    <!-- GI Surgeon section -->
-    <section class="tool-detail alt" id="surgeon">
+    <!-- GI Monitor section -->
+    <section class="tool-detail alt" id="monitor">
       <div class="container">
         <div class="tool-detail-inner reverse">
+          <div class="tool-text">
+            <span class="tool-label">GI Monitor</span>
+            <h2>Track Neuron Drift in Real Time</h2>
+            <p>As models are updated, fine-tuned, or exposed to distribution shifts, their neuron composition changes. GI Monitor detects these changes before they manifest as output degradation.</p>
+            <ul class="feature-list">
+              <li>Continuous neuron composition tracking</li>
+              <li>Drift alerts before output quality degrades</li>
+              <li>Slack and PagerDuty integration</li>
+              <li>Monthly composition summary</li>
+              <li>Comparison across model versions</li>
+            </ul>
+            <a href="mailto:shalev.yoni@gmail.com?subject=GI Monitor Inquiry" class="btn-request">Contact Us &rarr;</a>
+          </div>
+          <div class="tool-visual monitor-visual">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="Monitor drift diagram">
+              <rect width="300" height="200" fill="#0D0F23" rx="12"/>
+              <text x="150" y="20" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Neuron Composition Over Time</text>
+              <!-- Stable line -->
+              <polyline points="20,80 60,78 100,82 140,79 180,81 220,76 260,80 280,78" fill="none" stroke="#00D9FF" stroke-width="2" opacity="0.8"/>
+              <!-- Drift line -->
+              <polyline points="180,81 200,90 220,105 240,118 260,130 280,140" fill="none" stroke="#EF4444" stroke-width="2" opacity="0.8"/>
+              <!-- Alert marker -->
+              <circle cx="200" cy="90" r="5" fill="#FFD60A" opacity="0.9"/>
+              <text x="206" y="88" fill="#FFD60A" font-size="8" font-family="Inter,sans-serif">drift detected</text>
+              <!-- Legend -->
+              <rect x="20" y="160" width="12" height="3" fill="#00D9FF"/>
+              <text x="36" y="164" fill="#8892A4" font-size="8" font-family="Inter,sans-serif">stable</text>
+              <rect x="80" y="160" width="12" height="3" fill="#EF4444"/>
+              <text x="96" y="164" fill="#8892A4" font-size="8" font-family="Inter,sans-serif">drift detected</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GI Surgeon section -->
+    <section class="tool-detail" id="surgeon">
+      <div class="container">
+        <div class="tool-detail-inner">
           <div class="tool-text">
             <span class="tool-label">GI Surgeon</span>
             <h2>Fix Hallucinations Without Retraining</h2>
@@ -119,37 +190,36 @@ const tiers = [
               <li>Weight-space edits (permanent, reversible)</li>
               <li>Amplification · Suppression · Rerouting</li>
               <li>50-prompt regression suite before every commit</li>
-              <li>Perplexity delta &lt; 0.5% guarantee</li>
+              <li>Minimal perplexity impact guarantee</li>
               <li>Air-gap deployment available</li>
             </ul>
-            <a href="mailto:contact@growing-intelligence.com?subject=GI Surgeon Inquiry" class="btn-request">Contact for Enterprise &rarr;</a>
+            <a href="mailto:shalev.yoni@gmail.com?subject=GI Surgeon Inquiry" class="btn-request">Request a Quote &rarr;</a>
           </div>
           <div class="tool-visual surgeon-visual">
             <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="Neuron edit diagram">
               <rect width="300" height="200" fill="#0D0F23" rx="12"/>
-              <!-- Before/after bars -->
               <text x="60" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">BEFORE</text>
               <text x="210" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">AFTER</text>
               <!-- Noise bar (before) -->
               <rect x="20" y="36" width="80" height="12" rx="2" fill="#7209B7" opacity="0.9"/>
-              <text x="24" y="46" fill="#fff" font-size="7" font-family="Inter,sans-serif">Symbol (noise) 180%</text>
-              <!-- Signal bar (before) - small -->
+              <text x="24" y="46" fill="#fff" font-size="7" font-family="Inter,sans-serif">Symbol.General (noise)</text>
+              <!-- Signal bar (before) — small -->
               <rect x="20" y="56" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.6"/>
-              <text x="24" y="66" fill="#fff" font-size="7" font-family="Inter,sans-serif">Time.Era 40%</text>
+              <text x="24" y="66" fill="#fff" font-size="7" font-family="Inter,sans-serif">Time.Era (weak)</text>
               <!-- Arrow -->
               <text x="150" y="80" fill="#00D9FF" font-size="24" text-anchor="middle" font-family="Inter,sans-serif">&#8594;</text>
               <text x="150" y="100" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">GI Surgeon</text>
-              <!-- Noise bar (after) - suppressed -->
+              <!-- Noise bar (after) — suppressed -->
               <rect x="170" y="36" width="25" height="12" rx="2" fill="#7209B7" opacity="0.35"/>
-              <text x="174" y="46" fill="#fff" font-size="7" font-family="Inter,sans-serif">Symbol 60%</text>
-              <!-- Signal bar (after) - amplified -->
+              <text x="174" y="46" fill="#fff" font-size="7" font-family="Inter,sans-serif">Symbol (suppressed)</text>
+              <!-- Signal bar (after) — amplified -->
               <rect x="170" y="56" width="95" height="12" rx="2" fill="#FFD60A" opacity="0.9"/>
-              <text x="174" y="66" fill="#fff" font-size="7" font-family="Inter,sans-serif">Time.Era 95%</text>
+              <text x="174" y="66" fill="#fff" font-size="7" font-family="Inter,sans-serif">Time.Era (amplified)</text>
               <!-- Result -->
               <rect x="20" y="120" width="260" height="20" rx="4" fill="#22C55E" opacity="0.15"/>
               <rect x="20" y="120" width="260" height="20" rx="4" fill="none" stroke="#22C55E" stroke-width="1" opacity="0.4"/>
-              <text x="150" y="134" fill="#22C55E" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Output: "1989" (correct)</text>
-              <text x="150" y="165" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">No retraining. Regression passed. Permanent.</text>
+              <text x="150" y="134" fill="#22C55E" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Output: correct — no retraining</text>
+              <text x="150" y="165" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">Fully reversible. Regression passed. Permanent.</text>
             </svg>
           </div>
         </div>
@@ -159,26 +229,24 @@ const tiers = [
     <!-- Pricing -->
     <section class="pricing-section" id="pricing">
       <div class="container">
-        <h2>Pricing</h2>
+        <h2>Get Started</h2>
+        <p class="pricing-sub">DarkField is free and open-source. GI X-Ray, Monitor, and Surgeon are managed services — contact us for access.</p>
         <div class="pricing-grid">
           {tiers.map(tier => (
             <div class={`pricing-card ${tier.highlight ? 'highlight' : ''}`}>
-              {tier.highlight && <div class="popular">Most Popular</div>}
+              {tier.highlight && <div class="popular">Most Requested</div>}
               <div class="tier-name">{tier.name}</div>
-              <div class="tier-price">
-                <span class="price-val">{tier.price}</span>
-                {tier.per && <span class="price-per">{tier.per}</span>}
-              </div>
+              <div class="tier-label">{tier.label}</div>
               <ul class="tier-features">
                 {tier.features.map(f => <li>{f}</li>)}
               </ul>
               <a
-                href={tier.price === 'Free' ? 'https://github.com/growing-intelligence/darkfield' : 'mailto:contact@growing-intelligence.com'}
+                href={tier.ctaHref}
                 class={`tier-cta ${tier.highlight ? 'primary' : 'secondary'}`}
-                target={tier.price === 'Free' ? '_blank' : undefined}
-                rel={tier.price === 'Free' ? 'noopener' : undefined}
+                target={tier.ctaExternal ? '_blank' : undefined}
+                rel={tier.ctaExternal ? 'noopener' : undefined}
               >
-                {tier.price === 'Free' ? 'Get Started Free' : tier.price === 'Custom' ? 'Contact Us' : 'Get Started'}
+                {tier.cta}
               </a>
             </div>
           ))}
@@ -360,9 +428,8 @@ const tiers = [
     align-items: center;
   }
 
-  .tool-detail-inner.reverse { direction: rtl; }
-  .tool-detail-inner.reverse .tool-text { direction: ltr; }
-  .tool-detail-inner.reverse .tool-visual { direction: ltr; }
+  /* Use order instead of direction:rtl to avoid LTR conflict */
+  .tool-detail-inner.reverse .tool-visual { order: -1; }
 
   .tool-label {
     font-size: 12px;
@@ -421,7 +488,14 @@ const tiers = [
   .tool-visual svg { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); }
 
   /* Pricing */
-  .pricing-section { padding: 80px 24px; }
+  .pricing-section { padding: 80px 24px; background: var(--bg2); }
+
+  .pricing-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 48px;
+    max-width: 520px;
+  }
 
   .pricing-grid {
     display: grid;
@@ -430,7 +504,7 @@ const tiers = [
   }
 
   .pricing-card {
-    background: var(--bg2);
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 28px 24px;
@@ -458,6 +532,7 @@ const tiers = [
     border-radius: 0 0 8px 8px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .tier-name {
@@ -469,16 +544,12 @@ const tiers = [
     margin-top: 8px;
   }
 
-  .tier-price { display: flex; align-items: baseline; gap: 4px; }
-
-  .price-val {
-    font-size: 36px;
+  .tier-label {
+    font-size: 28px;
     font-weight: 900;
     color: #fff;
     line-height: 1;
   }
-
-  .price-per { font-size: 14px; color: var(--muted); }
 
   .tier-features {
     list-style: none;
@@ -532,7 +603,7 @@ const tiers = [
     .steps-grid { grid-template-columns: 1fr 1fr; }
     .pricing-grid { grid-template-columns: 1fr 1fr; }
     .tool-detail-inner { grid-template-columns: 1fr; }
-    .tool-detail-inner.reverse { direction: ltr; }
+    .tool-detail-inner.reverse .tool-visual { order: 0; }
   }
 
   @media (max-width: 600px) {

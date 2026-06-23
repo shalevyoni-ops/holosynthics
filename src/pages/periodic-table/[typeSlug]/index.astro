@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import { BY_TYPE, TYPE_META } from '../../../data/element-content';
+
+export function getStaticPaths() {
+  return TYPE_META.map(t => ({
+    params: { typeSlug: t.slug },
+    props: { typeMeta: t, elements: BY_TYPE[t.slug] ?? [] },
+  }));
+}
+
+const { typeMeta, elements } = Astro.props;
+const firstEl = elements[0];
+---
+
+<BaseLayout
+  title={`${typeMeta.name} Neurons — Periodic Table of AI`}
+  description={`${firstEl?.typeDescription ?? ''} Explore all 7 ${typeMeta.name} neuron elements discovered in transformer language models.`}
+>
+  <Nav />
+
+  <main class="type-page">
+    <div class="type-hero" style={`--tc: ${typeMeta.color};`}>
+      <div class="type-hero-glow"></div>
+      <div class="breadcrumb">
+        <a href="/periodic-table">Periodic Table</a>
+        <span>/</span>
+        <span>{typeMeta.name}</span>
+      </div>
+      <div class="type-symbol" style={`color: ${typeMeta.color};`}>{typeMeta.symbol}</div>
+      <h1>{typeMeta.name} Neurons</h1>
+      <p class="type-tagline">{firstEl?.typeDescription}</p>
+    </div>
+
+    <div class="type-overview">
+      <div class="container">
+        <div class="overview-card">
+          <h2>About {typeMeta.name} Neurons</h2>
+          <p>{firstEl?.typeOverview}</p>
+        </div>
+
+        <h2 class="elements-heading">The 7 {typeMeta.name} Elements</h2>
+        <div class="elements-grid">
+          {elements.map(el => (
+            <a
+              href={`/periodic-table/${el.typeSlug}/${el.slug}`}
+              class="element-card"
+              style={`--ec: ${el.color};`}
+            >
+              <div class="el-header">
+                <span class="el-id">{el.id}</span>
+                <span class="el-type-badge" style={`color: ${el.color}; border-color: ${el.color}40; background: ${el.color}10;`}>{el.typeSymbol}</span>
+              </div>
+              <div class="el-name">{el.name}</div>
+              <div class="el-one-liner">{el.oneLiner}</div>
+              <div class="el-explore">Explore &rarr;</div>
+            </a>
+          ))}
+        </div>
+
+        <div class="type-nav">
+          <a href="/periodic-table" class="back-link">&larr; Back to Full Periodic Table</a>
+          <a href="/darkfield" class="scan-link">Scan Your Model &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .type-page { padding-top: 64px; }
+
+  .type-hero {
+    position: relative;
+    padding: 72px 24px 60px;
+    text-align: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, color-mix(in srgb, var(--tc) 15%, transparent) 0%, transparent 60%);
+  }
+
+  .type-hero-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 40% 30% at 50% 100%, rgba(8,10,24,0.8) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .breadcrumb a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover { color: var(--text); }
+
+  .type-symbol {
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: -0.04em;
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+    letter-spacing: -0.03em;
+  }
+
+  .type-tagline {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .type-overview { padding: 60px 24px 80px; }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .overview-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 56px;
+  }
+
+  .overview-card h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .overview-card p {
+    font-size: 16px;
+    color: #94A3B8;
+    line-height: 1.85;
+  }
+
+  .elements-heading {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .elements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .element-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 24px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s, transform 0.15s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .element-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--ec);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .element-card:hover {
+    border-color: var(--ec);
+    background: rgba(255,255,255,0.03);
+    transform: translateY(-3px);
+    text-decoration: none;
+  }
+
+  .element-card:hover::before { opacity: 1; }
+
+  .el-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .el-id {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .el-type-badge {
+    font-size: 10px;
+    font-weight: 700;
+    border: 1px solid;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .el-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .el-one-liner {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .el-explore {
+    font-size: 13px;
+    color: var(--ec);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .type-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .back-link {
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--text); text-decoration: none; }
+
+  .scan-link {
+    font-size: 14px;
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0,217,255,0.4);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+
+  .scan-link:hover { border-color: var(--cyan); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .elements-grid { grid-template-columns: 1fr; }
+  }
+</style>

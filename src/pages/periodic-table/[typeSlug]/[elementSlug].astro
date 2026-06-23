@@ -1,0 +1,557 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import { ELEMENT_CONTENT } from '../../../data/element-content';
+
+export function getStaticPaths() {
+  return ELEMENT_CONTENT.map(el => ({
+    params: { typeSlug: el.typeSlug, elementSlug: el.slug },
+    props: { el },
+  }));
+}
+
+const { el } = Astro.props;
+
+// Find sibling elements (same type, different element)
+const siblings = ELEMENT_CONTENT.filter(
+  e => e.typeSlug === el.typeSlug && e.slug !== el.slug
+);
+
+// Find the previous and next elements by id
+const prevEl = ELEMENT_CONTENT.find(e => e.id === el.id - 1);
+const nextEl = ELEMENT_CONTENT.find(e => e.id === el.id + 1);
+---
+
+<BaseLayout
+  title={`${el.typeSymbol}.${el.name} — Periodic Table of AI`}
+  description={`${el.oneLiner} A ${el.typeName} neuron found universally across AI language models. ${el.what.slice(0, 120)}`}
+>
+  <Nav />
+
+  <main class="element-page">
+    <!-- Element Hero -->
+    <div class="el-hero" style={`--ec: ${el.color};`}>
+      <div class="el-hero-glow"></div>
+      <div class="el-hero-inner">
+        <div class="breadcrumb">
+          <a href="/periodic-table">Periodic Table</a>
+          <span>/</span>
+          <a href={`/periodic-table/${el.typeSlug}`}>{el.typeName}</a>
+          <span>/</span>
+          <span>{el.name}</span>
+        </div>
+
+        <div class="el-id-badge">Element {el.id}</div>
+        <div class="el-symbol-block">
+          <span class="el-type-sym" style={`color: ${el.color};`}>{el.typeSymbol}</span>
+          <span class="el-dot">.</span>
+          <span class="el-name-title">{el.name}</span>
+        </div>
+        <p class="el-one-liner">{el.oneLiner}</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="el-content">
+      <div class="container">
+        <div class="content-grid">
+          <!-- Left: main content -->
+          <div class="main-col">
+            <section class="content-section">
+              <h2>What It Does</h2>
+              <p>{el.what}</p>
+            </section>
+
+            <section class="content-section">
+              <h2>How It Behaves</h2>
+              <p>{el.behavior}</p>
+            </section>
+
+            <section class="content-section">
+              <h2>Research Example</h2>
+              <div class="example-box">
+                <p>{el.example}</p>
+              </div>
+            </section>
+          </div>
+
+          <!-- Right: sidebar -->
+          <aside class="sidebar">
+            <!-- Element card -->
+            <div class="el-card" style={`--ec: ${el.color};`}>
+              <div class="el-card-num">{el.id}</div>
+              <div class="el-card-type" style={`color: ${el.color};`}>{el.typeSymbol}</div>
+              <div class="el-card-name">{el.name}</div>
+              <div class="el-card-type-full">{el.typeName}</div>
+            </div>
+
+            <!-- Type overview link -->
+            <div class="sidebar-card">
+              <div class="sidebar-label">Atom Type</div>
+              <a href={`/periodic-table/${el.typeSlug}`} class="type-link" style={`color: ${el.color};`}>
+                {el.typeName} neurons &rarr;
+              </a>
+              <p class="type-desc">{el.typeDescription}</p>
+            </div>
+
+            <!-- Related elements -->
+            {el.relatedElements.length > 0 && (
+              <div class="sidebar-card">
+                <div class="sidebar-label">Related Elements</div>
+                <div class="related-list">
+                  {el.relatedElements.map(rel => {
+                    const parts = rel.split('.');
+                    const relType = parts.length > 1 ? parts[0] : el.typeName;
+                    const relName = parts.length > 1 ? parts[1] : parts[0];
+                    const relEl = ELEMENT_CONTENT.find(
+                      e => e.name === relName && (parts.length === 1 || e.typeName === relType || e.typeSymbol === relType)
+                    ) ?? ELEMENT_CONTENT.find(e => e.name === relName);
+                    if (relEl) {
+                      return (
+                        <a href={`/periodic-table/${relEl.typeSlug}/${relEl.slug}`} class="related-item" style={`--rc: ${relEl.color};`}>
+                          <span class="ri-type" style={`color: ${relEl.color};`}>{relEl.typeSymbol}</span>
+                          <span class="ri-name">{relEl.name}</span>
+                        </a>
+                      );
+                    }
+                    return (
+                      <span class="related-item-plain" style={`color: ${el.color};`}>{rel}</span>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            <!-- CTA -->
+            <div class="sidebar-cta">
+              <p>See {el.typeSymbol}.{el.name} neurons in your model.</p>
+              <a href="mailto:shalev.yoni@gmail.com?subject=GI X-Ray Request" class="cta-btn">
+                Request a Scan &rarr;
+              </a>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Element navigation -->
+        <nav class="el-nav">
+          {prevEl ? (
+            <a href={`/periodic-table/${prevEl.typeSlug}/${prevEl.slug}`} class="nav-link prev">
+              <span class="nav-dir">&larr; Previous</span>
+              <span class="nav-name">{prevEl.typeSymbol}.{prevEl.name}</span>
+            </a>
+          ) : <div></div>}
+          <a href="/periodic-table" class="nav-table-link">Full Table</a>
+          {nextEl ? (
+            <a href={`/periodic-table/${nextEl.typeSlug}/${nextEl.slug}`} class="nav-link next">
+              <span class="nav-dir">Next &rarr;</span>
+              <span class="nav-name">{nextEl.typeSymbol}.{nextEl.name}</span>
+            </a>
+          ) : <div></div>}
+        </nav>
+
+        <!-- All siblings -->
+        <section class="siblings-section">
+          <h2>Other {el.typeName} Elements</h2>
+          <div class="siblings-grid">
+            {siblings.map(s => (
+              <a href={`/periodic-table/${s.typeSlug}/${s.slug}`} class="sibling-card" style={`--ec: ${s.color};`}>
+                <span class="sib-id">{s.id}</span>
+                <span class="sib-name">{s.name}</span>
+                <span class="sib-one">{s.oneLiner}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .element-page { padding-top: 64px; }
+
+  .el-hero {
+    position: relative;
+    padding: 72px 24px 60px;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, color-mix(in srgb, var(--ec) 12%, transparent) 0%, transparent 60%);
+    overflow: hidden;
+  }
+
+  .el-hero-glow {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--ec, rgba(0,217,255,0.3)), transparent);
+    opacity: 0.4;
+  }
+
+  .el-hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .breadcrumb a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover { color: var(--text); }
+
+  .el-id-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .el-symbol-block {
+    font-size: clamp(40px, 7vw, 72px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .el-type-sym { color: var(--ec); }
+  .el-dot { color: rgba(255,255,255,0.3); }
+  .el-name-title { color: #fff; }
+
+  .el-one-liner {
+    font-size: 18px;
+    color: #94A3B8;
+    line-height: 1.6;
+    max-width: 580px;
+  }
+
+  /* Content layout */
+  .el-content { padding: 60px 24px 80px; }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+
+  /* Main column */
+  .content-section {
+    margin-bottom: 48px;
+  }
+
+  .content-section:last-child { margin-bottom: 0; }
+
+  .content-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .content-section p {
+    font-size: 16px;
+    color: #94A3B8;
+    line-height: 1.85;
+  }
+
+  .example-box {
+    background: var(--bg2);
+    border: 1px solid rgba(0,217,255,0.15);
+    border-radius: 12px;
+    padding: 24px;
+    border-left: 3px solid var(--ec, var(--cyan));
+  }
+
+  .example-box p {
+    font-size: 15px;
+    color: #94A3B8;
+    line-height: 1.85;
+  }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+  .el-card {
+    background: var(--bg2);
+    border: 1px solid var(--ec, rgba(255,255,255,0.08));
+    border-radius: 14px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .el-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--ec);
+  }
+
+  .el-card-num {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .el-card-type {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .el-card-name {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .el-card-type-full {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .sidebar-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .sidebar-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .type-link {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+
+  .type-link:hover { text-decoration: underline; }
+
+  .type-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Related elements */
+  .related-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .related-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .related-item:hover {
+    border-color: var(--rc, rgba(255,255,255,0.15));
+    background: rgba(255,255,255,0.05);
+    text-decoration: none;
+  }
+
+  .ri-type {
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 20px;
+  }
+
+  .ri-name {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .related-item-plain {
+    font-size: 13px;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+  }
+
+  /* Sidebar CTA */
+  .sidebar-cta {
+    background: rgba(0,217,255,0.05);
+    border: 1px solid rgba(0,217,255,0.2);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .sidebar-cta p {
+    font-size: 14px;
+    color: #94A3B8;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .cta-btn {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .cta-btn:hover { opacity: 0.85; text-decoration: none; }
+
+  /* Element navigation */
+  .el-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    max-width: 200px;
+  }
+
+  .nav-link.prev { align-items: flex-start; }
+  .nav-link.next { align-items: flex-end; }
+
+  .nav-dir {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .nav-name {
+    font-size: 15px;
+    color: var(--cyan);
+    font-weight: 600;
+  }
+
+  .nav-table-link {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 8px;
+    transition: 0.2s;
+  }
+
+  .nav-table-link:hover { color: var(--text); border-color: rgba(255,255,255,0.15); text-decoration: none; }
+
+  /* Siblings */
+  .siblings-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .siblings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .sibling-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sibling-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--ec);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .sibling-card:hover {
+    border-color: var(--ec);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .sibling-card:hover::before { opacity: 1; }
+
+  .sib-id { font-size: 10px; color: var(--muted); }
+  .sib-name { font-size: 15px; font-weight: 700; color: #fff; }
+  .sib-one { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 900px) {
+    .content-grid { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+  }
+
+  @media (max-width: 600px) {
+    .siblings-grid { grid-template-columns: 1fr 1fr; }
+    .el-nav { flex-direction: column; align-items: flex-start; }
+  }
+</style>

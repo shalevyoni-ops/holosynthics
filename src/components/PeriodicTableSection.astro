@@ -5,7 +5,7 @@ import { ATOM_TYPES } from '../data/elements';
 <section class="pt-section" id="periodic-table">
   <div class="pt-img-bg" role="presentation">
     <img
-      src="/img/u6136666627_fractal_zoom_into_AI_brain_layers_of_neurons_reve_a415b7c3-1b8e-4951-8098-33caae357807_1.png"
+      src="/img/fractal_1.png"
       alt=""
       class="pt-bg-img"
       loading="lazy"
@@ -28,7 +28,7 @@ import { ATOM_TYPES } from '../data/elements';
           </div>
           {type.elements.map((el) => (
             <a
-              href={`/periodic-table#element-${el.id}`}
+              href={`/periodic-table/${type.name.toLowerCase()}/${el.name.toLowerCase()}`}
               class="element-card"
               style={`--el-color: ${el.color};`}
               title={el.description}
@@ -70,14 +70,14 @@ import { ATOM_TYPES } from '../data/elements';
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.12;
-    filter: saturate(0.6) brightness(0.8);
+    opacity: 0.35;
+    filter: saturate(0.8) brightness(0.7);
   }
 
   .pt-img-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(13,15,35,0.72);
+    background: rgba(13,15,35,0.55);
   }
 
   .container {

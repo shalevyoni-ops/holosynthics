@@ -7,7 +7,7 @@ keywords: ["AI interpretability", "periodic table AI", "neuron analysis", "langu
 
 In chemistry, 118 elements explain all matter. We asked: is there an equivalent for artificial intelligence?
 
-After two years of systematic neuron decomposition across 11 language models — from GPT-2 Small (124M parameters) to Mistral 7B — we found 56 distinct neuron types, organized into 8 fundamental atom types. Like the periodic table of chemistry, these 56 elements appear across radically different models, trained on different data, by different organizations.
+After two years of systematic neuron analysis across 11 language models — from GPT-2 Small (124M parameters) to Mistral 7B — we found 56 distinct neuron types, organized into 8 fundamental atom types. Like the periodic table of chemistry, these 56 elements appear across radically different models, trained on different data, by different organizations.
 
 ## The 8 Fundamental Types
 
@@ -21,7 +21,7 @@ Every AI language model we examined contains neurons that organize into exactly 
 
 **Identity** — neurons specialized in named entities: people, places, organizations. GPT-2 Small shows 10.9% Identity allocation; Gemma 2B shows 5.4%.
 
-**Space** — neurons for position, direction, and geometry. Concentrated in middle layers (mid-network peak 51–100% in some sub-types).
+**Space** — neurons for position, direction, and geometry. Concentrated in middle and late network layers.
 
 **Time** — temporal neurons for dates, sequences, and events. Era neurons (1,457 found) are the largest single element across our corpus.
 
@@ -42,7 +42,7 @@ The same 8 types appear across architectures that share nothing in common:
 | Qwen 3 1.7B | 1.5% | 12.8% | 25.5% | 5.1% | 1.6% | 21.6% | 4.1% | 0.2% |
 | OLMo 3 7B | 3.6% | 13.2% | 31.6% | 7.4% | 2.8% | 23.6% | 8.0% | 0.6% |
 
-Ten out of eleven models confirm all 8 types. The single exception (GPT-2 Medium) is an artifact of our decomposition method — vocabulary projection without SAE access misses Identity, Space, and Entropy in that specific architecture.
+Ten out of eleven models confirm all 8 types. The single exception (GPT-2 Medium) reflects a classification gap at that model scale that we continue to investigate.
 
 ## The 56th Element: Entropy.Confidence
 
@@ -56,4 +56,4 @@ A periodic table of AI implies something profound: intelligence, at least in its
 
 This is the foundation of Holosynthics. Every model can be decomposed, scanned, and analyzed using the same periodic table. Anomalies stand out. Hallucination-prone regions become visible. The model becomes interpretable.
 
-The full 56-element table, with neuron counts and layer distributions, is available at [holosynthics.com/periodic-table](/periodic-table).
+The full 56-element table, with complete element profiles and research findings, is available at [holosynthics.com/periodic-table](/periodic-table).
