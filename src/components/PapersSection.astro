@@ -24,7 +24,16 @@ const papers = [
 ---
 
 <section class="papers-section">
-  <div class="papers-bg"></div>
+  <div class="papers-bg" role="presentation">
+    <img
+      src="/img/u6136666627_dark_microscope_view_of_neural_network_neurons_gl_d7a0a9ee-73d6-491e-9371-34fbd1bd358f_2.png"
+      alt=""
+      class="papers-img"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="papers-overlay"></div>
+  </div>
   <Particles id="papers-canvas" count={60} />
 
   <div class="container">
@@ -65,9 +74,27 @@ const papers = [
   .papers-bg {
     position: absolute;
     inset: 0;
+    overflow: hidden;
+  }
+
+  .papers-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.25;
+    filter: saturate(0.8) brightness(0.7) hue-rotate(20deg);
+  }
+
+  .papers-overlay {
+    position: absolute;
+    inset: 0;
     background:
-      radial-gradient(ellipse 60% 40% at 30% 50%, rgba(114,9,183,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 70% 50%, rgba(247,37,133,0.08) 0%, transparent 60%);
+      radial-gradient(ellipse 60% 40% at 30% 50%, rgba(114,9,183,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 70% 50%, rgba(247,37,133,0.15) 0%, transparent 60%),
+      rgba(13,15,35,0.72);
   }
 
   .container {

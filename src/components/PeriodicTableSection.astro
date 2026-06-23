@@ -3,6 +3,16 @@ import { ATOM_TYPES } from '../data/elements';
 ---
 
 <section class="pt-section" id="periodic-table">
+  <div class="pt-img-bg" role="presentation">
+    <img
+      src="/img/u6136666627_fractal_zoom_into_AI_brain_layers_of_neurons_reve_a415b7c3-1b8e-4951-8098-33caae357807_1.png"
+      alt=""
+      class="pt-bg-img"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="pt-img-overlay"></div>
+  </div>
   <div class="container">
     <div class="section-header">
       <h2>The Periodic Table of <span class="accent">AI</span></h2>
@@ -44,6 +54,36 @@ import { ATOM_TYPES } from '../data/elements';
   .pt-section {
     padding: 100px 24px;
     background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pt-img-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .pt-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.12;
+    filter: saturate(0.6) brightness(0.8);
+  }
+
+  .pt-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13,15,35,0.72);
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
   }
 
   .container {

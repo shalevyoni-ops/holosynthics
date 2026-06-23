@@ -3,8 +3,15 @@ import Particles from './Particles.astro';
 ---
 
 <section class="hero">
-  <div class="hero-bg">
-    <!-- Neuron network background pattern (CSS-based; swap with /img/hero-neuron.jpg when Midjourney assets arrive) -->
+  <div class="hero-bg" role="presentation">
+    <img
+      src="/img/u6136666627_dark_microscope_view_of_neural_network_neurons_gl_d7a0a9ee-73d6-491e-9371-34fbd1bd358f_0.png"
+      alt=""
+      class="hero-img"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="hero-overlay"></div>
   </div>
   <Particles id="hero-canvas" count={100} />
 
@@ -55,11 +62,26 @@ import Particles from './Particles.astro';
   .hero-bg {
     position: absolute;
     inset: 0;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.35;
+    filter: saturate(1.2) brightness(0.8);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,217,255,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 40% at 80% 60%, rgba(247,37,133,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 60% at 20% 80%, rgba(114,9,183,0.08) 0%, transparent 60%),
-      var(--bg);
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(8,10,24,0.3) 0%, rgba(8,10,24,0.75) 70%),
+      linear-gradient(to bottom, rgba(8,10,24,0.2) 0%, rgba(8,10,24,0.85) 100%);
   }
 
   .hero-content {
