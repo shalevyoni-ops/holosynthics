@@ -1,9 +1,12 @@
 ---
 const navLinks = [
   { href: '/periodic-table', label: 'Periodic Table' },
+  { href: '/demo', label: 'Demo' },
   { href: '/research', label: 'Research' },
+  { href: '/benchmarks', label: 'Benchmarks' },
   { href: '/blog', label: 'Blog' },
-  { href: '/darkfield', label: 'DarkField' },
+  { href: '/probe56', label: 'Probe56' },
+  { href: '/learn', label: 'Learn' },
   { href: '/about', label: 'About' },
 ];
 ---
@@ -19,7 +22,7 @@ const navLinks = [
         <li><a href={link.href}>{link.label}</a></li>
       ))}
     </ul>
-    <a href="/darkfield" class="nav-cta">Free Scan</a>
+    <a href="/probe56" class="nav-cta">Free Scan</a>
     <button class="hamburger" aria-label="Open menu" id="hamburger">
       <span></span><span></span><span></span>
     </button>
@@ -28,7 +31,7 @@ const navLinks = [
     {navLinks.map(link => (
       <a href={link.href}>{link.label}</a>
     ))}
-    <a href="/darkfield" class="mobile-cta">Free Scan</a>
+    <a href="/probe56" class="mobile-cta">Free Scan</a>
   </div>
 </nav>
 
