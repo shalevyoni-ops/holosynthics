@@ -4,19 +4,19 @@ import Particles from './Particles.astro';
 const papers = [
   {
     num: 1,
-    title: 'Holosynthics: Neuron-Level Decomposition of Language Models into 8 Universal Atom Types',
-    desc: 'We introduce the Holosynthics framework and demonstrate 8 fundamental neuron types across 6 transformer architectures.',
-    doi: '10.5281/zenodo.15623044',
-    doiUrl: 'https://doi.org/10.5281/zenodo.15623044',
+    title: 'Holosynthics: Element-Level Decomposition of Language Models into 8 Universal Atom Types',
+    desc: 'We introduce the Holosynthics framework and demonstrate 8 fundamental element types observed across 6 transformer architectures.',
+    doi: '10.5281/zenodo.20736159',
+    doiUrl: 'https://zenodo.org/records/20736159',
     models: ['Gemma 2B', 'GPT-2 Small', 'Qwen3 1.7B'],
     tag: 'Paper I · June 2026',
   },
   {
     num: 2,
-    title: 'The Periodic Table of AI: 56 Universal Neuron Elements Across 11 Language Models',
-    desc: 'We extend the 8-type framework to 56 sub-types and validate universality across 11 models including Mistral 7B, OLMo 3 7B, Llama 3.1 8B, and Phi-3 Mini.',
-    doi: '10.5281/zenodo.15640300',
-    doiUrl: 'https://doi.org/10.5281/zenodo.15640300',
+    title: 'The Periodic Table of AI: 56 Universal Elements Across 11 Language Models',
+    desc: 'We extend the 8-type framework to 56 elements and demonstrate their universality across 11 language models including Mistral 7B, OLMo 3 7B, Llama 3.1 8B, and Phi-3 Mini.',
+    doi: '10.5281/zenodo.19852341',
+    doiUrl: 'https://zenodo.org/records/19852341',
     models: ['Mistral 7B', 'OLMo 3 7B', 'Llama 3.1 8B', '+8 more'],
     tag: 'Paper II · June 2026',
   },
@@ -39,7 +39,8 @@ const papers = [
   <div class="container">
     <div class="section-header">
       <h2>Peer-Reviewed <span class="accent">Research</span></h2>
-      <p>Published on Zenodo. Independently reproducible. Real neuron counts, real model weights, real experiments.</p>
+      <p>Published on Zenodo. Independently reproducible. Real data, real models, real experiments.</p>
+      <p class="papers-context">Our first published research applies Holosynthics to language models. The framework extends to all digital matter.</p>
     </div>
 
     <div class="papers-grid">
@@ -124,6 +125,14 @@ const papers = [
     color: var(--muted);
     max-width: 520px;
     margin: 0 auto;
+  }
+
+  .papers-context {
+    margin-top: 16px;
+    font-size: 15px;
+    color: rgba(148,163,184,0.7);
+    max-width: 520px;
+    font-style: italic;
   }
 
   .papers-grid {

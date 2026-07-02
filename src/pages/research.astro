@@ -6,40 +6,40 @@ import Footer from '../components/Footer.astro';
 const papers = [
   {
     num: 1,
-    title: 'Holosynthics: Neuron-Level Decomposition of Language Models into 8 Universal Atom Types',
-    abstract: 'We present Holosynthics and demonstrate that transformer language model neurons fall into 8 fundamental semantic types: Boolean, Number, Symbol, Identity, Space, Time, Relation, and Entropy. We show these 8 types appear universally across architecturally distinct models. Every model tested — regardless of size, training data, or architecture — contains all 8 types in consistent proportions. This is the first empirical demonstration of universal neuron-type organization across AI language models.',
-    doi: '10.5281/zenodo.15623044',
-    doiUrl: 'https://doi.org/10.5281/zenodo.15623044',
+    title: 'Holosynthics: Element-Level Decomposition of Language Models into 8 Universal Atom Types',
+    abstract: 'We present Holosynthics and demonstrate that transformer language models contain 8 fundamental semantic element types: Boolean, Number, Symbol, Identity, Space, Time, Relation, and Entropy. We show these 8 types appear universally across architecturally distinct models. Every model tested — regardless of size, training data, or architecture — contains all 8 types in consistent proportions. This is the first empirical demonstration of universal element-type organization across AI language models.',
+    doi: '10.5281/zenodo.20736159',
+    doiUrl: 'https://zenodo.org/records/20736159',
     models: ['Gemma 2B', 'GPT-2 Small', 'Gemma 9B', 'Llama 3.1 8B', 'Qwen3 1.7B', 'OLMo 3 7B'],
     date: 'June 2026',
     venue: 'Zenodo',
     findings: [
       '8 universal atom types confirmed across all tested architectures',
-      'Symbol neurons are the most numerous — dominant in every model',
-      'Entropy neurons are the rarest — and the most diagnostically important',
-      'Relation neuron proportion scales with model capability',
+      'Symbol elements are the most numerous — dominant in every model',
+      'Entropy elements are the rarest — and the most diagnostically important',
+      'Relation element proportion scales with model capability',
     ],
   },
   {
     num: 2,
-    title: 'The Periodic Table of AI: 56 Universal Neuron Elements Across 11 Language Models',
-    abstract: 'We extend the 8-type Holosynthics framework to 56 sub-type elements (8 types × 7 sub-types each) and validate universality across 11 language models. The same 56 elements appear in 10 of 11 models tested. We characterize each element by its functional role, typical network position, and behavioral signature. We introduce Entropy.Confidence — a late-layer neuron cluster whose presence or absence predicts whether a model will hallucinate on a given prompt.',
-    doi: '10.5281/zenodo.15640300',
-    doiUrl: 'https://doi.org/10.5281/zenodo.15640300',
+    title: 'The Periodic Table of AI: 56 Universal Elements Across 11 Language Models',
+    abstract: 'We extend the 8-type Holosynthics framework to 56 sub-type elements (8 types × 7 sub-types each) and validate universality across 11 language models. The same 56 elements appear in 10 of 11 models tested. We characterize each element by its functional role and behavioral signature. We introduce Entropy.Confidence — an element whose presence or absence predicts whether a model will hallucinate on a given prompt.',
+    doi: '10.5281/zenodo.19852341',
+    doiUrl: 'https://zenodo.org/records/19852341',
     models: ['GPT-2 Small', 'GPT-2 Medium', 'GPT-Neo 2.7B', 'Pythia 1.4B', 'Pythia 2.8B', 'DeepSeek 1.3B', 'Falcon 7B', 'Mistral 7B', 'OLMo 3 7B', 'Phi-3 Mini', 'Qwen3 1.7B'],
     date: 'June 2026',
     venue: 'Zenodo',
     findings: [
       '56 elements validated across 11 distinct architectures',
       '10 of 11 models confirm all 8 types and all 56 sub-types',
-      'Entropy.Confidence neuron cluster correlates with hallucination absence',
+      'Entropy.Confidence element correlates with hallucination absence',
       'Full element profiles with behavioral characterization published',
     ],
   },
 ];
 
 const experiments = [
-  { name: 'Hallucination Trace Experiment', model: 'GPT-2 Small', date: 'June 2026', result: 'Entropy.Confidence neurons absent in all hallucinated responses; present (weakly) in correct responses — first neuron-level hallucination signature' },
+  { name: 'Hallucination Trace Experiment', model: 'GPT-2 Small', date: 'June 2026', result: 'Entropy.Confidence element absent in all hallucinated responses; present (weakly) in correct responses — first element-level hallucination signature' },
   { name: 'Gemma 2B Full Layer-by-Layer Analysis', model: 'Gemma 2B', date: 'June 2026', result: 'All 26 layers analyzed; complete periodic table element distribution mapped; Conductor GI identified' },
   { name: 'Qwen3 1.7B Cross-Architecture Validation', model: 'Qwen3 1.7B', date: 'June 2026', result: 'All 8 types confirmed; anomaly cluster detected; results independently validated against Paper I findings' },
   { name: 'Six-Model Periodic Table Comparison', model: 'Gemma 2B/9B, GPT-2, Llama, Qwen3, OLMo', date: 'June 2026', result: 'Symbol is most variable across models; Relation grows monotonically with model scale; type proportions are model-fingerprints' },
@@ -49,7 +49,7 @@ const experiments = [
 
 <BaseLayout
   title="Research"
-  description="Holosynthics research papers and experiments. Two published papers on AI neuron analysis, 11 models tested, 56 universal elements discovered."
+  description="Holosynthics research papers and experiments. Two published papers on digital matter science, 11 models tested, 56 universal elements discovered."
 >
   <script type="application/ld+json" slot="head">
     {JSON.stringify({
