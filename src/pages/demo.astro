@@ -66,6 +66,12 @@ const TYPE_COLORS: Record<string, string> = Object.fromEntries(
           </button>
           <span class="or-sep">or</span>
           <button class="btn-ghost" id="demo-btn">Try with demo data</button>
+          <span class="or-sep">or</span>
+          <button class="btn-ghost" id="folder-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+            Upload Folder
+          </button>
+          <input type="file" id="folder-input" webkitdirectory multiple class="sr-only" />
         </div>
       </div>
     </section>
@@ -159,6 +165,36 @@ const TYPE_COLORS: Record<string, string> = Object.fromEntries(
         <div class="restart-bar">
           <button class="btn-ghost" id="restart-btn">← Try another file</button>
           <a href="/probe56" class="btn-primary">Run full Probe56 scan →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Folder Upload Section (hidden until folder selected) -->
+    <section class="section" id="folder-section" style="display:none">
+      <div class="container">
+        <div class="step-label">Folder Upload</div>
+        <h2 class="step-title" id="folder-section-title">Processing Files...</h2>
+
+        <!-- Progress bar -->
+        <div class="folder-progress" id="folder-progress">
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="folder-progress-bar" style="width:0%"></div>
+          </div>
+          <div class="progress-label" id="folder-progress-label">Preparing…</div>
+        </div>
+
+        <!-- Per-file list -->
+        <div class="folder-file-list" id="folder-file-list"></div>
+
+        <!-- Cross-file entity clustering (shown after all done) -->
+        <div class="cluster-section" id="cluster-section" style="display:none">
+          <h3 class="table-label">Cross-File Entity Clusters</h3>
+          <p class="cluster-intro" id="cluster-intro"></p>
+          <div class="cluster-grid" id="cluster-grid"></div>
+        </div>
+
+        <div class="restart-bar" id="folder-restart-bar" style="display:none">
+          <button class="btn-ghost" id="folder-restart-btn">← Upload another folder</button>
         </div>
       </div>
     </section>
@@ -510,6 +546,90 @@ const TYPE_COLORS: Record<string, string> = Object.fromEntries(
   }
   .error-close { background: none; border: none; color: inherit; cursor: pointer; font-size: 16px; padding: 0; opacity: 0.7; }
   .error-close:hover { opacity: 1; }
+
+  /* ── Folder upload ── */
+  .folder-progress { margin-bottom: 28px; }
+  .progress-bar-wrap {
+    height: 6px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), #0099BB);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+  .progress-label { font-size: 14px; color: var(--muted); }
+
+  .folder-file-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 32px; }
+  .folder-file-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr 80px;
+    gap: 12px;
+    align-items: center;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    transition: border-color 0.15s;
+  }
+  .folder-file-row.processing { border-color: rgba(0,217,255,0.3); }
+  .folder-file-row.done { }
+  .folder-file-row.error { border-color: rgba(239,68,68,0.3); }
+  .file-row-name { font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-row-count { font-size: 12px; color: var(--muted); text-align: right; }
+  .file-row-elements { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-row-status { text-align: right; }
+  .status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .status-badge.processing { background: rgba(0,217,255,0.12); color: var(--cyan); }
+  .status-badge.done { background: rgba(34,197,94,0.12); color: #22C55E; }
+  .status-badge.error { background: rgba(239,68,68,0.12); color: #FCA5A5; }
+  .status-badge.pending { background: rgba(255,255,255,0.05); color: var(--muted); }
+
+  /* ── Cross-file clustering ── */
+  .cluster-section { margin-bottom: 32px; }
+  .cluster-intro { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+  .cluster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .cluster-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: border-color 0.15s;
+  }
+  .cluster-card:hover { border-color: rgba(0,217,255,0.25); }
+  .cluster-element {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .cluster-files {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .cluster-file-name {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cluster-more { color: rgba(255,255,255,0.3); font-style: italic; }
 </style>
 
 <script define:vars={{ ATOM_TYPES, ALL_ELEMENTS }}>
@@ -871,4 +991,168 @@ function formatBytes(bytes) {
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+// ── Folder upload ─────────────────────────────────────────────────────────────
+const folderBtn        = document.getElementById('folder-btn');
+const folderInput      = document.getElementById('folder-input');
+const folderSection    = document.getElementById('folder-section');
+const folderSectionTitle = document.getElementById('folder-section-title');
+const folderProgressBar  = document.getElementById('folder-progress-bar');
+const folderProgressLabel= document.getElementById('folder-progress-label');
+const folderFileList     = document.getElementById('folder-file-list');
+const clusterSection     = document.getElementById('cluster-section');
+const clusterIntro       = document.getElementById('cluster-intro');
+const clusterGrid        = document.getElementById('cluster-grid');
+const folderRestartBar   = document.getElementById('folder-restart-bar');
+const folderRestartBtn   = document.getElementById('folder-restart-btn');
+
+// Per-file result storage: { name, atomCount, molecule, elements: Map<string,number> }
+let folderResults = [];
+
+folderBtn.addEventListener('click', () => folderInput.click());
+folderInput.addEventListener('change', () => {
+  const files = Array.from(folderInput.files).filter(f => {
+    const ext = f.name.split('.').pop().toLowerCase();
+    return /^(png|jpg|jpeg|gif|bmp|webp|wav|mp3|flac|ogg|pdf)$/.test(ext);
+  });
+  if (!files.length) return;
+  startFolderUpload(files);
+});
+
+function startFolderUpload(files) {
+  // Hide the single-file section, show folder section
+  document.getElementById('upload-section').style.display = 'none';
+  resultsSection.style.display = 'none';
+  compareSection.style.display = 'none';
+  folderSection.style.display = 'block';
+  clusterSection.style.display = 'none';
+  folderRestartBar.style.display = 'none';
+  folderResults = [];
+  folderFileList.innerHTML = '';
+
+  folderSectionTitle.textContent = `Processing ${files.length} file${files.length === 1 ? '' : 's'}…`;
+
+  // Build initial rows (all pending)
+  const rowEls = files.map((f, i) => {
+    const row = document.createElement('div');
+    row.className = 'folder-file-row';
+    row.id = `fr-${i}`;
+    row.innerHTML = `
+      <span class="file-row-name" title="${escHtml(f.name)}">${escHtml(f.name)}</span>
+      <span class="file-row-count">—</span>
+      <span class="file-row-elements">—</span>
+      <span class="file-row-status"><span class="status-badge pending">Queued</span></span>
+    `;
+    folderFileList.appendChild(row);
+    return row;
+  });
+
+  folderSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Process files sequentially
+  (async () => {
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      const row = rowEls[i];
+      const pct = Math.round((i / files.length) * 100);
+
+      folderProgressBar.style.width = pct + '%';
+      folderProgressLabel.textContent = `Processing file ${i + 1} of ${files.length}: ${f.name}`;
+      row.className = 'folder-file-row processing';
+      row.querySelector('.file-row-status').innerHTML = '<span class="status-badge processing">Processing…</span>';
+
+      try {
+        const formData = new FormData();
+        formData.append('file', f);
+        const resp = await fetch(`${API_BASE}/api/v1/decompose`, { method: 'POST', body: formData });
+        if (!resp.ok) throw new Error(resp.status);
+        const data = await resp.json();
+
+        // Tally elements (keep counts, not full atom list)
+        const elMap = new Map();
+        for (const atom of (data.atoms || [])) {
+          const key = atom.element || `${atom.type_name}:${atom.law}`;
+          elMap.set(key, (elMap.get(key) || 0) + 1);
+        }
+        const topEls = [...elMap.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+        folderResults.push({ name: f.name, atomCount: data.atom_count || 0, molecule: data.molecule || '?', elements: elMap });
+
+        row.className = 'folder-file-row done';
+        row.querySelector('.file-row-count').textContent = (data.atom_count || 0).toLocaleString() + ' atoms';
+        row.querySelector('.file-row-elements').textContent = topEls.map(([el]) => el.split(':')[0]).join(' · ') || '—';
+        row.querySelector('.file-row-status').innerHTML = '<span class="status-badge done">✓ Done</span>';
+      } catch (err) {
+        folderResults.push({ name: f.name, atomCount: 0, molecule: '?', elements: new Map() });
+        row.className = 'folder-file-row error';
+        row.querySelector('.file-row-status').innerHTML = '<span class="status-badge error">Failed</span>';
+      }
+    }
+
+    // All done
+    folderProgressBar.style.width = '100%';
+    const successCount = folderResults.filter(r => r.atomCount > 0).length;
+    folderProgressLabel.textContent = `Done — ${successCount} of ${files.length} file${files.length === 1 ? '' : 's'} analysed`;
+    folderSectionTitle.textContent = `${files.length} File${files.length === 1 ? '' : 's'} Decomposed`;
+
+    renderClustering();
+    folderRestartBar.style.display = 'flex';
+    folderInput.value = '';
+  })();
+}
+
+function renderClustering() {
+  // Build element → [{filename, count}] map across all successful results
+  const elementFiles = new Map(); // element → [{name, count}]
+  for (const result of folderResults) {
+    for (const [el, count] of result.elements) {
+      if (!elementFiles.has(el)) elementFiles.set(el, []);
+      elementFiles.get(el).push({ name: result.name, count });
+    }
+  }
+
+  // Filter to elements shared by 2+ files, sort by file-count then total atoms
+  const shared = [...elementFiles.entries()]
+    .filter(([, files]) => files.length >= 2)
+    .map(([el, files]) => ({ el, files: files.sort((a, b) => b.count - a.count), totalFiles: files.length }))
+    .sort((a, b) => b.totalFiles - a.totalFiles || b.files.reduce((s, f) => s + f.count, 0) - a.files.reduce((s, f) => s + f.count, 0))
+    .slice(0, 12);
+
+  clusterGrid.innerHTML = '';
+
+  if (!shared.length) {
+    clusterSection.style.display = 'none';
+    return;
+  }
+
+  clusterIntro.textContent = `${shared.length} element${shared.length === 1 ? '' : 's'} appear across multiple files — showing which concepts are universal to this folder.`;
+  clusterSection.style.display = 'block';
+
+  for (const { el, files, totalFiles } of shared) {
+    const card = document.createElement('div');
+    card.className = 'cluster-card';
+    const previewFiles = files.slice(0, 4);
+    const extra = files.length - previewFiles.length;
+    card.innerHTML = `
+      <div class="cluster-element">${escHtml(el)}</div>
+      <div class="cluster-files">
+        ${previewFiles.map(f => `<span class="cluster-file-name" title="${escHtml(f.name)}">${escHtml(f.name)}</span>`).join('')}
+        ${extra > 0 ? `<span class="cluster-more">+ ${extra} more</span>` : ''}
+      </div>
+    `;
+    clusterGrid.appendChild(card);
+  }
+}
+
+folderRestartBtn.addEventListener('click', () => {
+  folderResults = [];
+  folderFileList.innerHTML = '';
+  clusterSection.style.display = 'none';
+  folderRestartBar.style.display = 'none';
+  folderSection.style.display = 'none';
+  document.getElementById('upload-section').style.display = 'block';
+  folderProgressBar.style.width = '0%';
+  folderProgressLabel.textContent = 'Preparing…';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 </script>
