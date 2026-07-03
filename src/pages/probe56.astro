@@ -1,0 +1,1426 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Probe56CTA from '../components/Probe56CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const tiers = [
+  {
+    name: 'Probe56 Open Source',
+    label: 'Free',
+    cta: 'Get Started Free',
+    ctaHref: '#free-scan',
+    ctaExternal: false,
+    highlight: false,
+    features: ['Probe56 CLI', 'Element scanning', 'P56 bundle format', 'MIT license', 'Any HuggingFace model'],
+  },
+  {
+    name: 'GI X-Ray',
+    label: 'Contact Us',
+    cta: 'Contact Us',
+    ctaHref: 'mailto:yonathan@growing-intelligence.com?subject=GI X-Ray Request',
+    ctaExternal: false,
+    highlight: true,
+    features: ['Full 56-element scan', 'Layer-by-layer analysis', 'Anomaly heatmap', 'Hallucination risk report', 'Signed PDF delivery', 'Email in 24h'],
+  },
+  {
+    name: 'GI Monitor',
+    label: 'Contact Us',
+    cta: 'Contact Us',
+    ctaHref: 'mailto:yonathan@growing-intelligence.com?subject=GI Monitor Inquiry',
+    ctaExternal: false,
+    highlight: false,
+    features: ['Real-time drift detection', 'Element composition alerts', 'Dashboard access', 'Monthly summary report', 'Up to 3 models', 'Slack/PagerDuty integration'],
+  },
+  {
+    name: 'GI Surgeon',
+    label: 'Request a Quote',
+    cta: 'Request a Quote',
+    ctaHref: 'mailto:yonathan@growing-intelligence.com?subject=GI Surgeon Inquiry',
+    ctaExternal: false,
+    highlight: false,
+    features: ['Targeted model editing', 'Validated hallucination fix', '50-prompt regression suite', 'Minimal perplexity impact', 'Air-gap deployment', 'Enterprise contract'],
+  },
+];
+---
+
+<BaseLayout
+  title="Probe56 — AI Model Scanning"
+  description="Scan your AI model with the Holosynthics periodic table. Open-source Python CLI, managed X-Ray analysis, real-time monitoring, and surgical editing."
+>
+  <Nav />
+
+  <main class="df-page">
+    <!-- Hero -->
+    <section class="df-hero">
+      <div class="hero-glow"></div>
+      <div class="df-hero-inner">
+        <div class="badge">Developer Tools</div>
+        <h1>Scan Any AI Model.<br /><span class="accent">Understand Every Element.</span></h1>
+        <p>Probe56 scans your model's element composition. GI X-Ray maps it to the 56-element periodic table. GI Surgeon fixes what's broken — without retraining.</p>
+
+        <div class="quickstart">
+          <code>pip install probe56 && probe56 scan --model gpt2 --output my_model.p56</code>
+        </div>
+
+        <div class="df-actions">
+          <a href="#tools" class="btn-primary">See All Tools</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="hs-num">56</span><span class="hs-label">Elements</span></div>
+          <div class="hero-stat-sep">|</div>
+          <div class="hero-stat"><span class="hs-num">13</span><span class="hs-label">Families</span></div>
+          <div class="hero-stat-sep">|</div>
+          <div class="hero-stat"><span class="hs-num">5</span><span class="hs-label">Repair Dimensions</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how-section" id="how">
+      <div class="container">
+        <h2>How It Works</h2>
+        <div class="steps-grid">
+          <div class="hw-step">
+            <div class="hw-num">01</div>
+            <h3>Extract</h3>
+            <p>Probe56 (open-source Python CLI) scans your model during inference and captures element composition data from your dataset.</p>
+            <code>probe56 scan --model your/model --dataset truthfulqa</code>
+          </div>
+          <div class="hw-step">
+            <div class="hw-num">02</div>
+            <h3>Bundle</h3>
+            <p>Scan data is compressed into a P56 bundle — a signed, deterministic binary format with cryptographic hash of the model weights. Portable, verifiable.</p>
+            <code>→ scan_bundle.p56 (SHA-256 verified)</code>
+          </div>
+          <div class="hw-step">
+            <div class="hw-num">03</div>
+            <h3>Analyze</h3>
+            <p>GI X-Ray maps your bundle against the Holosynthics 56-element periodic table. Produces a heatmap of which elements dominate which layers, and flags anomalies.</p>
+            <code>→ 56-element report + anomaly score</code>
+          </div>
+          <div class="hw-step">
+            <div class="hw-num">04</div>
+            <h3>Repair (optional)</h3>
+            <p>GI Surgeon applies precision edits to the identified problem areas. No retraining. Fully reversible. Validated against regression suite.</p>
+            <code>→ patched model weights</code>
+            <div class="quote-block">
+              <span class="quote-text">Want to fix these issues?</span>
+              <a href="mailto:yonathan@growing-intelligence.com?subject=Get a Quote" class="quote-link">Get a quote &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GI X-Ray section -->
+    <section class="tool-detail" id="tools">
+      <div class="container">
+        <div class="tool-detail-inner">
+          <div class="tool-text">
+            <span class="tool-label">GI X-Ray</span>
+            <h2>See Your Model's Element Map</h2>
+            <p>Send us your Probe56 bundle. We run the full 56-element analysis and return a comprehensive report showing which elements dominate the composition, where anomalies concentrate, and what your hallucination risk profile looks like.</p>
+            <ul class="feature-list">
+              <li>Full periodic table heatmap per layer</li>
+              <li>Anomaly cluster identification</li>
+              <li>Entropy.Confidence trace (hallucination predictor)</li>
+              <li>Cross-model comparison</li>
+              <li>Signed PDF report + raw JSON data</li>
+            </ul>
+            <a href="mailto:yonathan@growing-intelligence.com?subject=GI X-Ray Request" class="btn-request">Contact Us for a Scan &rarr;</a>
+            <div class="quote-block">
+              <span class="quote-text">Want to fix these issues?</span>
+              <a href="mailto:yonathan@growing-intelligence.com?subject=Get a Quote" class="quote-link">Get a quote &rarr;</a>
+            </div>
+          </div>
+          <div class="tool-visual xray-visual">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="X-Ray heatmap diagram">
+              <rect width="300" height="200" fill="#0D0F23" rx="12"/>
+              <text x="150" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Layer Distribution Heatmap</text>
+              {Array.from({length: 8}, (_, col) =>
+                Array.from({length: 7}, (_, row) => {
+                  const colors = ['#F72585','#00D9FF','#7209B7','#4CC9F0','#22C55E','#FFD60A','#F59E0B','#EF4444'];
+                  const vals = [0.5, 0.8, 0.3, 0.6, 0.4, 0.7, 0.9, 0.2];
+                  const opacity = Math.max(0.1, Math.min(0.95, vals[(col + row) % 8]));
+                  return `<rect x="${30 + col*32}" y="${36 + row*22}" width="28" height="18" rx="3" fill="${colors[col]}" opacity="${opacity.toFixed(2)}"/>`;
+                }).join('')
+              ).join('')}
+              <text x="150" y="195" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">Bo · Nu · Sy · Id · Sp · Ti · Re · En</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GI Monitor section -->
+    <section class="tool-detail alt" id="monitor">
+      <div class="container">
+        <div class="tool-detail-inner reverse">
+          <div class="tool-text">
+            <span class="tool-label">GI Monitor</span>
+            <h2>Track Element Drift in Real Time</h2>
+            <p>As models are updated, fine-tuned, or exposed to distribution shifts, their element composition changes. GI Monitor detects these changes before they manifest as output degradation.</p>
+            <ul class="feature-list">
+              <li>Continuous element composition tracking</li>
+              <li>Drift alerts before output quality degrades</li>
+              <li>Slack and PagerDuty integration</li>
+              <li>Monthly composition summary</li>
+              <li>Comparison across model versions</li>
+            </ul>
+            <a href="mailto:yonathan@growing-intelligence.com?subject=GI Monitor Inquiry" class="btn-request">Contact Us &rarr;</a>
+          </div>
+          <div class="tool-visual monitor-visual">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="Monitor drift diagram">
+              <rect width="300" height="200" fill="#0D0F23" rx="12"/>
+              <text x="150" y="20" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Element Composition Over Time</text>
+              <!-- Stable line -->
+              <polyline points="20,80 60,78 100,82 140,79 180,81 220,76 260,80 280,78" fill="none" stroke="#00D9FF" stroke-width="2" opacity="0.8"/>
+              <!-- Drift line -->
+              <polyline points="180,81 200,90 220,105 240,118 260,130 280,140" fill="none" stroke="#EF4444" stroke-width="2" opacity="0.8"/>
+              <!-- Alert marker -->
+              <circle cx="200" cy="90" r="5" fill="#FFD60A" opacity="0.9"/>
+              <text x="206" y="88" fill="#FFD60A" font-size="8" font-family="Inter,sans-serif">drift detected</text>
+              <!-- Legend -->
+              <rect x="20" y="160" width="12" height="3" fill="#00D9FF"/>
+              <text x="36" y="164" fill="#8892A4" font-size="8" font-family="Inter,sans-serif">stable</text>
+              <rect x="80" y="160" width="12" height="3" fill="#EF4444"/>
+              <text x="96" y="164" fill="#8892A4" font-size="8" font-family="Inter,sans-serif">drift detected</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GI Surgeon section -->
+    <section class="tool-detail" id="surgeon">
+      <div class="container">
+        <div class="tool-detail-inner">
+          <div class="tool-text">
+            <span class="tool-label">GI Surgeon</span>
+            <h2>Fix Hallucinations Without Retraining</h2>
+            <p>GI Surgeon identifies the specific element patterns responsible for a hallucination and applies precision edits — validated, reversible, no retraining required.</p>
+            <ul class="feature-list">
+              <li>Precision edits (permanent, reversible)</li>
+              <li>Validated correction, zero regressions</li>
+              <li>50-prompt regression suite before every commit</li>
+              <li>Minimal perplexity impact (validated)</li>
+              <li>Air-gap deployment available</li>
+            </ul>
+            <a href="mailto:yonathan@growing-intelligence.com?subject=GI Surgeon Inquiry" class="btn-request">Request a Quote &rarr;</a>
+            <div class="quote-block">
+              <span class="quote-text">Want to fix these issues?</span>
+              <a href="mailto:yonathan@growing-intelligence.com?subject=Get a Quote" class="quote-link">Get a quote &rarr;</a>
+            </div>
+          </div>
+          <div class="tool-visual surgeon-visual">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="Element map diagram">
+              <rect width="300" height="200" fill="#0D0F23" rx="12"/>
+              <text x="60" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">BEFORE</text>
+              <text x="210" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">AFTER</text>
+              <!-- Noise bar (before) -->
+              <rect x="20" y="36" width="80" height="12" rx="2" fill="#7209B7" opacity="0.9"/>
+              <text x="24" y="46" fill="#fff" font-size="7" font-family="Inter,sans-serif">Symbol.General (noise)</text>
+              <!-- Signal bar (before) — small -->
+              <rect x="20" y="56" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.6"/>
+              <text x="24" y="66" fill="#fff" font-size="7" font-family="Inter,sans-serif">Time.Era (weak)</text>
+              <!-- Arrow -->
+              <text x="150" y="80" fill="#00D9FF" font-size="24" text-anchor="middle" font-family="Inter,sans-serif">&#8594;</text>
+              <text x="150" y="100" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">GI Surgeon</text>
+              <!-- Noise bar (after) — suppressed -->
+              <rect x="170" y="36" width="25" height="12" rx="2" fill="#7209B7" opacity="0.35"/>
+              <text x="174" y="46" fill="#fff" font-size="7" font-family="Inter,sans-serif">Symbol (suppressed)</text>
+              <!-- Signal bar (after) — amplified -->
+              <rect x="170" y="56" width="95" height="12" rx="2" fill="#FFD60A" opacity="0.9"/>
+              <text x="174" y="66" fill="#fff" font-size="7" font-family="Inter,sans-serif">Time.Era (amplified)</text>
+              <!-- Result -->
+              <rect x="20" y="120" width="260" height="20" rx="4" fill="#22C55E" opacity="0.15"/>
+              <rect x="20" y="120" width="260" height="20" rx="4" fill="none" stroke="#22C55E" stroke-width="1" opacity="0.4"/>
+              <text x="150" y="134" fill="#22C55E" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Output: correct — no retraining</text>
+              <text x="150" y="165" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">Fully reversible. Regression passed. Permanent.</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 Dimensions of AI Model Health -->
+    <section class="dims-section" id="dimensions">
+      <div class="container">
+        <div class="dims-header">
+          <div class="results-badge">What We Measure</div>
+          <h2>5 Dimensions of AI Model Health</h2>
+          <p class="results-sub">Every Probe56 scan scores your model across five dimensions. A weak score in any one of them predicts where failures will appear in production.</p>
+        </div>
+        <div class="dims-grid">
+          <div class="dim-card" style="--dc: #00D9FF">
+            <div class="dim-icon">🔍</div>
+            <h3>Knowledge</h3>
+            <p>The AI knows factual information correctly and does not invent facts it was never trained on.</p>
+          </div>
+          <div class="dim-card" style="--dc: #F59E0B">
+            <div class="dim-icon">⚙️</div>
+            <h3>Reasoning</h3>
+            <p>The AI draws logically valid conclusions from premises — cause and effect, if-then, because.</p>
+          </div>
+          <div class="dim-card" style="--dc: #22C55E">
+            <div class="dim-icon">🛠</div>
+            <h3>Skills</h3>
+            <p>The AI can perform tasks accurately — translation, coding, summarization, calculation.</p>
+          </div>
+          <div class="dim-card" style="--dc: #7209B7">
+            <div class="dim-icon">📐</div>
+            <h3>Logical Generalization</h3>
+            <p>The AI applies rules consistently across new cases it has not seen before during training.</p>
+          </div>
+          <div class="dim-card" style="--dc: #EF4444">
+            <div class="dim-icon">⚖️</div>
+            <h3>Judgment</h3>
+            <p>The AI makes sound decisions under uncertainty and knows the limits of what it knows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benchmark Foundation Mini -->
+    <section class="bmini-section">
+      <div class="container">
+        <div class="bmini-header">
+          <div class="results-badge">Validation Foundation</div>
+          <h2>Validated Against 1.8M Academic Benchmarks</h2>
+          <p class="bmini-sub">Every scan runs 8 fixed categories — peer-reviewed datasets, zero auto-generated questions.</p>
+        </div>
+        <div class="bmini-grid">
+          <div class="bmini-card" style="--bc: #00D9FF">
+            <span class="bmini-icon">🔍</span>
+            <div class="bmini-name">General Knowledge</div>
+            <div class="bmini-count">58,934</div>
+            <div class="bmini-bm">MMLU · HellaSwag · TriviaQA</div>
+          </div>
+          <div class="bmini-card" style="--bc: #818CF8">
+            <span class="bmini-icon">🧠</span>
+            <div class="bmini-name">Reasoning</div>
+            <div class="bmini-count">869,978</div>
+            <div class="bmini-bm">BBH · ProofWriter · EntailmentBank</div>
+          </div>
+          <div class="bmini-card" style="--bc: #FB923C">
+            <span class="bmini-icon">⚡</span>
+            <div class="bmini-name">Logic</div>
+            <div class="bmini-count">1,151</div>
+            <div class="bmini-bm">LogiQA · ReClor</div>
+          </div>
+          <div class="bmini-card" style="--bc: #34D399">
+            <span class="bmini-icon">📐</span>
+            <div class="bmini-name">Mathematics</div>
+            <div class="bmini-count">7,158</div>
+            <div class="bmini-bm">GSM8K · MATH-500 · TheoremQA</div>
+          </div>
+          <div class="bmini-card" style="--bc: #60A5FA">
+            <span class="bmini-icon">💡</span>
+            <div class="bmini-name">Commonsense</div>
+            <div class="bmini-count">17,277</div>
+            <div class="bmini-bm">PIQA · SocialIQA · XCOPA</div>
+          </div>
+          <div class="bmini-card" style="--bc: #F472B6">
+            <span class="bmini-icon">🎯</span>
+            <div class="bmini-name">Hallucination</div>
+            <div class="bmini-count">5,143</div>
+            <div class="bmini-bm">TruthfulQA · SimpleQA</div>
+          </div>
+          <div class="bmini-card" style="--bc: #F87171">
+            <span class="bmini-icon">🛡️</span>
+            <div class="bmini-name">Safety</div>
+            <div class="bmini-count">157,934</div>
+            <div class="bmini-bm">BBQ · RealToxicityPrompts</div>
+          </div>
+          <div class="bmini-card" style="--bc: #A3E635">
+            <span class="bmini-icon">📖</span>
+            <div class="bmini-name">Reading Comprehension</div>
+            <div class="bmini-count">28,075</div>
+            <div class="bmini-bm">SQuAD · DROP · BoolQ</div>
+          </div>
+        </div>
+        <div class="bmini-cta-row">
+          <a href="/benchmarks" class="bmini-cta-link">See all 46 categories — 1,801,476 questions →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Surgeon Results — 4-way comparison -->
+    <section class="results-section" id="results">
+      <div class="container">
+        <div class="results-header">
+          <div class="results-badge">Proven Results</div>
+          <h2>GI Surgeon vs. the Field</h2>
+          <p class="results-sub">Benchmarks run against CounterFact and RippleEdits. Every result is Ed25519 signed and independently reproducible.</p>
+        </div>
+        <div class="results-table">
+          <div class="rt-row rt-head">
+            <div class="rt-metric">Metric</div>
+            <div class="rt-ours">GI Surgeon</div>
+            <div class="rt-b1">ROME</div>
+            <div class="rt-b2">AlphaEdit</div>
+            <div class="rt-b3">MEMIT</div>
+          </div>
+          <div class="rt-row">
+            <div class="rt-metric">Neighborhood Score (NS)</div>
+            <div class="rt-ours win">83.4%</div>
+            <div class="rt-b1">78.2%</div>
+            <div class="rt-b2">75.48%</div>
+            <div class="rt-b3">73.7%</div>
+          </div>
+          <div class="rt-row">
+            <div class="rt-metric">Architectures supported</div>
+            <div class="rt-ours win">13</div>
+            <div class="rt-b1">2–3</div>
+            <div class="rt-b2">2–3</div>
+            <div class="rt-b3">2–3</div>
+          </div>
+          <div class="rt-row">
+            <div class="rt-metric">Side effects on neighbors</div>
+            <div class="rt-ours win">0</div>
+            <div class="rt-b1">unverified</div>
+            <div class="rt-b2">unverified</div>
+            <div class="rt-b3">unverified</div>
+          </div>
+          <div class="rt-row">
+            <div class="rt-metric">Cryptographically signed proof</div>
+            <div class="rt-ours win">Yes</div>
+            <div class="rt-b1">No</div>
+            <div class="rt-b2">No</div>
+            <div class="rt-b3">No</div>
+          </div>
+        </div>
+        <p class="results-note">Method protected by provisional patents filed with the USPTO.</p>
+      </div>
+    </section>
+
+    <!-- Two-Layer Repair Explainer -->
+    <section class="repair-section" id="repair">
+      <div class="container">
+        <div class="results-header">
+          <div class="results-badge">How Repair Works</div>
+          <h2>Two-Layer Repair</h2>
+          <p class="results-sub">One repair pass fixes the obvious problems. Two passes fix what's hiding underneath — without touching anything that already works.</p>
+        </div>
+        <div class="repair-flow">
+          <div class="rf-step">
+            <div class="rf-num">1</div>
+            <div class="rf-title">Scan</div>
+            <div class="rf-desc">We scan your model and get a full map of what's broken and where.</div>
+          </div>
+          <div class="rf-arrow">&rarr;</div>
+          <div class="rf-step">
+            <div class="rf-num">2</div>
+            <div class="rf-title">Fix</div>
+            <div class="rf-desc">We fix the highest-priority issues with targeted edits. No retraining.</div>
+          </div>
+          <div class="rf-arrow">&rarr;</div>
+          <div class="rf-step">
+            <div class="rf-num">3</div>
+            <div class="rf-title">Scan again</div>
+            <div class="rf-desc">We re-scan the repaired model to expose what the first pass uncovered.</div>
+          </div>
+          <div class="rf-arrow">&rarr;</div>
+          <div class="rf-step">
+            <div class="rf-num">4</div>
+            <div class="rf-title">Fix again</div>
+            <div class="rf-desc">Second layer of repairs targets the newly visible issues.</div>
+          </div>
+          <div class="rf-arrow">&rarr;</div>
+          <div class="rf-step rf-final">
+            <div class="rf-num">5</div>
+            <div class="rf-title">Prove</div>
+            <div class="rf-desc">Cryptographically signed before-and-after report. Every fix is auditable.</div>
+          </div>
+        </div>
+        <div class="repair-cta">
+          <span>Want this for your model?</span>
+          <a href="mailto:yonathan@growing-intelligence.com?subject=Get a Quote" class="quote-link">Get a quote &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="case-section" id="case-study">
+      <div class="container">
+        <div class="results-header">
+          <div class="results-badge">Real Results</div>
+          <h2>Case Study: Medical AI Provider</h2>
+          <p class="results-sub">A real product run. Numbers from the signed report. Nothing fabricated.</p>
+        </div>
+        <div class="case-grid">
+          <div class="case-story">
+            <p>A medical AI provider's model was showing unexpected behavior on clinical knowledge questions. They ran a Probe56 scan, then a GI Surgeon repair cycle.</p>
+            <p>The scan found 78 anomalous element patterns across the model. Most were structural — they're how every model works. Two were fixable without retraining.</p>
+            <p>After the Two-Layer Repair: both target behaviors corrected, all 20 preserved behaviors still passing, zero side effects detected in the regression suite.</p>
+            <p class="case-fingerprint">Report fingerprint: <code>a9c492a3…</code> &middot; Ed25519 signed</p>
+          </div>
+          <div class="case-stats">
+            <div class="cs-row">
+              <div class="cs-label">Probe56 health score</div>
+              <div class="cs-before">1.2%</div>
+              <div class="cs-arrow">&rarr;</div>
+              <div class="cs-after">2.5%</div>
+            </div>
+            <div class="cs-row">
+              <div class="cs-label">Issues found</div>
+              <div class="cs-val">78</div>
+            </div>
+            <div class="cs-row">
+              <div class="cs-label">Fixable at weight level</div>
+              <div class="cs-val">2</div>
+            </div>
+            <div class="cs-row cs-win">
+              <div class="cs-label">Fixed (no retraining)</div>
+              <div class="cs-val">2 / 2</div>
+            </div>
+            <div class="cs-row cs-win">
+              <div class="cs-label">Preserved behaviors</div>
+              <div class="cs-val">20 / 20</div>
+            </div>
+            <div class="cs-row cs-win">
+              <div class="cs-label">Side effects</div>
+              <div class="cs-val">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Registration -->
+    <section class="reg-section" id="free-scan">
+      <div class="container">
+        <div class="reg-inner">
+          <div class="reg-text">
+            <h2>Get Your Free Scan Report</h2>
+            <p>Send us your model identifier. We run a free Probe56 scan and deliver a signed health report by email within 24 hours.</p>
+            <p class="reg-note">No commitment. No credit card. Just the scan.</p>
+          </div>
+          <form class="reg-form" action="mailto:yonathan@growing-intelligence.com" method="post" enctype="text/plain">
+            <input class="reg-input" type="text" name="name" placeholder="Your Name" required />
+            <input class="reg-input" type="text" name="company" placeholder="Company" />
+            <input class="reg-input" type="email" name="email" placeholder="Email Address" required />
+            <button class="reg-submit" type="submit">Get your free scan report &rarr;</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        <h2>Get Started</h2>
+        <p class="pricing-sub">Probe56 is free and open-source. GI X-Ray, Monitor, and Surgeon are managed services — contact us for access.</p>
+        <div class="pricing-grid">
+          {tiers.map(tier => (
+            <div class={`pricing-card ${tier.highlight ? 'highlight' : ''}`}>
+              {tier.highlight && <div class="popular">Most Requested</div>}
+              <div class="tier-name">{tier.name}</div>
+              <div class="tier-label">{tier.label}</div>
+              <ul class="tier-features">
+                {tier.features.map(f => <li>{f}</li>)}
+              </ul>
+              <a
+                href={tier.ctaHref}
+                class={`tier-cta ${tier.highlight ? 'primary' : 'secondary'}`}
+                target={tier.ctaExternal ? '_blank' : undefined}
+                rel={tier.ctaExternal ? 'noopener' : undefined}
+              >
+                {tier.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Probe56CTA />
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .df-page { padding-top: 64px; }
+
+  .df-hero {
+    position: relative;
+    text-align: center;
+    padding: 80px 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(0,217,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .df-hero-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+
+  .badge {
+    display: inline-block;
+    border: 1px solid rgba(0,217,255,0.3);
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    background: rgba(0,217,255,0.06);
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 60px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .accent { color: var(--cyan); }
+
+  .df-hero p {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .quickstart {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,217,255,0.2);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 32px;
+    display: inline-block;
+  }
+
+  .quickstart code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+    background: none;
+    padding: 0;
+    word-break: break-all;
+  }
+
+  .df-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-github {
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    background: rgba(255,255,255,0.05);
+    transition: 0.2s;
+  }
+
+  .btn-github:hover { border-color: rgba(255,255,255,0.2); text-decoration: none; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; text-decoration: none; }
+
+  /* How section */
+  .how-section { padding: 80px 24px; background: var(--bg2); }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  h2 {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 48px;
+    letter-spacing: -0.03em;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .hw-step {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .hw-num {
+    font-size: 40px;
+    font-weight: 900;
+    color: rgba(0,217,255,0.15);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .hw-step h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .hw-step p {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .hw-step code {
+    font-size: 11px;
+    font-family: monospace;
+    color: var(--cyan);
+    background: rgba(0,217,255,0.07);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: block;
+    word-break: break-all;
+  }
+
+  /* Get a Quote CTA (Task 2) */
+  .quote-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .quote-text {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .quote-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cyan);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,217,255,0.4);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .quote-link:hover { border-color: var(--cyan); text-decoration: none; }
+
+  /* Tool detail */
+  .tool-detail { padding: 80px 24px; }
+  .tool-detail.alt { background: var(--bg2); }
+
+  .tool-detail-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .tool-detail-inner.reverse .tool-visual { order: -1; }
+
+  .tool-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .tool-text h2 { margin-bottom: 20px; font-size: 28px; }
+
+  .tool-text p {
+    font-size: 16px;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .feature-list li {
+    font-size: 14px;
+    color: #CBD5E1;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .feature-list li::before {
+    content: '✓';
+    color: var(--cyan);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  .btn-request {
+    color: var(--cyan);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,217,255,0.4);
+    padding-bottom: 2px;
+  }
+
+  .btn-request:hover { border-color: var(--cyan); }
+
+  .tool-visual { border-radius: 14px; overflow: hidden; }
+  .tool-visual svg { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); }
+
+  /* Hero stat strip */
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .hs-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .hs-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .hero-stat-sep {
+    font-size: 24px;
+    color: var(--border);
+    margin-top: -8px;
+  }
+
+  /* 5 Dimensions */
+  .dims-section { padding: 80px 24px; }
+
+  .dims-header { text-align: center; margin-bottom: 48px; }
+
+  .dims-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .dim-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--dc);
+    border-radius: 14px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .dim-icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .dim-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dc);
+    margin: 0;
+  }
+
+  .dim-card p {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Surgeon Results */
+  .results-section { padding: 80px 24px; background: var(--bg2); }
+
+  .results-header { text-align: center; margin-bottom: 48px; }
+
+  .results-badge {
+    display: inline-block;
+    border: 1px solid rgba(0,217,255,0.3);
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    background: rgba(0,217,255,0.06);
+  }
+
+  .results-section h2 { margin-bottom: 16px; }
+  .dims-header h2 { margin-bottom: 16px; }
+  .repair-section h2 { margin-bottom: 16px; }
+  .case-section h2 { margin-bottom: 16px; }
+
+  .results-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .results-table {
+    max-width: 900px;
+    margin: 0 auto 24px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .rt-row {
+    display: grid;
+    grid-template-columns: 1fr 130px 110px 110px 110px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rt-row:last-child { border-bottom: none; }
+
+  .rt-row.rt-head {
+    background: rgba(0,217,255,0.04);
+  }
+
+  .rt-metric, .rt-ours, .rt-b1, .rt-b2, .rt-b3 {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  .rt-head .rt-metric,
+  .rt-head .rt-ours,
+  .rt-head .rt-b1,
+  .rt-head .rt-b2,
+  .rt-head .rt-b3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  .rt-metric { color: #CBD5E1; }
+
+  .rt-ours {
+    color: var(--muted);
+    text-align: center;
+    border-left: 1px solid var(--border);
+  }
+
+  .rt-ours.win {
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  .rt-b1, .rt-b2, .rt-b3 {
+    color: var(--muted);
+    text-align: center;
+    border-left: 1px solid var(--border);
+  }
+
+  .results-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+
+  /* Two-Layer Repair */
+  .repair-section { padding: 80px 24px; }
+
+  .repair-flow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .rf-step {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 20px;
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .rf-step.rf-final {
+    border-color: rgba(0,217,255,0.4);
+    background: rgba(0,217,255,0.03);
+  }
+
+  .rf-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: rgba(0,217,255,0.15);
+    line-height: 1;
+  }
+
+  .rf-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .rf-final .rf-title { color: var(--cyan); }
+
+  .rf-desc {
+    font-size: 12px;
+    color: #94A3B8;
+    line-height: 1.6;
+  }
+
+  .rf-arrow {
+    font-size: 20px;
+    color: var(--muted);
+    padding-top: 28px;
+    flex-shrink: 0;
+  }
+
+  .repair-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+
+  /* Case Study */
+  .case-section { padding: 80px 24px; background: var(--bg2); }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 60px;
+    align-items: start;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .case-story p {
+    font-size: 15px;
+    color: #94A3B8;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .case-fingerprint {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .case-fingerprint code {
+    font-family: monospace;
+    color: var(--cyan);
+    background: rgba(0,217,255,0.07);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  .case-stats {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .cs-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cs-row:last-child { border-bottom: none; }
+
+  .cs-row.cs-win .cs-label { color: #CBD5E1; }
+  .cs-row.cs-win .cs-val { color: var(--cyan); font-weight: 700; }
+
+  .cs-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .cs-val, .cs-before, .cs-after {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .cs-before { color: var(--muted); }
+  .cs-after { color: var(--cyan); font-weight: 700; }
+
+  .cs-arrow {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 0 2px;
+  }
+
+  .cs-row:first-child {
+    grid-template-columns: 1fr auto auto auto;
+  }
+
+  /* Benchmark Foundation Mini */
+  .bmini-section {
+    padding: 80px 24px;
+    background: var(--bg2);
+  }
+
+  .bmini-header {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  .bmini-header h2 {
+    font-size: clamp(22px, 3.5vw, 34px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin: 12px 0;
+  }
+
+  .bmini-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .bmini-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .bmini-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--bc);
+    border-radius: 12px;
+    padding: 18px 16px;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+  }
+
+  .bmini-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.04);
+    border-color: var(--bc);
+  }
+
+  .bmini-icon {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .bmini-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .bmini-count {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--bc);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .bmini-bm {
+    font-size: 11px;
+    color: #64748B;
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  .bmini-cta-row { text-align: center; }
+
+  .bmini-cta-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cyan);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,217,255,0.4);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .bmini-cta-link:hover { border-color: var(--cyan); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .bmini-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .bmini-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Registration form */
+  .reg-section { padding: 80px 24px; }
+
+  .reg-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .reg-text h2 {
+    margin-bottom: 16px;
+    font-size: clamp(22px, 3vw, 32px);
+  }
+
+  .reg-text p {
+    font-size: 16px;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .reg-note {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .reg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .reg-input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 15px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+
+  .reg-input::placeholder { color: var(--muted); }
+  .reg-input:focus { border-color: rgba(0,217,255,0.5); }
+
+  .reg-submit {
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 24px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: inherit;
+    text-align: center;
+  }
+
+  .reg-submit:hover { opacity: 0.85; }
+
+  /* Pricing */
+  .pricing-section { padding: 80px 24px; }
+
+  .pricing-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 48px;
+    max-width: 520px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .pricing-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .pricing-card.highlight {
+    border-color: rgba(0,217,255,0.4);
+    background: rgba(0,217,255,0.03);
+  }
+
+  .popular {
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--cyan);
+    color: #080A18;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 0 0 8px 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .tier-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+  }
+
+  .tier-label {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .tier-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .tier-features li {
+    font-size: 13px;
+    color: #94A3B8;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .tier-features li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--muted);
+  }
+
+  .tier-cta {
+    display: block;
+    text-align: center;
+    padding: 11px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: auto;
+    transition: 0.2s;
+  }
+
+  .tier-cta.primary {
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+  }
+
+  .tier-cta.secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .tier-cta:hover { opacity: 0.85; text-decoration: none; }
+
+  @media (max-width: 1100px) {
+    .dims-grid { grid-template-columns: repeat(3, 1fr); }
+    .rt-row { grid-template-columns: 1fr 110px 90px 90px 90px; }
+    .rt-metric, .rt-ours, .rt-b1, .rt-b2, .rt-b3 { padding: 12px 10px; font-size: 13px; }
+  }
+
+  @media (max-width: 900px) {
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid { grid-template-columns: 1fr 1fr; }
+    .tool-detail-inner { grid-template-columns: 1fr; }
+    .tool-detail-inner.reverse .tool-visual { order: 0; }
+    .rt-row { grid-template-columns: 1fr 100px 80px 80px 80px; }
+    .rt-metric, .rt-ours, .rt-b1, .rt-b2, .rt-b3 { padding: 10px 8px; font-size: 12px; }
+    .case-grid { grid-template-columns: 1fr; }
+    .reg-inner { grid-template-columns: 1fr; }
+    .repair-flow { flex-direction: column; align-items: center; }
+    .rf-arrow { transform: rotate(90deg); padding: 0; }
+    .rf-step { width: 100%; max-width: 340px; }
+    .dims-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .dims-grid { grid-template-columns: 1fr; }
+    .results-table { overflow-x: auto; }
+    .rt-row { grid-template-columns: 1fr 80px 70px 70px 70px; min-width: 440px; }
+    .rt-metric, .rt-ours, .rt-b1, .rt-b2, .rt-b3 { padding: 10px 6px; font-size: 11px; }
+  }
+</style>

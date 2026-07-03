@@ -1,0 +1,572 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const fixedCategories = [
+  { name: 'General Knowledge', icon: '🔍', count: 58934, color: '#00D9FF', benchmarks: 'MMLU · MMLU-Pro · TriviaQA · HellaSwag · WinoGrande · CommonsenseQA · OpenBookQA' },
+  { name: 'Reasoning',          icon: '🧠', count: 869978, color: '#818CF8', benchmarks: 'BBH · CLUTRR · ProofWriter · EntailmentBank' },
+  { name: 'Logic',              icon: '⚡', count: 1151,   color: '#FB923C', benchmarks: 'LogiQA · ReClor' },
+  { name: 'Mathematics',        icon: '📐', count: 7158,   color: '#34D399', benchmarks: 'GSM8K · MATH-500 · MathQA · TheoremQA · SVAMP · ASDiv · GSM-Hard' },
+  { name: 'Commonsense',        icon: '💡', count: 17277,  color: '#60A5FA', benchmarks: 'PIQA · SocialIQA · XCOPA' },
+  { name: 'Hallucination',      icon: '🎯', count: 5143,   color: '#F472B6', benchmarks: 'TruthfulQA · SimpleQA' },
+  { name: 'Safety',             icon: '🛡️', count: 157934, color: '#F87171', benchmarks: 'BBQ · RealToxicityPrompts · StereoSet' },
+  { name: 'Reading Comprehension', icon: '📖', count: 28075, color: '#A3E635', benchmarks: 'DROP · BoolQ · RACE · SQuAD · Quail · ROPES' },
+];
+
+const domainCategories = [
+  { name: 'Legal',            count: 83777,  detail: 'CaseHOLD · CUAD · LegalBench (162 tasks)' },
+  { name: 'Insurance',        count: 27987,  detail: 'Domain-specific academic datasets' },
+  { name: 'Automotive',       count: 27397,  detail: 'Domain-specific academic datasets' },
+  { name: 'Medical',          count: 9323,   detail: 'MedQA-USMLE · MedMCQA · PubMedQA · HeadQA · MedExpQA' },
+  { name: 'Statistics',       count: 11623,  detail: 'Quantitative reasoning academic datasets' },
+  { name: 'Finance',          count: 12537,  detail: 'FinQA · ConvFinQA · FinanceBench' },
+  { name: 'Telecom',          count: 10000,  detail: 'Domain-specific academic datasets' },
+  { name: 'Science',          count: 7677,   detail: 'ARC-Challenge · GPQA-Diamond · SciFact · QASC' },
+  { name: 'Construction',     count: 7151,   detail: 'Domain-specific academic datasets' },
+  { name: 'Ethics',           count: 3964,   detail: 'Academic moral reasoning datasets' },
+  { name: 'Aerospace',        count: 3082,   detail: 'Domain-specific academic datasets' },
+  { name: 'Psychology',       count: 1960,   detail: 'Academic psychology benchmarks' },
+  { name: 'Agriculture',      count: 2186,   detail: 'Academic agriculture benchmarks' },
+  { name: 'Education',        count: 2726,   detail: 'Academic education benchmarks' },
+  { name: 'Chemistry',        count: 1785,   detail: 'Academic chemistry benchmarks' },
+  { name: 'Energy',           count: 1632,   detail: 'Domain-specific academic datasets' },
+  { name: 'History',          count: 1316,   detail: 'MMLU history sub-categories' },
+  { name: 'Philosophy',       count: 1104,   detail: 'MMLU philosophy sub-categories' },
+  { name: 'Political Science', count: 538,   detail: 'Academic political science benchmarks' },
+  { name: 'Geography',        count: 455,    detail: 'Academic geography benchmarks' },
+  { name: 'Materials',        count: 650,    detail: 'Academic materials science benchmarks' },
+  { name: 'Environment',      count: 292,    detail: 'Academic environmental science benchmarks' },
+  { name: 'Sociology',        count: 201,    detail: 'Academic sociology benchmarks' },
+  { name: 'Economics',        count: 130,    detail: 'Academic economics benchmarks' },
+  { name: 'Transportation',   count: 133,    detail: 'Academic transportation benchmarks' },
+  { name: 'Industry',         count: 100,    detail: 'Academic industry benchmarks' },
+  { name: 'Code',             count: 664,    detail: 'HumanEval · MBPP' },
+];
+
+const suppCategories = [
+  { name: 'Multilingual',   count: 220542, detail: 'Global-MMLU · MGSM · Belebele · TyDiQA' },
+  { name: 'Entailment / NLI', count: 83360, detail: 'ANLI · XNLI' },
+  { name: 'Linguistics',    count: 67000,  detail: 'BLiMP' },
+  { name: 'Journalism',     count: 19998,  detail: 'News domain academic datasets' },
+  { name: 'Paraphrase',     count: 14000,  detail: 'Paraphrase detection academic datasets' },
+  { name: 'Sentiment',      count: 12284,  detail: 'Sentiment analysis academic datasets' },
+  { name: 'Multi-hop QA',   count: 9822,   detail: 'HotpotQA · MuSiQue' },
+  { name: 'Exams',          count: 3546,   detail: 'Standardized examination datasets' },
+  { name: 'Dialogue',       count: 2041,   detail: 'Academic dialogue benchmarks' },
+  { name: 'Chinese Exams',  count: 1346,   detail: 'C-Eval · CMMLU' },
+];
+---
+
+<BaseLayout
+  title="Benchmark Library | Probe56 — Holosynthics"
+  description="1,801,476 questions across 46 categories and 88 datasets. Every Probe56 scan validated against published, peer-reviewed academic benchmarks."
+>
+  <Nav />
+
+  <main class="bm-page">
+
+    <!-- SECTION 1: Hero Stats Bar -->
+    <section class="bm-hero">
+      <div class="bm-glow"></div>
+      <div class="bm-container">
+        <div class="badge">Benchmark Infrastructure</div>
+        <h1>The Probe56 <span class="accent">Benchmark Library</span></h1>
+        <p class="bm-desc">Every model scan is validated against published, peer-reviewed academic benchmarks — mapped to the 56 Holosynthics elements. Zero auto-generated questions. Ever.</p>
+
+        <div class="bm-stats-panel">
+          <div class="bm-big-stat">
+            <span class="bm-big-num">1,801,476</span>
+            <span class="bm-big-lbl">Questions</span>
+          </div>
+          <div class="bm-sdiv"></div>
+          <div class="bm-big-stat">
+            <span class="bm-big-num">46</span>
+            <span class="bm-big-lbl">Categories</span>
+          </div>
+          <div class="bm-sdiv"></div>
+          <div class="bm-big-stat">
+            <span class="bm-big-num">88</span>
+            <span class="bm-big-lbl">Datasets</span>
+          </div>
+          <div class="bm-sdiv"></div>
+          <div class="bm-big-stat">
+            <span class="bm-big-num">56</span>
+            <span class="bm-big-lbl">Elements</span>
+          </div>
+        </div>
+
+        <p class="bm-tagline">All verified academic benchmarks. Zero auto-generated.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Fixed Categories — 8 colored cards -->
+    <section class="bm-fixed-section">
+      <div class="bm-container">
+        <div class="bm-sec-header">
+          <div class="tier-tag tier-fixed-tag">Fixed — Every Scan</div>
+          <h2>8 Universal Benchmark Categories</h2>
+          <p>These 8 categories run automatically on every model. No configuration needed.</p>
+        </div>
+
+        <div class="fixed-grid">
+          {fixedCategories.map(cat => (
+            <div class="fixed-card" style={`--cc: ${cat.color};`}>
+              <div class="fc-top">
+                <span class="fc-icon">{cat.icon}</span>
+                <span class="fc-badge">✓ Standard</span>
+              </div>
+              <div class="fc-name">{cat.name}</div>
+              <div class="fc-count">{cat.count.toLocaleString()}</div>
+              <div class="fc-qlbl">questions</div>
+              <div class="fc-bm">{cat.benchmarks}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Domain Categories — expandable pills -->
+    <section class="bm-domain-section">
+      <div class="bm-container">
+        <div class="bm-sec-header">
+          <div class="tier-tag tier-domain-tag">Domain — Customer Select</div>
+          <h2>27 Industry Domain Categories</h2>
+          <p>Applied per your industry vertical. Click any category to see the datasets inside.</p>
+        </div>
+
+        <div class="pills-wrap" id="domain-pills">
+          {domainCategories.map(cat => (
+            <button class="dp-pill domain-pill" data-name={cat.name} data-detail={cat.detail}>
+              <span class="dp-name">{cat.name}</span>
+              <span class="dp-n">{cat.count.toLocaleString()}</span>
+            </button>
+          ))}
+        </div>
+        <div class="dp-panel domain-dpanel" id="dp-panel">
+          <span class="dp-hint">Click any category above to see the datasets inside</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Supplementary Categories -->
+    <section class="bm-supp-section">
+      <div class="bm-container">
+        <div class="bm-sec-header">
+          <div class="tier-tag tier-supp-tag">Supplementary — On Request</div>
+          <h2>10 Supplementary Categories</h2>
+          <p>Available for specialized evaluation needs. Contact us to include in your scan.</p>
+        </div>
+
+        <div class="pills-wrap" id="supp-pills">
+          {suppCategories.map(cat => (
+            <button class="dp-pill supp-pill" data-name={cat.name} data-detail={cat.detail}>
+              <span class="dp-name">{cat.name}</span>
+              <span class="dp-n">{cat.count.toLocaleString()}</span>
+            </button>
+          ))}
+        </div>
+        <div class="dp-panel supp-dpanel" id="sp-panel">
+          <span class="dp-hint">Click any category above to see the datasets inside</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer note + CTA -->
+    <section class="bm-footer-section">
+      <div class="bm-container">
+        <div class="bm-footer-box">
+          <p>Every benchmark is a published, peer-reviewed academic dataset. No auto-generated or synthetic questions. All questions mapped to the Holosynthics 56-element periodic table. Method protected by provisional patents filed with the USPTO.</p>
+          <a href="/probe56" class="bm-cta-btn">Start a Free Model Scan →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  function setupPills(wrapId: string, panelId: string) {
+    const pills = document.querySelectorAll<HTMLButtonElement>(`#${wrapId} .dp-pill`);
+    const panel = document.getElementById(panelId);
+    if (!pills.length || !panel) return;
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const isActive = pill.classList.contains('dp-active');
+        pills.forEach(p => p.classList.remove('dp-active'));
+        panel.classList.remove('dp-panel-open');
+
+        if (!isActive) {
+          pill.classList.add('dp-active');
+          const name = pill.dataset.name ?? '';
+          const detail = pill.dataset.detail ?? '';
+          panel.innerHTML = `<strong>${name}</strong> — ${detail}`;
+          panel.classList.add('dp-panel-open');
+        } else {
+          panel.innerHTML = '<span class="dp-hint">Click any category above to see the datasets inside</span>';
+        }
+      });
+    });
+  }
+
+  setupPills('domain-pills', 'dp-panel');
+  setupPills('supp-pills', 'sp-panel');
+</script>
+
+<style>
+  .bm-page { padding-top: 64px; }
+
+  .bm-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .badge {
+    display: inline-block;
+    border: 1px solid rgba(0,217,255,0.4);
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    background: rgba(0,217,255,0.06);
+  }
+
+  /* ── HERO ── */
+  .bm-hero {
+    padding: 80px 24px 72px;
+    text-align: center;
+    position: relative;
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,217,255,0.07) 0%, transparent 70%);
+    overflow: hidden;
+  }
+
+  .bm-glow {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(0,217,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .bm-hero h1 {
+    font-size: clamp(30px, 5vw, 54px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin: 0 0 20px;
+    line-height: 1.1;
+  }
+
+  .accent { color: var(--cyan); }
+
+  .bm-desc {
+    font-size: 17px;
+    color: #94A3B8;
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.75;
+  }
+
+  /* Stats panel */
+  .bm-stats-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 760px;
+    margin: 0 auto 24px;
+    padding: 36px 48px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+
+  .bm-big-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bm-big-num {
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 900;
+    color: var(--cyan);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  .bm-big-lbl {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .bm-sdiv {
+    width: 1px;
+    height: 54px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .bm-tagline {
+    font-size: 13px;
+    color: rgba(0,217,255,0.65);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .bm-sec-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .tier-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .tier-fixed-tag  { color: var(--cyan); background: rgba(0,217,255,0.08); border: 1px solid rgba(0,217,255,0.3); }
+  .tier-domain-tag { color: #F472B6;    background: rgba(244,114,182,0.08); border: 1px solid rgba(244,114,182,0.3); }
+  .tier-supp-tag   { color: #A78BFA;    background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.3); }
+
+  .bm-sec-header h2 {
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .bm-sec-header p {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* ── FIXED CARDS ── */
+  .bm-fixed-section {
+    padding: 80px 24px;
+    background: var(--bg2);
+  }
+
+  .fixed-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .fixed-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--cc);
+    border-radius: 14px;
+    padding: 22px 18px;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+  }
+
+  .fixed-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--cc);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .fc-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .fc-icon { font-size: 22px; line-height: 1; }
+
+  .fc-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--cc);
+    border: 1px solid currentColor;
+    padding: 2px 8px;
+    border-radius: 10px;
+    opacity: 0.9;
+  }
+
+  .fc-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .fc-count {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--cc);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .fc-qlbl {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+    margin-bottom: 14px;
+  }
+
+  .fc-bm {
+    font-size: 11px;
+    color: #64748B;
+    line-height: 1.65;
+  }
+
+  /* ── DOMAIN / SUPP PILLS ── */
+  .bm-domain-section { padding: 80px 24px; }
+  .bm-supp-section   { padding: 80px 24px; background: var(--bg2); }
+
+  .pills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .dp-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+
+  .domain-pill:hover            { border-color: rgba(244,114,182,0.45); background: rgba(244,114,182,0.05); }
+  .domain-pill.dp-active        { border-color: #F472B6; background: rgba(244,114,182,0.1); }
+  .supp-pill:hover              { border-color: rgba(167,139,250,0.45); background: rgba(167,139,250,0.05); }
+  .supp-pill.dp-active          { border-color: #A78BFA; background: rgba(167,139,250,0.1); }
+
+  .dp-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #CBD5E1;
+    transition: color 0.18s;
+  }
+
+  .domain-pill:hover .dp-name,
+  .domain-pill.dp-active .dp-name  { color: #F472B6; }
+  .supp-pill:hover .dp-name,
+  .supp-pill.dp-active .dp-name    { color: #A78BFA; }
+
+  .dp-n {
+    font-size: 12px;
+    color: #475569;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.18s;
+  }
+
+  .domain-pill.dp-active .dp-n { color: rgba(244,114,182,0.7); }
+  .supp-pill.dp-active .dp-n   { color: rgba(167,139,250,0.7); }
+
+  /* Detail panel */
+  .dp-panel {
+    min-height: 52px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+  }
+
+  .domain-dpanel.dp-panel-open  { border-color: rgba(244,114,182,0.25); background: rgba(244,114,182,0.04); color: #E2E8F0; }
+  .supp-dpanel.dp-panel-open    { border-color: rgba(167,139,250,0.25); background: rgba(167,139,250,0.04); color: #E2E8F0; }
+
+  .dp-hint { font-style: italic; opacity: 0.5; }
+
+  .domain-dpanel :global(strong) { color: #F472B6; font-weight: 700; }
+  .supp-dpanel :global(strong)   { color: #A78BFA; font-weight: 700; }
+
+  /* ── FOOTER NOTE ── */
+  .bm-footer-section { padding: 60px 24px 80px; }
+
+  .bm-footer-box {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 44px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg2);
+  }
+
+  .bm-footer-box p {
+    font-size: 14px;
+    color: #64748B;
+    line-height: 1.85;
+    margin-bottom: 28px;
+  }
+
+  .bm-cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .bm-cta-btn:hover { transform: translateY(-2px); opacity: 0.9; text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .fixed-grid { grid-template-columns: repeat(2, 1fr); }
+    .bm-stats-panel { gap: 24px; padding: 28px 32px; }
+  }
+
+  @media (max-width: 600px) {
+    .bm-sdiv { display: none; }
+    .bm-stats-panel { gap: 20px; padding: 24px 20px; justify-content: space-around; }
+    .bm-big-num { font-size: 26px; }
+    .bm-footer-box { padding: 28px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .fixed-grid { grid-template-columns: 1fr; }
+  }
+</style>
