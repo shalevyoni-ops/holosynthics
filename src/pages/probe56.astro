@@ -92,14 +92,14 @@ const tiers = [
           </div>
           <div class="hw-step">
             <div class="hw-num">02</div>
-            <h3>Bundle</h3>
+            <h3>Sign</h3>
             <p>Scan data is structured into a signed, deterministic format with cryptographic hash of the model weights. Portable, verifiable.</p>
             <code>→ signed scan output (SHA-256 verified)</code>
           </div>
           <div class="hw-step">
             <div class="hw-num">03</div>
             <h3>Analyze</h3>
-            <p>GI X-Ray maps your bundle against the Holosynthics 56-element periodic table. Produces a heatmap of which elements dominate which layers, and flags anomalies.</p>
+            <p>GI X-Ray maps your scan results against the Holosynthics 56-element periodic table. Produces a heatmap of which elements dominate which layers, and flags anomalies.</p>
             <code>→ 56-element report + anomaly score</code>
           </div>
           <div class="hw-step">
@@ -123,7 +123,7 @@ const tiers = [
           <div class="tool-text">
             <span class="tool-label">GI X-Ray</span>
             <h2>See Your Model's Element Map</h2>
-            <p>Send us your Probe56 bundle. We run the full 56-element analysis and return a comprehensive report showing which elements dominate the composition, where anomalies concentrate, and what your hallucination risk profile looks like.</p>
+            <p>Run a scan on your model. We run the full 56-element analysis and return a comprehensive report showing which elements dominate the composition, where anomalies concentrate, and what your hallucination risk profile looks like.</p>
             <ul class="feature-list">
               <li>Full periodic table heatmap per layer</li>
               <li>Anomaly cluster identification</li>
@@ -138,18 +138,139 @@ const tiers = [
             </div>
           </div>
           <div class="tool-visual xray-visual">
-            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" aria-label="X-Ray heatmap diagram">
-              <rect width="300" height="200" fill="#0D0F23" rx="12"/>
-              <text x="150" y="24" fill="#8892A4" font-size="10" text-anchor="middle" font-family="Inter,sans-serif">Layer Distribution Heatmap</text>
-              {Array.from({length: 8}, (_, col) =>
-                Array.from({length: 7}, (_, row) => {
-                  const colors = ['#F72585','#00D9FF','#7209B7','#4CC9F0','#22C55E','#FFD60A','#F59E0B','#EF4444'];
-                  const vals = [0.5, 0.8, 0.3, 0.6, 0.4, 0.7, 0.9, 0.2];
-                  const opacity = Math.max(0.1, Math.min(0.95, vals[(col + row) % 8]));
-                  return `<rect x="${30 + col*32}" y="${36 + row*22}" width="28" height="18" rx="3" fill="${colors[col]}" opacity="${opacity.toFixed(2)}"/>`;
-                }).join('')
-              ).join('')}
-              <text x="150" y="195" fill="#8892A4" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">Bo · Nu · Sy · Id · Sp · Ti · Re · En</text>
+            <svg viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg" aria-label="Layer distribution heatmap — 12 layers × 8 element types">
+              <rect width="320" height="230" fill="#0D0F23" rx="12"/>
+              <text x="160" y="15" fill="#8892A4" font-size="9" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600" letter-spacing="0.06em" text-transform="uppercase">Layer Distribution Heatmap</text>
+              <!-- Layer labels -->
+              <text x="23" y="33" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L1</text>
+              <text x="23" y="49" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L2</text>
+              <text x="23" y="65" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L3</text>
+              <text x="23" y="81" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L4</text>
+              <text x="23" y="97" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L5</text>
+              <text x="23" y="113" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L6</text>
+              <text x="23" y="129" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L7</text>
+              <text x="23" y="145" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L8</text>
+              <text x="23" y="161" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L9</text>
+              <text x="23" y="177" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L10</text>
+              <text x="23" y="193" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L11</text>
+              <text x="23" y="209" fill="#64748B" font-size="7" text-anchor="end" font-family="Inter,sans-serif">L12</text>
+              <!-- L1: Bo high, Nu high, rest low -->
+              <rect x="28" y="26" width="30" height="12" rx="2" fill="#F72585" opacity="0.90"/>
+              <rect x="62" y="26" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.70"/>
+              <rect x="96" y="26" width="30" height="12" rx="2" fill="#7209B7" opacity="0.30"/>
+              <rect x="130" y="26" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.50"/>
+              <rect x="164" y="26" width="30" height="12" rx="2" fill="#22C55E" opacity="0.40"/>
+              <rect x="198" y="26" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.20"/>
+              <rect x="232" y="26" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.30"/>
+              <rect x="266" y="26" width="30" height="12" rx="2" fill="#EF4444" opacity="0.10"/>
+              <!-- L2 -->
+              <rect x="28" y="42" width="30" height="12" rx="2" fill="#F72585" opacity="0.80"/>
+              <rect x="62" y="42" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.80"/>
+              <rect x="96" y="42" width="30" height="12" rx="2" fill="#7209B7" opacity="0.40"/>
+              <rect x="130" y="42" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.60"/>
+              <rect x="164" y="42" width="30" height="12" rx="2" fill="#22C55E" opacity="0.30"/>
+              <rect x="198" y="42" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.30"/>
+              <rect x="232" y="42" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.40"/>
+              <rect x="266" y="42" width="30" height="12" rx="2" fill="#EF4444" opacity="0.20"/>
+              <!-- L3: Nu peaks -->
+              <rect x="28" y="58" width="30" height="12" rx="2" fill="#F72585" opacity="0.60"/>
+              <rect x="62" y="58" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.90"/>
+              <rect x="96" y="58" width="30" height="12" rx="2" fill="#7209B7" opacity="0.50"/>
+              <rect x="130" y="58" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.70"/>
+              <rect x="164" y="58" width="30" height="12" rx="2" fill="#22C55E" opacity="0.40"/>
+              <rect x="198" y="58" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.30"/>
+              <rect x="232" y="58" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.50"/>
+              <rect x="266" y="58" width="30" height="12" rx="2" fill="#EF4444" opacity="0.20"/>
+              <!-- L4: Id rising -->
+              <rect x="28" y="74" width="30" height="12" rx="2" fill="#F72585" opacity="0.50"/>
+              <rect x="62" y="74" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.70"/>
+              <rect x="96" y="74" width="30" height="12" rx="2" fill="#7209B7" opacity="0.70"/>
+              <rect x="130" y="74" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.80"/>
+              <rect x="164" y="74" width="30" height="12" rx="2" fill="#22C55E" opacity="0.50"/>
+              <rect x="198" y="74" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.40"/>
+              <rect x="232" y="74" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.60"/>
+              <rect x="266" y="74" width="30" height="12" rx="2" fill="#EF4444" opacity="0.30"/>
+              <!-- L5: Sy and Id peak -->
+              <rect x="28" y="90" width="30" height="12" rx="2" fill="#F72585" opacity="0.40"/>
+              <rect x="62" y="90" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.50"/>
+              <rect x="96" y="90" width="30" height="12" rx="2" fill="#7209B7" opacity="0.80"/>
+              <rect x="130" y="90" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.90"/>
+              <rect x="164" y="90" width="30" height="12" rx="2" fill="#22C55E" opacity="0.60"/>
+              <rect x="198" y="90" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.50"/>
+              <rect x="232" y="90" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.70"/>
+              <rect x="266" y="90" width="30" height="12" rx="2" fill="#EF4444" opacity="0.30"/>
+              <!-- L6: Sy peaks, Re rising -->
+              <rect x="28" y="106" width="30" height="12" rx="2" fill="#F72585" opacity="0.30"/>
+              <rect x="62" y="106" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.40"/>
+              <rect x="96" y="106" width="30" height="12" rx="2" fill="#7209B7" opacity="0.90"/>
+              <rect x="130" y="106" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.70"/>
+              <rect x="164" y="106" width="30" height="12" rx="2" fill="#22C55E" opacity="0.70"/>
+              <rect x="198" y="106" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.60"/>
+              <rect x="232" y="106" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.80"/>
+              <rect x="266" y="106" width="30" height="12" rx="2" fill="#EF4444" opacity="0.40"/>
+              <!-- L7: Re peaks -->
+              <rect x="28" y="122" width="30" height="12" rx="2" fill="#F72585" opacity="0.20"/>
+              <rect x="62" y="122" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.30"/>
+              <rect x="96" y="122" width="30" height="12" rx="2" fill="#7209B7" opacity="0.70"/>
+              <rect x="130" y="122" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.60"/>
+              <rect x="164" y="122" width="30" height="12" rx="2" fill="#22C55E" opacity="0.80"/>
+              <rect x="198" y="122" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.70"/>
+              <rect x="232" y="122" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.90"/>
+              <rect x="266" y="122" width="30" height="12" rx="2" fill="#EF4444" opacity="0.50"/>
+              <!-- L8: Sp peaks -->
+              <rect x="28" y="138" width="30" height="12" rx="2" fill="#F72585" opacity="0.20"/>
+              <rect x="62" y="138" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.20"/>
+              <rect x="96" y="138" width="30" height="12" rx="2" fill="#7209B7" opacity="0.50"/>
+              <rect x="130" y="138" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.50"/>
+              <rect x="164" y="138" width="30" height="12" rx="2" fill="#22C55E" opacity="0.90"/>
+              <rect x="198" y="138" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.80"/>
+              <rect x="232" y="138" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.80"/>
+              <rect x="266" y="138" width="30" height="12" rx="2" fill="#EF4444" opacity="0.50"/>
+              <!-- L9: Ti peaks -->
+              <rect x="28" y="154" width="30" height="12" rx="2" fill="#F72585" opacity="0.10"/>
+              <rect x="62" y="154" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.20"/>
+              <rect x="96" y="154" width="30" height="12" rx="2" fill="#7209B7" opacity="0.40"/>
+              <rect x="130" y="154" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.40"/>
+              <rect x="164" y="154" width="30" height="12" rx="2" fill="#22C55E" opacity="0.80"/>
+              <rect x="198" y="154" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.90"/>
+              <rect x="232" y="154" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.60"/>
+              <rect x="266" y="154" width="30" height="12" rx="2" fill="#EF4444" opacity="0.70"/>
+              <!-- L10: En rising -->
+              <rect x="28" y="170" width="30" height="12" rx="2" fill="#F72585" opacity="0.10"/>
+              <rect x="62" y="170" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.10"/>
+              <rect x="96" y="170" width="30" height="12" rx="2" fill="#7209B7" opacity="0.30"/>
+              <rect x="130" y="170" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.30"/>
+              <rect x="164" y="170" width="30" height="12" rx="2" fill="#22C55E" opacity="0.60"/>
+              <rect x="198" y="170" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.80"/>
+              <rect x="232" y="170" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.50"/>
+              <rect x="266" y="170" width="30" height="12" rx="2" fill="#EF4444" opacity="0.80"/>
+              <!-- L11: En dominant -->
+              <rect x="28" y="186" width="30" height="12" rx="2" fill="#F72585" opacity="0.10"/>
+              <rect x="62" y="186" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.10"/>
+              <rect x="96" y="186" width="30" height="12" rx="2" fill="#7209B7" opacity="0.20"/>
+              <rect x="130" y="186" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.20"/>
+              <rect x="164" y="186" width="30" height="12" rx="2" fill="#22C55E" opacity="0.50"/>
+              <rect x="198" y="186" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.60"/>
+              <rect x="232" y="186" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.40"/>
+              <rect x="266" y="186" width="30" height="12" rx="2" fill="#EF4444" opacity="0.90"/>
+              <!-- L12: En peaks -->
+              <rect x="28" y="202" width="30" height="12" rx="2" fill="#F72585" opacity="0.10"/>
+              <rect x="62" y="202" width="30" height="12" rx="2" fill="#4CC9F0" opacity="0.10"/>
+              <rect x="96" y="202" width="30" height="12" rx="2" fill="#7209B7" opacity="0.15"/>
+              <rect x="130" y="202" width="30" height="12" rx="2" fill="#00D9FF" opacity="0.15"/>
+              <rect x="164" y="202" width="30" height="12" rx="2" fill="#22C55E" opacity="0.40"/>
+              <rect x="198" y="202" width="30" height="12" rx="2" fill="#FFD60A" opacity="0.50"/>
+              <rect x="232" y="202" width="30" height="12" rx="2" fill="#F59E0B" opacity="0.30"/>
+              <rect x="266" y="202" width="30" height="12" rx="2" fill="#EF4444" opacity="0.95"/>
+              <!-- Element labels -->
+              <text x="43"  y="224" fill="#8892A4" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Bo</text>
+              <text x="77"  y="224" fill="#8892A4" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Nu</text>
+              <text x="111" y="224" fill="#8892A4" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Sy</text>
+              <text x="145" y="224" fill="#8892A4" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Id</text>
+              <text x="179" y="224" fill="#8892A4" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Sp</text>
+              <text x="213" y="224" fill="#8892A4" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Ti</text>
+              <text x="247" y="224" fill="#8892A4" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Re</text>
+              <text x="281" y="224" fill="#8892A4" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">En</text>
             </svg>
           </div>
         </div>
