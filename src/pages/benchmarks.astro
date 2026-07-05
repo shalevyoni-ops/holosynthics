@@ -4,63 +4,65 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
 const fixedCategories = [
-  { name: 'General Knowledge', icon: '🔍', count: 58934, color: '#00D9FF', benchmarks: 'MMLU · MMLU-Pro · TriviaQA · HellaSwag · WinoGrande · CommonsenseQA · OpenBookQA' },
-  { name: 'Reasoning',          icon: '🧠', count: 869978, color: '#818CF8', benchmarks: 'BBH · CLUTRR · ProofWriter · EntailmentBank' },
-  { name: 'Logic',              icon: '⚡', count: 1151,   color: '#FB923C', benchmarks: 'LogiQA · ReClor' },
-  { name: 'Mathematics',        icon: '📐', count: 7158,   color: '#34D399', benchmarks: 'GSM8K · MATH-500 · MathQA · TheoremQA · SVAMP · ASDiv · GSM-Hard' },
-  { name: 'Commonsense',        icon: '💡', count: 17277,  color: '#60A5FA', benchmarks: 'PIQA · SocialIQA · XCOPA' },
-  { name: 'Hallucination',      icon: '🎯', count: 5143,   color: '#F472B6', benchmarks: 'TruthfulQA · SimpleQA' },
-  { name: 'Safety',             icon: '🛡️', count: 157934, color: '#F87171', benchmarks: 'BBQ · RealToxicityPrompts · StereoSet' },
-  { name: 'Reading Comprehension', icon: '📖', count: 28075, color: '#A3E635', benchmarks: 'DROP · BoolQ · RACE · SQuAD · Quail · ROPES' },
+  { name: 'General Knowledge', icon: '🔍', count: 406757,  color: '#00D9FF', benchmarks: 'MMLU · MMLU-Pro · TriviaQA · HellaSwag · WinoGrande · CommonsenseQA · OpenBookQA' },
+  { name: 'Reasoning',          icon: '🧠', count: 846171,  color: '#818CF8', benchmarks: 'BBH · CLUTRR · ProofWriter · EntailmentBank' },
+  { name: 'Logic',              icon: '⚡', count: 3046,    color: '#FB923C', benchmarks: 'LogiQA · ReClor' },
+  { name: 'Mathematics',        icon: '📐', count: 10704,   color: '#34D399', benchmarks: 'GSM8K · MATH-500 · MathQA · TheoremQA · SVAMP · ASDiv · GSM-Hard' },
+  { name: 'Commonsense',        icon: '💡', count: 131610,  color: '#60A5FA', benchmarks: 'PIQA · SocialIQA · XCOPA' },
+  { name: 'Hallucination',      icon: '🎯', count: 32833,   color: '#F472B6', benchmarks: 'TruthfulQA · SimpleQA' },
+  { name: 'Safety',             icon: '🛡️', count: 264690,  color: '#F87171', benchmarks: 'BBQ · RealToxicityPrompts · StereoSet' },
+  { name: 'Reading Comprehension', icon: '📖', count: 35128, color: '#A3E635', benchmarks: 'DROP · BoolQ · RACE · SQuAD · Quail · ROPES' },
 ];
 
 const domainCategories = [
-  { name: 'Legal',            count: 83777,  detail: 'CaseHOLD · CUAD · LegalBench (162 tasks)' },
-  { name: 'Insurance',        count: 27987,  detail: 'Domain-specific academic datasets' },
-  { name: 'Automotive',       count: 27397,  detail: 'Domain-specific academic datasets' },
-  { name: 'Medical',          count: 9323,   detail: 'MedQA-USMLE · MedMCQA · PubMedQA · HeadQA · MedExpQA' },
-  { name: 'Statistics',       count: 11623,  detail: 'Quantitative reasoning academic datasets' },
-  { name: 'Finance',          count: 12537,  detail: 'FinQA · ConvFinQA · FinanceBench' },
-  { name: 'Telecom',          count: 10000,  detail: 'Domain-specific academic datasets' },
-  { name: 'Science',          count: 7677,   detail: 'ARC-Challenge · GPQA-Diamond · SciFact · QASC' },
-  { name: 'Construction',     count: 7151,   detail: 'Domain-specific academic datasets' },
-  { name: 'Ethics',           count: 3964,   detail: 'Academic moral reasoning datasets' },
-  { name: 'Aerospace',        count: 3082,   detail: 'Domain-specific academic datasets' },
-  { name: 'Psychology',       count: 1960,   detail: 'Academic psychology benchmarks' },
-  { name: 'Agriculture',      count: 2186,   detail: 'Academic agriculture benchmarks' },
-  { name: 'Education',        count: 2726,   detail: 'Academic education benchmarks' },
-  { name: 'Chemistry',        count: 1785,   detail: 'Academic chemistry benchmarks' },
-  { name: 'Energy',           count: 1632,   detail: 'Domain-specific academic datasets' },
-  { name: 'History',          count: 1316,   detail: 'MMLU history sub-categories' },
-  { name: 'Philosophy',       count: 1104,   detail: 'MMLU philosophy sub-categories' },
-  { name: 'Political Science', count: 538,   detail: 'Academic political science benchmarks' },
-  { name: 'Geography',        count: 455,    detail: 'Academic geography benchmarks' },
-  { name: 'Materials',        count: 650,    detail: 'Academic materials science benchmarks' },
-  { name: 'Environment',      count: 292,    detail: 'Academic environmental science benchmarks' },
-  { name: 'Sociology',        count: 201,    detail: 'Academic sociology benchmarks' },
-  { name: 'Economics',        count: 130,    detail: 'Academic economics benchmarks' },
-  { name: 'Transportation',   count: 133,    detail: 'Academic transportation benchmarks' },
-  { name: 'Industry',         count: 100,    detail: 'Academic industry benchmarks' },
-  { name: 'Code',             count: 664,    detail: 'HumanEval · MBPP' },
+  { name: 'Telecom',           count: 760441, detail: 'Domain-specific academic datasets' },
+  { name: 'Legal',             count: 127964, detail: 'CaseHOLD · CUAD · LegalBench (162 tasks)' },
+  { name: 'Insurance',         count: 27987,  detail: 'Domain-specific academic datasets' },
+  { name: 'Dialogue',          count: 27710,  detail: 'Academic dialogue benchmarks' },
+  { name: 'Automotive',        count: 27397,  detail: 'Domain-specific academic datasets' },
+  { name: 'Statistics',        count: 23246,  detail: 'Quantitative reasoning academic datasets' },
+  { name: 'Multi-hop QA',      count: 23175,  detail: 'HotpotQA · MuSiQue' },
+  { name: 'Chinese Exams',     count: 17707,  detail: 'C-Eval · CMMLU' },
+  { name: 'Medical',           count: 16596,  detail: 'MedQA-USMLE · MedMCQA · PubMedQA · HeadQA · MedExpQA' },
+  { name: 'Cloze',             count: 15195,  detail: 'Academic cloze task datasets' },
+  { name: 'Finance',           count: 12551,  detail: 'FinQA · ConvFinQA · FinanceBench' },
+  { name: 'Ethics',            count: 8903,   detail: 'Academic moral reasoning datasets' },
+  { name: 'Science',           count: 8093,   detail: 'ARC-Challenge · GPQA-Diamond · SciFact · QASC' },
+  { name: 'Construction',      count: 7151,   detail: 'Domain-specific academic datasets' },
+  { name: 'Exams',             count: 4363,   detail: 'Standardized examination datasets' },
+  { name: 'Aerospace',         count: 3082,   detail: 'Domain-specific academic datasets' },
+  { name: 'Education',         count: 2726,   detail: 'Academic education benchmarks' },
+  { name: 'Code',              count: 2464,   detail: 'HumanEval · MBPP' },
+  { name: 'Agriculture',       count: 2186,   detail: 'Academic agriculture benchmarks' },
+  { name: 'Psychology',        count: 1960,   detail: 'Academic psychology benchmarks' },
+  { name: 'Energy',            count: 1632,   detail: 'Domain-specific academic datasets' },
+  { name: 'Telecom-adv',       count: 1497,   detail: 'Advanced telecom academic datasets' },
+  { name: 'History',           count: 1316,   detail: 'MMLU history sub-categories' },
+  { name: 'Philosophy',        count: 1104,   detail: 'MMLU philosophy sub-categories' },
+  { name: 'Political Science', count: 1012,   detail: 'Academic political science benchmarks' },
+  { name: 'Materials',         count: 650,    detail: 'Academic materials science benchmarks' },
+  { name: 'Sociology',         count: 555,    detail: 'Academic sociology benchmarks' },
+  { name: 'Geography',         count: 421,    detail: 'Academic geography benchmarks' },
+  { name: 'Environment',       count: 292,    detail: 'Academic environmental science benchmarks' },
+  { name: 'Chemistry',         count: 243,    detail: 'Academic chemistry benchmarks' },
+  { name: 'Industry',          count: 210,    detail: 'Academic industry benchmarks' },
+  { name: 'Transportation',    count: 133,    detail: 'Academic transportation benchmarks' },
+  { name: 'Economics',         count: 130,    detail: 'Academic economics benchmarks' },
 ];
 
 const suppCategories = [
-  { name: 'Multilingual',   count: 220542, detail: 'Global-MMLU · MGSM · Belebele · TyDiQA' },
-  { name: 'Entailment / NLI', count: 83360, detail: 'ANLI · XNLI' },
-  { name: 'Linguistics',    count: 67000,  detail: 'BLiMP' },
-  { name: 'Journalism',     count: 19998,  detail: 'News domain academic datasets' },
-  { name: 'Paraphrase',     count: 14000,  detail: 'Paraphrase detection academic datasets' },
-  { name: 'Sentiment',      count: 12284,  detail: 'Sentiment analysis academic datasets' },
-  { name: 'Multi-hop QA',   count: 9822,   detail: 'HotpotQA · MuSiQue' },
-  { name: 'Exams',          count: 3546,   detail: 'Standardized examination datasets' },
-  { name: 'Dialogue',       count: 2041,   detail: 'Academic dialogue benchmarks' },
-  { name: 'Chinese Exams',  count: 1346,   detail: 'C-Eval · CMMLU' },
+  { name: 'Multilingual',     count: 408118, detail: 'Global-MMLU · MGSM · Belebele · TyDiQA' },
+  { name: 'Linguistics',      count: 112000, detail: 'BLiMP' },
+  { name: 'Entailment / NLI', count: 106394, detail: 'ANLI · XNLI' },
+  { name: 'Sentiment',        count: 45126,  detail: 'Sentiment analysis academic datasets' },
+  { name: 'Paraphrase',       count: 40104,  detail: 'Paraphrase detection academic datasets' },
+  { name: 'Journalism',       count: 34998,  detail: 'News domain academic datasets' },
 ];
 ---
 
 <BaseLayout
   title="Benchmark Library | Probe56 — Holosynthics"
-  description="1,801,476 questions across 46 categories and 88 datasets. Every Probe56 scan validated against published, peer-reviewed academic benchmarks."
+  description="3,607,771 questions across 47 categories and 88+ datasets. Every Probe56 scan validated against published, peer-reviewed academic benchmarks."
 >
   <Nav />
 
@@ -76,12 +78,12 @@ const suppCategories = [
 
         <div class="bm-stats-panel">
           <div class="bm-big-stat">
-            <span class="bm-big-num">1,801,476</span>
+            <span class="bm-big-num">3,607,771</span>
             <span class="bm-big-lbl">Questions</span>
           </div>
           <div class="bm-sdiv"></div>
           <div class="bm-big-stat">
-            <span class="bm-big-num">46</span>
+            <span class="bm-big-num">47</span>
             <span class="bm-big-lbl">Categories</span>
           </div>
           <div class="bm-sdiv"></div>
@@ -131,7 +133,7 @@ const suppCategories = [
       <div class="bm-container">
         <div class="bm-sec-header">
           <div class="tier-tag tier-domain-tag">Domain — Customer Select</div>
-          <h2>27 Industry Domain Categories</h2>
+          <h2>33 Industry Domain Categories</h2>
           <p>Applied per your industry vertical. Click any category to see the datasets inside.</p>
         </div>
 
@@ -154,7 +156,7 @@ const suppCategories = [
       <div class="bm-container">
         <div class="bm-sec-header">
           <div class="tier-tag tier-supp-tag">Supplementary — On Request</div>
-          <h2>10 Supplementary Categories</h2>
+          <h2>6 Supplementary Categories</h2>
           <p>Available for specialized evaluation needs. Contact us to include in your scan.</p>
         </div>
 

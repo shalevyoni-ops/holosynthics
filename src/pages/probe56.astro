@@ -12,7 +12,7 @@ const tiers = [
     ctaHref: '#free-scan',
     ctaExternal: false,
     highlight: false,
-    features: ['Probe56 CLI', 'Element scanning', 'P56 bundle format', 'MIT license', 'Any HuggingFace model'],
+    features: ['Probe56 CLI', 'Element scanning', 'HTML + JSON report', 'MIT license', 'Any HuggingFace model'],
   },
   {
     name: 'GI X-Ray',
@@ -60,7 +60,7 @@ const tiers = [
         <p>Probe56 scans your model's element composition. GI X-Ray maps it to the 56-element periodic table. GI Surgeon fixes what's broken — without retraining.</p>
 
         <div class="quickstart">
-          <code>pip install probe56 && probe56 scan --model gpt2 --output my_model.p56</code>
+          <code>probe56 scan --model meta-llama/Llama-3.1-8B --out ./results --output-html report.html</code>
         </div>
 
         <div class="df-actions">
@@ -70,9 +70,11 @@ const tiers = [
         <div class="hero-stats">
           <div class="hero-stat"><span class="hs-num">56</span><span class="hs-label">Elements</span></div>
           <div class="hero-stat-sep">|</div>
-          <div class="hero-stat"><span class="hs-num">13</span><span class="hs-label">Families</span></div>
+          <div class="hero-stat"><span class="hs-num">3.6M</span><span class="hs-label">Questions</span></div>
           <div class="hero-stat-sep">|</div>
-          <div class="hero-stat"><span class="hs-num">5</span><span class="hs-label">Repair Dimensions</span></div>
+          <div class="hero-stat"><span class="hs-num">8</span><span class="hs-label">Categories</span></div>
+          <div class="hero-stat-sep">|</div>
+          <div class="hero-stat"><span class="hs-num">~15 min</span><span class="hs-label">Standard Scan</span></div>
         </div>
       </div>
     </section>
@@ -86,13 +88,13 @@ const tiers = [
             <div class="hw-num">01</div>
             <h3>Extract</h3>
             <p>Probe56 (open-source Python CLI) scans your model during inference and captures element composition data from your dataset.</p>
-            <code>probe56 scan --model your/model --dataset truthfulqa</code>
+            <code>probe56 scan --model your/model --out ./results --output-html report.html</code>
           </div>
           <div class="hw-step">
             <div class="hw-num">02</div>
             <h3>Bundle</h3>
-            <p>Scan data is compressed into a P56 bundle — a signed, deterministic binary format with cryptographic hash of the model weights. Portable, verifiable.</p>
-            <code>→ scan_bundle.p56 (SHA-256 verified)</code>
+            <p>Scan data is structured into a signed, deterministic format with cryptographic hash of the model weights. Portable, verifiable.</p>
+            <code>→ signed scan output (SHA-256 verified)</code>
           </div>
           <div class="hw-step">
             <div class="hw-num">03</div>
@@ -288,61 +290,61 @@ const tiers = [
       <div class="container">
         <div class="bmini-header">
           <div class="results-badge">Validation Foundation</div>
-          <h2>Validated Against 1.8M Academic Benchmarks</h2>
+          <h2>Validated Against 3.6M Academic Benchmarks</h2>
           <p class="bmini-sub">Every scan runs 8 fixed categories — peer-reviewed datasets, zero auto-generated questions.</p>
         </div>
         <div class="bmini-grid">
           <div class="bmini-card" style="--bc: #00D9FF">
             <span class="bmini-icon">🔍</span>
             <div class="bmini-name">General Knowledge</div>
-            <div class="bmini-count">58,934</div>
+            <div class="bmini-count">406,757</div>
             <div class="bmini-bm">MMLU · HellaSwag · TriviaQA</div>
           </div>
           <div class="bmini-card" style="--bc: #818CF8">
             <span class="bmini-icon">🧠</span>
             <div class="bmini-name">Reasoning</div>
-            <div class="bmini-count">869,978</div>
+            <div class="bmini-count">846,171</div>
             <div class="bmini-bm">BBH · ProofWriter · EntailmentBank</div>
           </div>
           <div class="bmini-card" style="--bc: #FB923C">
             <span class="bmini-icon">⚡</span>
             <div class="bmini-name">Logic</div>
-            <div class="bmini-count">1,151</div>
+            <div class="bmini-count">3,046</div>
             <div class="bmini-bm">LogiQA · ReClor</div>
           </div>
           <div class="bmini-card" style="--bc: #34D399">
             <span class="bmini-icon">📐</span>
             <div class="bmini-name">Mathematics</div>
-            <div class="bmini-count">7,158</div>
+            <div class="bmini-count">10,704</div>
             <div class="bmini-bm">GSM8K · MATH-500 · TheoremQA</div>
           </div>
           <div class="bmini-card" style="--bc: #60A5FA">
             <span class="bmini-icon">💡</span>
             <div class="bmini-name">Commonsense</div>
-            <div class="bmini-count">17,277</div>
+            <div class="bmini-count">131,610</div>
             <div class="bmini-bm">PIQA · SocialIQA · XCOPA</div>
           </div>
           <div class="bmini-card" style="--bc: #F472B6">
             <span class="bmini-icon">🎯</span>
             <div class="bmini-name">Hallucination</div>
-            <div class="bmini-count">5,143</div>
+            <div class="bmini-count">32,833</div>
             <div class="bmini-bm">TruthfulQA · SimpleQA</div>
           </div>
           <div class="bmini-card" style="--bc: #F87171">
             <span class="bmini-icon">🛡️</span>
             <div class="bmini-name">Safety</div>
-            <div class="bmini-count">157,934</div>
+            <div class="bmini-count">264,690</div>
             <div class="bmini-bm">BBQ · RealToxicityPrompts</div>
           </div>
           <div class="bmini-card" style="--bc: #A3E635">
             <span class="bmini-icon">📖</span>
             <div class="bmini-name">Reading Comprehension</div>
-            <div class="bmini-count">28,075</div>
+            <div class="bmini-count">35,128</div>
             <div class="bmini-bm">SQuAD · DROP · BoolQ</div>
           </div>
         </div>
         <div class="bmini-cta-row">
-          <a href="/benchmarks" class="bmini-cta-link">See all 46 categories — 1,801,476 questions →</a>
+          <a href="/benchmarks" class="bmini-cta-link">See all 47 categories — 3,607,771 questions →</a>
         </div>
       </div>
     </section>
@@ -447,42 +449,38 @@ const tiers = [
       <div class="container">
         <div class="results-header">
           <div class="results-badge">Real Results</div>
-          <h2>Case Study: Medical AI Provider</h2>
+          <h2>Case Study: Language Model Health Restoration</h2>
           <p class="results-sub">A real product run. Numbers from the signed report. Nothing fabricated.</p>
         </div>
         <div class="case-grid">
           <div class="case-story">
-            <p>A medical AI provider's model was showing unexpected behavior on clinical knowledge questions. They ran a Probe56 scan, then a GI Surgeon repair cycle.</p>
-            <p>The scan found 78 anomalous element patterns across the model. Most were structural — they're how every model works. Two were fixable without retraining.</p>
-            <p>After the Two-Layer Repair: both target behaviors corrected, all 20 preserved behaviors still passing, zero side effects detected in the regression suite.</p>
+            <p>An open-source language model arrived with a Knowledge Score of 1.2% — near-zero. The model had wide knowledge gaps across multiple benchmark categories.</p>
+            <p>Probe56 scanned the model and identified 1,075 fixable issues. Fixable means the model holds partial knowledge but fails to surface the correct answer — highest-priority, lowest-risk targets for repair.</p>
+            <p>After the repair cycle: 617 of 1,075 issues fixed, Knowledge Score jumped to 57.4%. Every repair verified for zero side effects on existing correct answers before being applied.</p>
             <p class="case-fingerprint">Report fingerprint: <code>a9c492a3…</code> &middot; Ed25519 signed</p>
           </div>
           <div class="case-stats">
             <div class="cs-row">
-              <div class="cs-label">Probe56 health score</div>
+              <div class="cs-label">Knowledge Score</div>
               <div class="cs-before">1.2%</div>
               <div class="cs-arrow">&rarr;</div>
-              <div class="cs-after">2.5%</div>
+              <div class="cs-after">57.4%</div>
             </div>
             <div class="cs-row">
-              <div class="cs-label">Issues found</div>
-              <div class="cs-val">78</div>
-            </div>
-            <div class="cs-row">
-              <div class="cs-label">Fixable at weight level</div>
-              <div class="cs-val">2</div>
+              <div class="cs-label">Fixable issues identified</div>
+              <div class="cs-val">1,075</div>
             </div>
             <div class="cs-row cs-win">
               <div class="cs-label">Fixed (no retraining)</div>
-              <div class="cs-val">2 / 2</div>
-            </div>
-            <div class="cs-row cs-win">
-              <div class="cs-label">Preserved behaviors</div>
-              <div class="cs-val">20 / 20</div>
+              <div class="cs-val">617 / 1,075</div>
             </div>
             <div class="cs-row cs-win">
               <div class="cs-label">Side effects</div>
               <div class="cs-val">0</div>
+            </div>
+            <div class="cs-row cs-win">
+              <div class="cs-label">Zero-collateral guarantee</div>
+              <div class="cs-val">Verified</div>
             </div>
           </div>
         </div>
