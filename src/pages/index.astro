@@ -1,25 +1,79 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import PeriodicTableSection from '../components/PeriodicTableSection.astro';
 import ToolsGrid from '../components/ToolsGrid.astro';
 import PapersSection from '../components/PapersSection.astro';
-import DarkFieldCTA from '../components/DarkFieldCTA.astro';
+import Probe56CTA from '../components/Probe56CTA.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
   title="Holosynthics"
-  description="We discovered the Periodic Table of AI — 56 universal neuron types across all language models. Scan, analyze, and repair AI models at the neuron level."
+  description="We discovered 56 irreducible elements that compose everything digital. Scan, analyze, and repair AI models with the Holosynthics periodic table of digital matter."
 >
   <Nav />
   <main>
     <Hero />
     <PeriodicTableSection />
+    <section class="vision-section">
+      <div class="vision-inner">
+        <h2 class="vision-title">The Vision</h2>
+        <p class="vision-lead">Everything digital is built from 56 elements.<br />Code. Data. Models. Content. Systems.</p>
+        <p class="vision-body">Today we apply Holosynthics to AI models — scanning,<br />repairing, and proving with signed evidence.</p>
+        <p class="vision-body">Tomorrow, every digital entity will be measured,<br />understood, and improved through the 56 elements.</p>
+        <p class="vision-close">The world is moving to Holosynthics.</p>
+      </div>
+    </section>
     <ToolsGrid />
     <PapersSection />
-    <DarkFieldCTA />
+    <Probe56CTA />
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  .vision-section {
+    padding: 100px 24px;
+    background: var(--bg);
+    text-align: center;
+  }
+
+  .vision-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .vision-title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 32px;
+  }
+
+  .vision-lead {
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 600;
+    color: #E2E8F0;
+    line-height: 1.5;
+    margin-bottom: 28px;
+  }
+
+  .vision-body {
+    font-size: clamp(15px, 2vw, 18px);
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .vision-close {
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-weight: 700;
+    color: var(--cyan);
+    margin-top: 36px;
+    letter-spacing: -0.01em;
+  }
+</style>
