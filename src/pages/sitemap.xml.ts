@@ -8,7 +8,7 @@ const staticPages = [
   { url: '/periodic-table/', priority: '0.9', changefreq: 'monthly' },
   { url: '/research/', priority: '0.9', changefreq: 'monthly' },
   { url: '/blog/', priority: '0.8', changefreq: 'weekly' },
-  { url: '/darkfield/', priority: '0.9', changefreq: 'monthly' },
+  { url: '/probe56/', priority: '0.9', changefreq: 'monthly' },
   { url: '/about/', priority: '0.6', changefreq: 'monthly' },
   { url: '/blog/periodic-table-ai-56-elements/', priority: '0.8', changefreq: 'monthly' },
   { url: '/blog/why-ai-models-hallucinate-neurons-reveal/', priority: '0.8', changefreq: 'monthly' },

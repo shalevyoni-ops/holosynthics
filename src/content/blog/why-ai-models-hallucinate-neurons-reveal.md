@@ -63,4 +63,4 @@ If you can read the neuron signature before the model outputs its answer, you ca
 
 That's what GI X-Ray does. It runs a Holosynthics scan on your model, identifies which neuron types are most likely to produce hallucination-prone responses on which input types, and flags them.
 
-The fix is in [GI Surgeon](/darkfield). The scan is in [GI X-Ray](/darkfield). Both are built on the Holosynthics periodic table.
+The fix is in [GI Surgeon](/probe56). The scan is in [GI X-Ray](/probe56). Both are built on the Holosynthics periodic table.

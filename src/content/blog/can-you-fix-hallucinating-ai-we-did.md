@@ -70,6 +70,6 @@ We disclose results, not implementation details. The specific neuron targeting a
 
 **GI Surgeon** — applies edits under Holosynthics protocol. Available as a managed service (we run it on your model) and an on-premises API (for air-gapped deployments).
 
-**DarkField** — the open-source Python client that captures the neuron data that X-Ray and Surgeon interpret.
+**Probe56** — the open-source Python CLI that captures the neuron data that X-Ray and Surgeon interpret.
 
-Pricing and free scan options at [holosynthics.com/darkfield](/darkfield).
+Pricing and free scan options at [holosynthics.com/probe56](/probe56).
