@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const services = [
+  {
+    id: 'free-scan',
+    keyword: 'AI Model Scanning Service',
+    name: 'Free Scan',
+    desc: 'Upload your model, get a full health report. 8 categories, 56 elements, scored and explained.',
+    cta: 'Start Free Scan',
+    href: '/probe56#free-scan',
+    external: false,
+    serviceType: 'AI model scanning service',
+  },
+  {
+    id: 'model-repair',
+    keyword: 'AI Model Repair Service',
+    name: 'Model Repair',
+    desc: 'We find what’s broken and fix it. Per-dimension, per-element. Choose Lite, Advanced, or PRO.',
+    cta: 'Get a Quote',
+    href: '/quote?service=Model+Repair',
+    external: false,
+    serviceType: 'AI model repair service',
+  },
+  {
+    id: 'custom-model-building',
+    keyword: 'Custom AI Model Building',
+    name: 'Custom Model Building',
+    desc: 'Need a model built for your specific domain? We build it from the periodic table — mapped, tested, proven.',
+    cta: 'Contact Us',
+    href: 'mailto:yonathan@growing-intelligence.com?subject=Custom Model Building Inquiry',
+    external: false,
+    serviceType: 'Custom AI model development',
+  },
+  {
+    id: 'invoice-processing',
+    keyword: 'Invoice Processing AI (GI-IAC)',
+    name: 'Invoice Processing (GI-IAC)',
+    desc: '48 fields per invoice. Any format. Any language. Supplier matching across entities.',
+    cta: 'Learn More',
+    href: '/quote?service=Invoice+Processing',
+    external: false,
+    serviceType: 'Invoice processing automation service',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How much does an AI model health scan cost?',
+    a: 'The initial Probe56 scan is free — upload your model identifier and get a full 8-category, 56-element health report. Model Repair, Custom Model Building, and Invoice Processing are managed services scoped and quoted per engagement; request a quote and we’ll respond with pricing for your use case.',
+  },
+  {
+    q: 'Can you fix AI model hallucinations without retraining?',
+    a: 'Yes. Model Repair applies targeted, per-element edits directly to the areas our scan identifies as broken — no full retraining required. Every repair is validated against a regression suite before delivery, and results are reported before/after with zero collateral impact on unrelated capabilities.',
+  },
+  {
+    q: 'What does an AI model scanning service actually check?',
+    a: 'Our scan maps your model across 8 categories and 56 elements — the full periodic table of digital matter applied to AI. Each element is scored, so you see exactly where a model is strong, where it’s degraded, and what’s fixable, with a signed, independently verifiable report.',
+  },
+  {
+    q: 'Do you build custom AI models for specific industries or domains?',
+    a: 'Yes. Custom Model Building starts from the same 56-element foundation — we map your domain’s requirements to the periodic table, then build, test, and prove the resulting model before delivery. Contact us with your domain and use case.',
+  },
+  {
+    q: 'What invoice formats and languages does the AI processing service support?',
+    a: 'GI-IAC (Invoice Processing) extracts 48 fields per invoice from any document format and any language, and matches suppliers across multiple entities — so multi-entity, multi-language accounts payable teams get one consistent, structured output regardless of source format.',
+  },
+  {
+    q: 'How long does an AI model repair take?',
+    a: 'Turnaround depends on the tier you choose — Lite, Advanced, or PRO — and how many dimensions need repair. Request a quote with your scan results and we’ll give you a concrete timeline for your model.',
+  },
+];
+
+const serviceSchemas = services.map(s => ({
+  '@type': 'Service',
+  serviceType: s.serviceType,
+  name: s.name,
+  description: s.desc,
+  provider: {
+    '@type': 'Organization',
+    name: 'Growing Intelligence',
+    url: 'https://holosynthics.com',
+  },
+  areaServed: 'Worldwide',
+  url: `https://holosynthics.com/services#${s.id}`,
+}));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    ...serviceSchemas,
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(f => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="AI Model Health Services"
+  description="AI model scanning and AI model repair services from Holosynthics: free 56-element health scans, per-dimension repair without retraining, custom model building, and AI invoice processing."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <Nav />
+
+  <main class="services-page">
+    <section class="services-hero">
+      <h1>AI Model Health Services</h1>
+      <p>Scan, repair, and build AI models on the Holosynthics periodic table — plus AI-powered invoice processing for accounts payable teams.</p>
+    </section>
+
+    <section class="services-grid-section">
+      <div class="container">
+        <div class="services-grid">
+          {services.map(s => (
+            <div class="service-card" id={s.id}>
+              <h2>{s.keyword}</h2>
+              <p class="service-desc">{s.desc}</p>
+              <a
+                href={s.href}
+                class={`service-cta ${s.id === 'model-repair' ? 'primary' : 'secondary'}`}
+                target={s.external ? '_blank' : undefined}
+                rel={s.external ? 'noopener' : undefined}
+              >
+                {s.cta} &rarr;
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          {faqs.map(f => (
+            <details class="faq-item">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .services-page { padding-top: 64px; }
+
+  .services-hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    background: radial-gradient(ellipse 50% 40% at 50% 0%, rgba(0,217,255,0.1) 0%, transparent 60%);
+  }
+
+  .services-hero h1 {
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .services-hero p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  .services-grid-section { padding: 60px 0 100px; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-margin-top: 84px;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+
+  .service-card:hover {
+    border-color: rgba(0,217,255,0.3);
+    transform: translateY(-4px);
+  }
+
+  .service-card h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .service-desc {
+    color: #94A3B8;
+    font-size: 15px;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .service-cta {
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: opacity 0.2s;
+  }
+
+  .service-cta.primary {
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+  }
+
+  .service-cta.secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .service-cta:hover { opacity: 0.85; text-decoration: none; }
+
+  @media (max-width: 700px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  .faq-section { padding: 0 0 100px; }
+
+  .faq-section h2 {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .faq-list {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+
+  .faq-item summary {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item summary::after {
+    content: '+';
+    float: right;
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  .faq-item[open] summary::after { content: '\2212'; }
+
+  .faq-item p {
+    color: #94A3B8;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-top: 14px;
+  }
+</style>

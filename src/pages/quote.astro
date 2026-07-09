@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+// TODO(W1): confirm the production sidecar host — using the known Railway domain from
+// docs/probe56/production-proof/04-pod-dispatch.txt (probe56-sidecar-production.up.railway.app).
+// The POST /quote endpoint itself is being built by W1; update here once confirmed.
+const QUOTE_API_BASE = 'https://probe56-sidecar-production.up.railway.app';
+---
+
+<BaseLayout
+  title="Request a Quote"
+  description="Request a quote for AI model repair, custom model building, or AI invoice processing from Holosynthics."
+>
+  <Nav />
+
+  <main class="quote-page">
+    <section class="quote-hero">
+      <h1>Request a Quote</h1>
+      <p>Tell us what you need. We’ll respond by email with scope and pricing.</p>
+    </section>
+
+    <section class="quote-form-section">
+      <div class="container">
+        <form id="quote-form" class="quote-form">
+          <div class="form-row">
+            <label for="q-name">Name</label>
+            <input id="q-name" name="name" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="q-email">Email</label>
+            <input id="q-email" name="email" type="email" required />
+          </div>
+          <div class="form-row">
+            <label for="q-company">Company</label>
+            <input id="q-company" name="company" type="text" required />
+          </div>
+          <div class="form-row">
+            <label for="q-service">What service are you interested in?</label>
+            <select id="q-service" name="service" required>
+              <option value="">Select a service&hellip;</option>
+              <option value="Free Scan">Free Scan</option>
+              <option value="Model Repair">Model Repair</option>
+              <option value="Custom Model">Custom Model</option>
+              <option value="Invoice Processing">Invoice Processing</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="q-message">Message</label>
+            <textarea id="q-message" name="message" rows="5"></textarea>
+          </div>
+          <button type="submit" class="quote-submit">Send Request</button>
+          <p class="quote-status" id="quote-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .quote-page { padding-top: 64px; }
+
+  .quote-hero {
+    text-align: center;
+    padding: 80px 24px 48px;
+    background: radial-gradient(ellipse 50% 40% at 50% 0%, rgba(0,217,255,0.1) 0%, transparent 60%);
+  }
+
+  .quote-hero h1 {
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .quote-hero p {
+    font-size: 18px;
+    color: var(--muted);
+  }
+
+  .container { max-width: 560px; margin: 0 auto; padding: 0 24px; }
+
+  .quote-form-section { padding: 0 0 100px; }
+
+  .quote-form {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .form-row { display: flex; flex-direction: column; gap: 6px; }
+
+  .form-row label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+  }
+
+  .form-row textarea { resize: vertical; }
+
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+  }
+
+  .quote-submit {
+    background: linear-gradient(135deg, var(--cyan), #0099BB);
+    color: #080A18;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .quote-submit:hover { opacity: 0.85; }
+  .quote-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .quote-status { font-size: 14px; min-height: 20px; }
+  .quote-status.ok { color: var(--green); }
+  .quote-status.err { color: var(--red); }
+</style>
+
+<script define:vars={{ QUOTE_API_BASE }}>
+  // Pre-select the service if the CTA linked here with ?service=...
+  const params = new URLSearchParams(location.search);
+  const preselect = params.get('service');
+  if (preselect) {
+    const select = document.getElementById('q-service');
+    if (select && [...select.options].some(o => o.value === preselect)) {
+      select.value = preselect;
+    }
+  }
+
+  const form = document.getElementById('quote-form');
+  const status = document.getElementById('quote-status');
+  const submitBtn = form.querySelector('.quote-submit');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    submitBtn.disabled = true;
+    status.className = 'quote-status';
+    status.textContent = 'Sending…';
+
+    try {
+      const resp = await fetch(`${QUOTE_API_BASE}/quote`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      status.className = 'quote-status ok';
+      status.textContent = 'Thanks — we’ll be in touch by email shortly.';
+      form.reset();
+    } catch (err) {
+      // Backup path so a request is never lost even if the sidecar endpoint is down.
+      const subject = encodeURIComponent(`Quote request — ${data.service || 'General'}`);
+      const body = encodeURIComponent(
+        `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\nService: ${data.service}\n\nMessage:\n${data.message || ''}`
+      );
+      status.className = 'quote-status err';
+      status.innerHTML = `Couldn't reach the server. <a href="mailto:yonathan@growing-intelligence.com?subject=${subject}&body=${body}">Click here to send by email instead</a>.`;
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
